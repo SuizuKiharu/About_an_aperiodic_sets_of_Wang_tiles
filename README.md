@@ -1,0 +1,2 @@
+# About_an_aperiodic_sets_of_Wang_tiles
+非周期的なWangタイル集合を見つけるまでの歴史をまとめとWangタイル集合の可視化やJeandelらのWang集合の非周期性の判定アルゴリズムのMathematica上での実装
