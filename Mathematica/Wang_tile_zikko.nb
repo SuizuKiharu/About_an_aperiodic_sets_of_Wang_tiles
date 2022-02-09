@@ -1,0 +1,3285 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 12.2' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[    154017,       3277]
+NotebookOptionsPosition[    150783,       3213]
+NotebookOutlinePosition[    151149,       3229]
+CellTagsIndexPosition[    151106,       3226]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell["\<\
+2021/11/21 Y . Mizoguchi
+Put your libraries \[OpenCurlyQuote]WangTileLib.wl\[CloseCurlyQuote] and \
+\[OpenCurlyQuote]WangTilesData.wl\[CloseCurlyQuote] on the directory \
+\[OpenCurlyQuote]Desktop/20211120Yang\[CloseCurlyQuote].
+Or you should set the appropriate directory for getting libraries.\
+\>", "Text",
+ CellChangeTimes->{{3.8464205477081957`*^9, 3.846420736116029*^9}},
+ Background->RGBColor[
+  0.87, 0.94, 1],ExpressionUUID->"1fea5a78-9e4b-436d-9877-88132254ad41"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"SetDirectory", "[", 
+   RowBox[{"FileNameJoin", "[", 
+    RowBox[{"{", 
+     RowBox[{"$HomeDirectory", ",", "\"\<CS4/20211223/\>\""}], "}"}], "]"}], 
+   "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"<<", "Aperiodic_Wang_tile.wl"}], ";"}]}], "Input",
+ CellChangeTimes->{{3.84641894336795*^9, 3.846418991821144*^9}, {
+  3.846419295256311*^9, 3.846419312060212*^9}, {3.8465030907675734`*^9, 
+  3.846503093786613*^9}, {3.84662769206361*^9, 3.846627693560067*^9}, {
+  3.849220363992058*^9, 3.8492203935457687`*^9}, {3.849220470586409*^9, 
+  3.849220491794486*^9}, {3.849220542151619*^9, 3.8492205582981358`*^9}, {
+  3.849220678879903*^9, 3.849220679992584*^9}},
+ CellLabel->"In[3]:=",ExpressionUUID->"df8bb222-36a9-427a-be88-d552b0d54235"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", "\:8272\:306e\:751f\:6210", "*)"}], "\[IndentingNewLine]", 
+  RowBox[{"Graphics", "[", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"Color", "[", 
+        RowBox[{"i", ",", "5"}], "]"}], ",", 
+       RowBox[{"Polygon", "[", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"i", ",", "0"}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"i", "+", "1"}], ",", "0"}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"i", "+", "1"}], ",", "1"}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"i", ",", "1"}], "}"}]}], "}"}], "]"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"i", ",", "0", ",", "5"}], "}"}]}], "]"}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.852014140210166*^9, 3.852014184509595*^9}, {
+  3.8520143035544767`*^9, 3.852014337333104*^9}, {3.853204455190321*^9, 
+  3.853204462474874*^9}},
+ CellLabel->"In[5]:=",ExpressionUUID->"e1429b7e-3bc1-4b5f-b119-59c89948b664"],
+
+Cell[BoxData[
+ GraphicsBox[{
+   {RGBColor[1, 0, 0], PolygonBox[{{0, 0}, {1, 0}, {1, 1}, {0, 1}}]}, 
+   {RGBColor[1, 
+     NCache[
+      Rational[1, 2], 0.5], 0], PolygonBox[{{1, 0}, {2, 0}, {2, 1}, {1, 1}}]}, 
+   {RGBColor[1, 1, 0], PolygonBox[{{2, 0}, {3, 0}, {3, 1}, {2, 1}}]}, 
+   {RGBColor[0, 1, 0], PolygonBox[{{3, 0}, {4, 0}, {4, 1}, {3, 1}}]}, 
+   {RGBColor[0, 0.5, 1], PolygonBox[{{4, 0}, {5, 0}, {5, 1}, {4, 1}}]}, 
+   {RGBColor[
+     NCache[
+      Rational[1, 2], 0.5], 0., 1], 
+    PolygonBox[{{5, 0}, {6, 0}, {6, 1}, {5, 1}}]}}]], "Output",
+ CellChangeTimes->{3.8520143386375923`*^9, 3.852560311709324*^9, 
+  3.852560954221813*^9, 3.852561628382118*^9, 3.8532050839271383`*^9},
+ CellLabel->"Out[5]=",ExpressionUUID->"5cea053f-91cf-4e28-bcbb-123eeb9a76da"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", "\:30bf\:30a4\:30ea\:30f3\:30b0\:306e\:4f8b", "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{"Map", "[", 
+   RowBox[{"Tiling", ",", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"{", "3", "}"}], ",", 
+        RowBox[{"{", "1", "}"}], ",", 
+        RowBox[{"{", "2", "}"}], ",", 
+        RowBox[{"{", "0", "}"}]}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"3", ",", "2"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"4", ",", "1"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"3", ",", "1", ",", "1"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"1", ",", "2", ",", "3"}], "}"}]}], "}"}]}], "}"}]}], 
+   "]"}]}]], "Input",
+ CellChangeTimes->{{3.85201475910332*^9, 3.852014766591813*^9}, {
+  3.852014834926749*^9, 3.8520148399672947`*^9}, {3.852014877308837*^9, 
+  3.852014989283268*^9}, {3.853204470266666*^9, 3.853204479328103*^9}},
+ CellLabel->"In[6]:=",ExpressionUUID->"af1fe4f3-1aa2-4966-8ec9-d52774192961"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   GraphicsBox[
+    {EdgeForm[Thickness[Large]], {
+      {RGBColor[1, 0, 0], PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+      {RGBColor[1, 1, 0], PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+      {RGBColor[0, 1, 0], PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+      {RGBColor[1, 
+        NCache[
+         Rational[1, 2], 0.5], 0], PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}}],
+    ",", 
+   GraphicsBox[
+    {EdgeForm[Thickness[Large]], {{
+       {RGBColor[1, 
+         NCache[
+          Rational[1, 2], 0.5], 0], PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+       {RGBColor[1, 1, 1], PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+       {RGBColor[0, 1, 0], PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+       {RGBColor[1, 1, 1], PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}, {
+       {RGBColor[1, 1, 0], PolygonBox[{{2, 0}, {4, 0}, {3, -1}}]}, 
+       {RGBColor[1, 1, 1], PolygonBox[{{2, -2}, {4, -2}, {3, -1}}]}, 
+       {RGBColor[1, 1, 1], PolygonBox[{{2, -2}, {2, 0}, {3, -1}}]}, 
+       {RGBColor[1, 1, 1], PolygonBox[{{4, -2}, {4, 0}, {3, -1}}]}}, {
+       {RGBColor[0, 1, 0], PolygonBox[{{4, 0}, {6, 0}, {5, -1}}]}, 
+       {RGBColor[1, 1, 1], PolygonBox[{{4, -2}, {6, -2}, {5, -1}}]}, 
+       {RGBColor[1, 1, 1], PolygonBox[{{4, -2}, {4, 0}, {5, -1}}]}, 
+       {RGBColor[0, 0.5, 1], PolygonBox[{{6, -2}, {6, 0}, {5, -1}}]}}}, {{
+       {RGBColor[1, 1, 1], PolygonBox[{{0, -2}, {2, -2}, {1, -3}}]}, 
+       {RGBColor[0, 1, 0], PolygonBox[{{0, -4}, {2, -4}, {1, -3}}]}, 
+       {RGBColor[1, 1, 0], PolygonBox[{{0, -4}, {0, -2}, {1, -3}}]}, 
+       {RGBColor[1, 1, 1], PolygonBox[{{2, -4}, {2, -2}, {1, -3}}]}}, {
+       {RGBColor[1, 1, 1], PolygonBox[{{2, -2}, {4, -2}, {3, -3}}]}, 
+       {RGBColor[1, 
+         NCache[
+          Rational[1, 2], 0.5], 0], 
+        PolygonBox[{{2, -4}, {4, -4}, {3, -3}}]}, 
+       {RGBColor[1, 1, 1], PolygonBox[{{2, -4}, {2, -2}, {3, -3}}]}, 
+       {RGBColor[1, 1, 1], PolygonBox[{{4, -4}, {4, -2}, {3, -3}}]}}, {
+       {RGBColor[1, 1, 1], PolygonBox[{{4, -2}, {6, -2}, {5, -3}}]}, 
+       {RGBColor[1, 
+         NCache[
+          Rational[1, 2], 0.5], 0], 
+        PolygonBox[{{4, -4}, {6, -4}, {5, -3}}]}, 
+       {RGBColor[1, 1, 1], PolygonBox[{{4, -4}, {4, -2}, {5, -3}}]}, 
+       {RGBColor[1, 
+         NCache[
+          Rational[1, 2], 0.5], 0], 
+        PolygonBox[{{6, -4}, {6, -2}, {5, -3}}]}}}}]}], "}"}]], "Output",
+ CellChangeTimes->{3.8520148407362337`*^9, 3.852014990011702*^9, 
+  3.852560956114772*^9, 3.852561630163252*^9, 3.853205083992339*^9},
+ CellLabel->"Out[6]=",ExpressionUUID->"594f3659-fb26-49ce-afa9-75a7fc11e52f"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{
+   "11", "\:500b\:306e\:975e\:5468\:671f\:7684\:306aWang\:30bf\:30a4\:30eb\
+\:96c6\:5408"}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{"Map", "[", 
+   RowBox[{"Tiling", ",", "Jeandeltiles"}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.8532047645341*^9, 3.8532047958912783`*^9}},
+ CellLabel->"In[7]:=",ExpressionUUID->"6b1aa3cc-0bda-42f3-aa69-ba190a54595a"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   GraphicsBox[
+    {EdgeForm[Thickness[Large]], {
+      {RGBColor[1, 
+        NCache[
+         Rational[1, 2], 0.5], 0], PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+      {RGBColor[1, 
+        NCache[
+         Rational[1, 2], 0.5], 0], PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+      {RGBColor[0, 1, 0], PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+      {RGBColor[1, 
+        NCache[
+         Rational[1, 2], 0.5], 0], PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}}],
+    ",", 
+   GraphicsBox[
+    {EdgeForm[Thickness[Large]], {
+      {RGBColor[1, 1, 0], PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+      {RGBColor[1, 1, 0], PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+      {RGBColor[0, 1, 0], PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+      {RGBColor[1, 
+        NCache[
+         Rational[1, 2], 0.5], 0], PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}}],
+    ",", 
+   GraphicsBox[
+    {EdgeForm[Thickness[Large]], {
+      {RGBColor[1, 
+        NCache[
+         Rational[1, 2], 0.5], 0], PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+      {RGBColor[0, 1, 0], PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+      {RGBColor[0, 1, 0], PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+      {RGBColor[0, 1, 0], PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}}], ",", 
+   GraphicsBox[
+    {EdgeForm[Thickness[Large]], {
+      {RGBColor[1, 0, 0], PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+      {RGBColor[1, 
+        NCache[
+         Rational[1, 2], 0.5], 0], PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+      {RGBColor[1, 1, 0], PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+      {RGBColor[1, 1, 0], PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}}], ",", 
+   GraphicsBox[
+    {EdgeForm[Thickness[Large]], {
+      {RGBColor[1, 1, 0], PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+      {RGBColor[1, 0, 0], PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+      {RGBColor[1, 1, 0], PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+      {RGBColor[1, 1, 0], PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}}], ",", 
+   GraphicsBox[
+    {EdgeForm[Thickness[Large]], {
+      {RGBColor[1, 0, 0], PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+      {RGBColor[1, 
+        NCache[
+         Rational[1, 2], 0.5], 0], PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+      {RGBColor[1, 0, 0], PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+      {RGBColor[1, 0, 0], PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}}], ",", 
+   GraphicsBox[
+    {EdgeForm[Thickness[Large]], {
+      {RGBColor[1, 
+        NCache[
+         Rational[1, 2], 0.5], 0], PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+      {RGBColor[1, 1, 0], PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+      {RGBColor[1, 0, 0], PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+      {RGBColor[0, 1, 0], PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}}], ",", 
+   GraphicsBox[
+    {EdgeForm[Thickness[Large]], {
+      {RGBColor[1, 1, 0], PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+      {RGBColor[1, 1, 0], PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+      {RGBColor[1, 
+        NCache[
+         Rational[1, 2], 0.5], 0], PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+      {RGBColor[1, 0, 0], PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}}], ",", 
+   GraphicsBox[
+    {EdgeForm[Thickness[Large]], {
+      {RGBColor[1, 1, 0], PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+      {RGBColor[1, 0, 0], PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+      {RGBColor[1, 
+        NCache[
+         Rational[1, 2], 0.5], 0], PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+      {RGBColor[1, 
+        NCache[
+         Rational[1, 2], 0.5], 0], PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}}],
+    ",", 
+   GraphicsBox[
+    {EdgeForm[Thickness[Large]], {
+      {RGBColor[0, 1, 0], PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+      {RGBColor[1, 1, 0], PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+      {RGBColor[1, 
+        NCache[
+         Rational[1, 2], 0.5], 0], PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+      {RGBColor[0, 1, 0], PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}}], ",", 
+   GraphicsBox[
+    {EdgeForm[Thickness[Large]], {
+      {RGBColor[1, 
+        NCache[
+         Rational[1, 2], 0.5], 0], PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+      {RGBColor[1, 
+        NCache[
+         Rational[1, 2], 0.5], 0], PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+      {RGBColor[0, 1, 0], PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+      {RGBColor[1, 0, 0], PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}}]}], 
+  "}"}]], "Output",
+ CellChangeTimes->{3.852261557439142*^9, 3.853205084064418*^9},
+ CellLabel->"Out[7]=",ExpressionUUID->"a93d6f23-e924-4178-9dda-4f8706db6bd8"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+  "(*", "Wang\:96c6\:5408\:306e\:5782\:76f4\:306e\:5408\:6210", "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{"Map", "[", 
+   RowBox[{"Tiling", ",", 
+    RowBox[{"Tilecompositionv", "[", 
+     RowBox[{"Jeandeltiles", ",", "Jeandeltiles"}], "]"}]}], "]"}]}]], "Input",\
+
+ CellChangeTimes->{{3.8532048101211348`*^9, 3.853204871966322*^9}, {
+  3.853204936918578*^9, 3.853204990320887*^9}},
+ CellLabel->"In[8]:=",ExpressionUUID->"2128dcc7-1d57-4c6e-a6d4-381801c70937"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   GraphicsBox[
+    {EdgeForm[Thickness[Large]], {
+      {RGBColor[1, 
+        NCache[
+         Rational[1, 2], 0.5], 0], PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+      {RGBColor[1, 1, 1], PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+      {RGBColor[0, 1, 0], PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+      {RGBColor[1, 
+        NCache[
+         Rational[1, 2], 0.5], 0], 
+       PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}, {
+      {RGBColor[1, 1, 1], PolygonBox[{{0, -2}, {2, -2}, {1, -3}}]}, 
+      {RGBColor[1, 
+        NCache[
+         Rational[1, 2], 0.5], 0], PolygonBox[{{0, -4}, {2, -4}, {1, -3}}]}, 
+      {RGBColor[0, 1, 0], PolygonBox[{{0, -4}, {0, -2}, {1, -3}}]}, 
+      {RGBColor[1, 
+        NCache[
+         Rational[1, 2], 0.5], 0], 
+       PolygonBox[{{2, -4}, {2, -2}, {1, -3}}]}}}], ",", 
+   GraphicsBox[
+    {EdgeForm[Thickness[Large]], {
+      {RGBColor[1, 0, 0], PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+      {RGBColor[1, 1, 1], PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+      {RGBColor[1, 1, 0], PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+      {RGBColor[1, 1, 0], PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}, {
+      {RGBColor[1, 1, 1], PolygonBox[{{0, -2}, {2, -2}, {1, -3}}]}, 
+      {RGBColor[1, 
+        NCache[
+         Rational[1, 2], 0.5], 0], PolygonBox[{{0, -4}, {2, -4}, {1, -3}}]}, 
+      {RGBColor[0, 1, 0], PolygonBox[{{0, -4}, {0, -2}, {1, -3}}]}, 
+      {RGBColor[1, 
+        NCache[
+         Rational[1, 2], 0.5], 0], 
+       PolygonBox[{{2, -4}, {2, -2}, {1, -3}}]}}}], ",", 
+   GraphicsBox[
+    {EdgeForm[Thickness[Large]], {
+      {RGBColor[1, 0, 0], PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+      {RGBColor[1, 1, 1], PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+      {RGBColor[1, 0, 0], PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+      {RGBColor[1, 0, 0], PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}, {
+      {RGBColor[1, 1, 1], PolygonBox[{{0, -2}, {2, -2}, {1, -3}}]}, 
+      {RGBColor[1, 
+        NCache[
+         Rational[1, 2], 0.5], 0], PolygonBox[{{0, -4}, {2, -4}, {1, -3}}]}, 
+      {RGBColor[0, 1, 0], PolygonBox[{{0, -4}, {0, -2}, {1, -3}}]}, 
+      {RGBColor[1, 
+        NCache[
+         Rational[1, 2], 0.5], 0], 
+       PolygonBox[{{2, -4}, {2, -2}, {1, -3}}]}}}], ",", 
+   GraphicsBox[
+    {EdgeForm[Thickness[Large]], {
+      {RGBColor[1, 
+        NCache[
+         Rational[1, 2], 0.5], 0], PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+      {RGBColor[1, 1, 1], PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+      {RGBColor[0, 1, 0], PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+      {RGBColor[1, 0, 0], PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}, {
+      {RGBColor[1, 1, 1], PolygonBox[{{0, -2}, {2, -2}, {1, -3}}]}, 
+      {RGBColor[1, 
+        NCache[
+         Rational[1, 2], 0.5], 0], PolygonBox[{{0, -4}, {2, -4}, {1, -3}}]}, 
+      {RGBColor[0, 1, 0], PolygonBox[{{0, -4}, {0, -2}, {1, -3}}]}, 
+      {RGBColor[1, 
+        NCache[
+         Rational[1, 2], 0.5], 0], 
+       PolygonBox[{{2, -4}, {2, -2}, {1, -3}}]}}}], ",", 
+   GraphicsBox[
+    {EdgeForm[Thickness[Large]], {
+      {RGBColor[1, 1, 0], PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+      {RGBColor[1, 1, 1], PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+      {RGBColor[0, 1, 0], PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+      {RGBColor[1, 
+        NCache[
+         Rational[1, 2], 0.5], 0], 
+       PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}, {
+      {RGBColor[1, 1, 1], PolygonBox[{{0, -2}, {2, -2}, {1, -3}}]}, 
+      {RGBColor[1, 1, 0], PolygonBox[{{0, -4}, {2, -4}, {1, -3}}]}, 
+      {RGBColor[0, 1, 0], PolygonBox[{{0, -4}, {0, -2}, {1, -3}}]}, 
+      {RGBColor[1, 
+        NCache[
+         Rational[1, 2], 0.5], 0], 
+       PolygonBox[{{2, -4}, {2, -2}, {1, -3}}]}}}], ",", 
+   GraphicsBox[
+    {EdgeForm[Thickness[Large]], {
+      {RGBColor[1, 
+        NCache[
+         Rational[1, 2], 0.5], 0], PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+      {RGBColor[1, 1, 1], PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+      {RGBColor[1, 0, 0], PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+      {RGBColor[0, 1, 0], PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}, {
+      {RGBColor[1, 1, 1], PolygonBox[{{0, -2}, {2, -2}, {1, -3}}]}, 
+      {RGBColor[1, 1, 0], PolygonBox[{{0, -4}, {2, -4}, {1, -3}}]}, 
+      {RGBColor[0, 1, 0], PolygonBox[{{0, -4}, {0, -2}, {1, -3}}]}, 
+      {RGBColor[1, 
+        NCache[
+         Rational[1, 2], 0.5], 0], 
+       PolygonBox[{{2, -4}, {2, -2}, {1, -3}}]}}}], ",", 
+   GraphicsBox[
+    {EdgeForm[Thickness[Large]], {
+      {RGBColor[1, 1, 0], PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+      {RGBColor[1, 1, 1], PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+      {RGBColor[1, 
+        NCache[
+         Rational[1, 2], 0.5], 0], PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+      {RGBColor[1, 0, 0], PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}, {
+      {RGBColor[1, 1, 1], PolygonBox[{{0, -2}, {2, -2}, {1, -3}}]}, 
+      {RGBColor[1, 1, 0], PolygonBox[{{0, -4}, {2, -4}, {1, -3}}]}, 
+      {RGBColor[0, 1, 0], PolygonBox[{{0, -4}, {0, -2}, {1, -3}}]}, 
+      {RGBColor[1, 
+        NCache[
+         Rational[1, 2], 0.5], 0], 
+       PolygonBox[{{2, -4}, {2, -2}, {1, -3}}]}}}], ",", 
+   GraphicsBox[
+    {EdgeForm[Thickness[Large]], {
+      {RGBColor[0, 1, 0], PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+      {RGBColor[1, 1, 1], PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+      {RGBColor[1, 
+        NCache[
+         Rational[1, 2], 0.5], 0], PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+      {RGBColor[0, 1, 0], PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}, {
+      {RGBColor[1, 1, 1], PolygonBox[{{0, -2}, {2, -2}, {1, -3}}]}, 
+      {RGBColor[1, 1, 0], PolygonBox[{{0, -4}, {2, -4}, {1, -3}}]}, 
+      {RGBColor[0, 1, 0], PolygonBox[{{0, -4}, {0, -2}, {1, -3}}]}, 
+      {RGBColor[1, 
+        NCache[
+         Rational[1, 2], 0.5], 0], 
+       PolygonBox[{{2, -4}, {2, -2}, {1, -3}}]}}}], ",", 
+   GraphicsBox[
+    {EdgeForm[Thickness[Large]], {
+      {RGBColor[1, 
+        NCache[
+         Rational[1, 2], 0.5], 0], PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+      {RGBColor[1, 1, 1], PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+      {RGBColor[0, 1, 0], PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+      {RGBColor[1, 
+        NCache[
+         Rational[1, 2], 0.5], 0], 
+       PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}, {
+      {RGBColor[1, 1, 1], PolygonBox[{{0, -2}, {2, -2}, {1, -3}}]}, 
+      {RGBColor[0, 1, 0], PolygonBox[{{0, -4}, {2, -4}, {1, -3}}]}, 
+      {RGBColor[0, 1, 0], PolygonBox[{{0, -4}, {0, -2}, {1, -3}}]}, 
+      {RGBColor[0, 1, 0], PolygonBox[{{2, -4}, {2, -2}, {1, -3}}]}}}], ",", 
+   GraphicsBox[
+    {EdgeForm[Thickness[Large]], {
+      {RGBColor[1, 0, 0], PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+      {RGBColor[1, 1, 1], PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+      {RGBColor[1, 1, 0], PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+      {RGBColor[1, 1, 0], PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}, {
+      {RGBColor[1, 1, 1], PolygonBox[{{0, -2}, {2, -2}, {1, -3}}]}, 
+      {RGBColor[0, 1, 0], PolygonBox[{{0, -4}, {2, -4}, {1, -3}}]}, 
+      {RGBColor[0, 1, 0], PolygonBox[{{0, -4}, {0, -2}, {1, -3}}]}, 
+      {RGBColor[0, 1, 0], PolygonBox[{{2, -4}, {2, -2}, {1, -3}}]}}}], ",", 
+   GraphicsBox[
+    {EdgeForm[Thickness[Large]], {
+      {RGBColor[1, 0, 0], PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+      {RGBColor[1, 1, 1], PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+      {RGBColor[1, 0, 0], PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+      {RGBColor[1, 0, 0], PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}, {
+      {RGBColor[1, 1, 1], PolygonBox[{{0, -2}, {2, -2}, {1, -3}}]}, 
+      {RGBColor[0, 1, 0], PolygonBox[{{0, -4}, {2, -4}, {1, -3}}]}, 
+      {RGBColor[0, 1, 0], PolygonBox[{{0, -4}, {0, -2}, {1, -3}}]}, 
+      {RGBColor[0, 1, 0], PolygonBox[{{2, -4}, {2, -2}, {1, -3}}]}}}], ",", 
+   GraphicsBox[
+    {EdgeForm[Thickness[Large]], {
+      {RGBColor[1, 
+        NCache[
+         Rational[1, 2], 0.5], 0], PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+      {RGBColor[1, 1, 1], PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+      {RGBColor[0, 1, 0], PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+      {RGBColor[1, 0, 0], PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}, {
+      {RGBColor[1, 1, 1], PolygonBox[{{0, -2}, {2, -2}, {1, -3}}]}, 
+      {RGBColor[0, 1, 0], PolygonBox[{{0, -4}, {2, -4}, {1, -3}}]}, 
+      {RGBColor[0, 1, 0], PolygonBox[{{0, -4}, {0, -2}, {1, -3}}]}, 
+      {RGBColor[0, 1, 0], PolygonBox[{{2, -4}, {2, -2}, {1, -3}}]}}}], ",", 
+   GraphicsBox[
+    {EdgeForm[Thickness[Large]], {
+      {RGBColor[1, 1, 0], PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+      {RGBColor[1, 1, 1], PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+      {RGBColor[1, 1, 0], PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+      {RGBColor[1, 1, 0], PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}, {
+      {RGBColor[1, 1, 1], PolygonBox[{{0, -2}, {2, -2}, {1, -3}}]}, 
+      {RGBColor[1, 
+        NCache[
+         Rational[1, 2], 0.5], 0], PolygonBox[{{0, -4}, {2, -4}, {1, -3}}]}, 
+      {RGBColor[1, 1, 0], PolygonBox[{{0, -4}, {0, -2}, {1, -3}}]}, 
+      {RGBColor[1, 1, 0], PolygonBox[{{2, -4}, {2, -2}, {1, -3}}]}}}], ",", 
+   GraphicsBox[
+    {EdgeForm[Thickness[Large]], {
+      {RGBColor[1, 1, 0], PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+      {RGBColor[1, 1, 1], PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+      {RGBColor[1, 
+        NCache[
+         Rational[1, 2], 0.5], 0], PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+      {RGBColor[1, 
+        NCache[
+         Rational[1, 2], 0.5], 0], 
+       PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}, {
+      {RGBColor[1, 1, 1], PolygonBox[{{0, -2}, {2, -2}, {1, -3}}]}, 
+      {RGBColor[1, 
+        NCache[
+         Rational[1, 2], 0.5], 0], PolygonBox[{{0, -4}, {2, -4}, {1, -3}}]}, 
+      {RGBColor[1, 1, 0], PolygonBox[{{0, -4}, {0, -2}, {1, -3}}]}, 
+      {RGBColor[1, 1, 0], PolygonBox[{{2, -4}, {2, -2}, {1, -3}}]}}}], ",", 
+   GraphicsBox[
+    {EdgeForm[Thickness[Large]], {
+      {RGBColor[1, 1, 0], PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+      {RGBColor[1, 1, 1], PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+      {RGBColor[0, 1, 0], PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+      {RGBColor[1, 
+        NCache[
+         Rational[1, 2], 0.5], 0], 
+       PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}, {
+      {RGBColor[1, 1, 1], PolygonBox[{{0, -2}, {2, -2}, {1, -3}}]}, 
+      {RGBColor[1, 0, 0], PolygonBox[{{0, -4}, {2, -4}, {1, -3}}]}, 
+      {RGBColor[1, 1, 0], PolygonBox[{{0, -4}, {0, -2}, {1, -3}}]}, 
+      {RGBColor[1, 1, 0], PolygonBox[{{2, -4}, {2, -2}, {1, -3}}]}}}], ",", 
+   GraphicsBox[
+    {EdgeForm[Thickness[Large]], {
+      {RGBColor[1, 
+        NCache[
+         Rational[1, 2], 0.5], 0], PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+      {RGBColor[1, 1, 1], PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+      {RGBColor[1, 0, 0], PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+      {RGBColor[0, 1, 0], PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}, {
+      {RGBColor[1, 1, 1], PolygonBox[{{0, -2}, {2, -2}, {1, -3}}]}, 
+      {RGBColor[1, 0, 0], PolygonBox[{{0, -4}, {2, -4}, {1, -3}}]}, 
+      {RGBColor[1, 1, 0], PolygonBox[{{0, -4}, {0, -2}, {1, -3}}]}, 
+      {RGBColor[1, 1, 0], PolygonBox[{{2, -4}, {2, -2}, {1, -3}}]}}}], ",", 
+   GraphicsBox[
+    {EdgeForm[Thickness[Large]], {
+      {RGBColor[1, 1, 0], PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+      {RGBColor[1, 1, 1], PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+      {RGBColor[1, 
+        NCache[
+         Rational[1, 2], 0.5], 0], PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+      {RGBColor[1, 0, 0], PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}, {
+      {RGBColor[1, 1, 1], PolygonBox[{{0, -2}, {2, -2}, {1, -3}}]}, 
+      {RGBColor[1, 0, 0], PolygonBox[{{0, -4}, {2, -4}, {1, -3}}]}, 
+      {RGBColor[1, 1, 0], PolygonBox[{{0, -4}, {0, -2}, {1, -3}}]}, 
+      {RGBColor[1, 1, 0], PolygonBox[{{2, -4}, {2, -2}, {1, -3}}]}}}], ",", 
+   GraphicsBox[
+    {EdgeForm[Thickness[Large]], {
+      {RGBColor[0, 1, 0], PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+      {RGBColor[1, 1, 1], PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+      {RGBColor[1, 
+        NCache[
+         Rational[1, 2], 0.5], 0], PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+      {RGBColor[0, 1, 0], PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}, {
+      {RGBColor[1, 1, 1], PolygonBox[{{0, -2}, {2, -2}, {1, -3}}]}, 
+      {RGBColor[1, 0, 0], PolygonBox[{{0, -4}, {2, -4}, {1, -3}}]}, 
+      {RGBColor[1, 1, 0], PolygonBox[{{0, -4}, {0, -2}, {1, -3}}]}, 
+      {RGBColor[1, 1, 0], PolygonBox[{{2, -4}, {2, -2}, {1, -3}}]}}}], ",", 
+   GraphicsBox[
+    {EdgeForm[Thickness[Large]], {
+      {RGBColor[1, 1, 0], PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+      {RGBColor[1, 1, 1], PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+      {RGBColor[1, 1, 0], PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+      {RGBColor[1, 1, 0], PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}, {
+      {RGBColor[1, 1, 1], PolygonBox[{{0, -2}, {2, -2}, {1, -3}}]}, 
+      {RGBColor[1, 
+        NCache[
+         Rational[1, 2], 0.5], 0], PolygonBox[{{0, -4}, {2, -4}, {1, -3}}]}, 
+      {RGBColor[1, 0, 0], PolygonBox[{{0, -4}, {0, -2}, {1, -3}}]}, 
+      {RGBColor[1, 0, 0], PolygonBox[{{2, -4}, {2, -2}, {1, -3}}]}}}], ",", 
+   GraphicsBox[
+    {EdgeForm[Thickness[Large]], {
+      {RGBColor[1, 1, 0], PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+      {RGBColor[1, 1, 1], PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+      {RGBColor[1, 
+        NCache[
+         Rational[1, 2], 0.5], 0], PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+      {RGBColor[1, 
+        NCache[
+         Rational[1, 2], 0.5], 0], 
+       PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}, {
+      {RGBColor[1, 1, 1], PolygonBox[{{0, -2}, {2, -2}, {1, -3}}]}, 
+      {RGBColor[1, 
+        NCache[
+         Rational[1, 2], 0.5], 0], PolygonBox[{{0, -4}, {2, -4}, {1, -3}}]}, 
+      {RGBColor[1, 0, 0], PolygonBox[{{0, -4}, {0, -2}, {1, -3}}]}, 
+      {RGBColor[1, 0, 0], PolygonBox[{{2, -4}, {2, -2}, {1, -3}}]}}}], ",", 
+   GraphicsBox[
+    {EdgeForm[Thickness[Large]], {
+      {RGBColor[1, 
+        NCache[
+         Rational[1, 2], 0.5], 0], PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+      {RGBColor[1, 1, 1], PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+      {RGBColor[0, 1, 0], PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+      {RGBColor[1, 
+        NCache[
+         Rational[1, 2], 0.5], 0], 
+       PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}, {
+      {RGBColor[1, 1, 1], PolygonBox[{{0, -2}, {2, -2}, {1, -3}}]}, 
+      {RGBColor[1, 1, 0], PolygonBox[{{0, -4}, {2, -4}, {1, -3}}]}, 
+      {RGBColor[1, 0, 0], PolygonBox[{{0, -4}, {0, -2}, {1, -3}}]}, 
+      {RGBColor[0, 1, 0], PolygonBox[{{2, -4}, {2, -2}, {1, -3}}]}}}], ",", 
+   GraphicsBox[
+    {EdgeForm[Thickness[Large]], {
+      {RGBColor[1, 0, 0], PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+      {RGBColor[1, 1, 1], PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+      {RGBColor[1, 1, 0], PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+      {RGBColor[1, 1, 0], PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}, {
+      {RGBColor[1, 1, 1], PolygonBox[{{0, -2}, {2, -2}, {1, -3}}]}, 
+      {RGBColor[1, 1, 0], PolygonBox[{{0, -4}, {2, -4}, {1, -3}}]}, 
+      {RGBColor[1, 0, 0], PolygonBox[{{0, -4}, {0, -2}, {1, -3}}]}, 
+      {RGBColor[0, 1, 0], PolygonBox[{{2, -4}, {2, -2}, {1, -3}}]}}}], ",", 
+   GraphicsBox[
+    {EdgeForm[Thickness[Large]], {
+      {RGBColor[1, 0, 0], PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+      {RGBColor[1, 1, 1], PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+      {RGBColor[1, 0, 0], PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+      {RGBColor[1, 0, 0], PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}, {
+      {RGBColor[1, 1, 1], PolygonBox[{{0, -2}, {2, -2}, {1, -3}}]}, 
+      {RGBColor[1, 1, 0], PolygonBox[{{0, -4}, {2, -4}, {1, -3}}]}, 
+      {RGBColor[1, 0, 0], PolygonBox[{{0, -4}, {0, -2}, {1, -3}}]}, 
+      {RGBColor[0, 1, 0], PolygonBox[{{2, -4}, {2, -2}, {1, -3}}]}}}], ",", 
+   GraphicsBox[
+    {EdgeForm[Thickness[Large]], {
+      {RGBColor[1, 
+        NCache[
+         Rational[1, 2], 0.5], 0], PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+      {RGBColor[1, 1, 1], PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+      {RGBColor[0, 1, 0], PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+      {RGBColor[1, 0, 0], PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}, {
+      {RGBColor[1, 1, 1], PolygonBox[{{0, -2}, {2, -2}, {1, -3}}]}, 
+      {RGBColor[1, 1, 0], PolygonBox[{{0, -4}, {2, -4}, {1, -3}}]}, 
+      {RGBColor[1, 0, 0], PolygonBox[{{0, -4}, {0, -2}, {1, -3}}]}, 
+      {RGBColor[0, 1, 0], PolygonBox[{{2, -4}, {2, -2}, {1, -3}}]}}}], ",", 
+   GraphicsBox[
+    {EdgeForm[Thickness[Large]], {
+      {RGBColor[1, 1, 0], PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+      {RGBColor[1, 1, 1], PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+      {RGBColor[0, 1, 0], PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+      {RGBColor[1, 
+        NCache[
+         Rational[1, 2], 0.5], 0], 
+       PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}, {
+      {RGBColor[1, 1, 1], PolygonBox[{{0, -2}, {2, -2}, {1, -3}}]}, 
+      {RGBColor[1, 1, 0], PolygonBox[{{0, -4}, {2, -4}, {1, -3}}]}, 
+      {RGBColor[1, 
+        NCache[
+         Rational[1, 2], 0.5], 0], PolygonBox[{{0, -4}, {0, -2}, {1, -3}}]}, 
+      {RGBColor[1, 0, 0], PolygonBox[{{2, -4}, {2, -2}, {1, -3}}]}}}], ",", 
+   GraphicsBox[
+    {EdgeForm[Thickness[Large]], {
+      {RGBColor[1, 
+        NCache[
+         Rational[1, 2], 0.5], 0], PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+      {RGBColor[1, 1, 1], PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+      {RGBColor[1, 0, 0], PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+      {RGBColor[0, 1, 0], PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}, {
+      {RGBColor[1, 1, 1], PolygonBox[{{0, -2}, {2, -2}, {1, -3}}]}, 
+      {RGBColor[1, 1, 0], PolygonBox[{{0, -4}, {2, -4}, {1, -3}}]}, 
+      {RGBColor[1, 
+        NCache[
+         Rational[1, 2], 0.5], 0], PolygonBox[{{0, -4}, {0, -2}, {1, -3}}]}, 
+      {RGBColor[1, 0, 0], PolygonBox[{{2, -4}, {2, -2}, {1, -3}}]}}}], ",", 
+   GraphicsBox[
+    {EdgeForm[Thickness[Large]], {
+      {RGBColor[1, 1, 0], PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+      {RGBColor[1, 1, 1], PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+      {RGBColor[1, 
+        NCache[
+         Rational[1, 2], 0.5], 0], PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+      {RGBColor[1, 0, 0], PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}, {
+      {RGBColor[1, 1, 1], PolygonBox[{{0, -2}, {2, -2}, {1, -3}}]}, 
+      {RGBColor[1, 1, 0], PolygonBox[{{0, -4}, {2, -4}, {1, -3}}]}, 
+      {RGBColor[1, 
+        NCache[
+         Rational[1, 2], 0.5], 0], PolygonBox[{{0, -4}, {0, -2}, {1, -3}}]}, 
+      {RGBColor[1, 0, 0], PolygonBox[{{2, -4}, {2, -2}, {1, -3}}]}}}], ",", 
+   GraphicsBox[
+    {EdgeForm[Thickness[Large]], {
+      {RGBColor[0, 1, 0], PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+      {RGBColor[1, 1, 1], PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+      {RGBColor[1, 
+        NCache[
+         Rational[1, 2], 0.5], 0], PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+      {RGBColor[0, 1, 0], PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}, {
+      {RGBColor[1, 1, 1], PolygonBox[{{0, -2}, {2, -2}, {1, -3}}]}, 
+      {RGBColor[1, 1, 0], PolygonBox[{{0, -4}, {2, -4}, {1, -3}}]}, 
+      {RGBColor[1, 
+        NCache[
+         Rational[1, 2], 0.5], 0], PolygonBox[{{0, -4}, {0, -2}, {1, -3}}]}, 
+      {RGBColor[1, 0, 0], PolygonBox[{{2, -4}, {2, -2}, {1, -3}}]}}}], ",", 
+   GraphicsBox[
+    {EdgeForm[Thickness[Large]], {
+      {RGBColor[1, 1, 0], PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+      {RGBColor[1, 1, 1], PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+      {RGBColor[0, 1, 0], PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+      {RGBColor[1, 
+        NCache[
+         Rational[1, 2], 0.5], 0], 
+       PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}, {
+      {RGBColor[1, 1, 1], PolygonBox[{{0, -2}, {2, -2}, {1, -3}}]}, 
+      {RGBColor[1, 0, 0], PolygonBox[{{0, -4}, {2, -4}, {1, -3}}]}, 
+      {RGBColor[1, 
+        NCache[
+         Rational[1, 2], 0.5], 0], PolygonBox[{{0, -4}, {0, -2}, {1, -3}}]}, 
+      {RGBColor[1, 
+        NCache[
+         Rational[1, 2], 0.5], 0], 
+       PolygonBox[{{2, -4}, {2, -2}, {1, -3}}]}}}], ",", 
+   GraphicsBox[
+    {EdgeForm[Thickness[Large]], {
+      {RGBColor[1, 
+        NCache[
+         Rational[1, 2], 0.5], 0], PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+      {RGBColor[1, 1, 1], PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+      {RGBColor[1, 0, 0], PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+      {RGBColor[0, 1, 0], PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}, {
+      {RGBColor[1, 1, 1], PolygonBox[{{0, -2}, {2, -2}, {1, -3}}]}, 
+      {RGBColor[1, 0, 0], PolygonBox[{{0, -4}, {2, -4}, {1, -3}}]}, 
+      {RGBColor[1, 
+        NCache[
+         Rational[1, 2], 0.5], 0], PolygonBox[{{0, -4}, {0, -2}, {1, -3}}]}, 
+      {RGBColor[1, 
+        NCache[
+         Rational[1, 2], 0.5], 0], 
+       PolygonBox[{{2, -4}, {2, -2}, {1, -3}}]}}}], ",", 
+   GraphicsBox[
+    {EdgeForm[Thickness[Large]], {
+      {RGBColor[1, 1, 0], PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+      {RGBColor[1, 1, 1], PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+      {RGBColor[1, 
+        NCache[
+         Rational[1, 2], 0.5], 0], PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+      {RGBColor[1, 0, 0], PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}, {
+      {RGBColor[1, 1, 1], PolygonBox[{{0, -2}, {2, -2}, {1, -3}}]}, 
+      {RGBColor[1, 0, 0], PolygonBox[{{0, -4}, {2, -4}, {1, -3}}]}, 
+      {RGBColor[1, 
+        NCache[
+         Rational[1, 2], 0.5], 0], PolygonBox[{{0, -4}, {0, -2}, {1, -3}}]}, 
+      {RGBColor[1, 
+        NCache[
+         Rational[1, 2], 0.5], 0], 
+       PolygonBox[{{2, -4}, {2, -2}, {1, -3}}]}}}], ",", 
+   GraphicsBox[
+    {EdgeForm[Thickness[Large]], {
+      {RGBColor[0, 1, 0], PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+      {RGBColor[1, 1, 1], PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+      {RGBColor[1, 
+        NCache[
+         Rational[1, 2], 0.5], 0], PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+      {RGBColor[0, 1, 0], PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}, {
+      {RGBColor[1, 1, 1], PolygonBox[{{0, -2}, {2, -2}, {1, -3}}]}, 
+      {RGBColor[1, 0, 0], PolygonBox[{{0, -4}, {2, -4}, {1, -3}}]}, 
+      {RGBColor[1, 
+        NCache[
+         Rational[1, 2], 0.5], 0], PolygonBox[{{0, -4}, {0, -2}, {1, -3}}]}, 
+      {RGBColor[1, 
+        NCache[
+         Rational[1, 2], 0.5], 0], 
+       PolygonBox[{{2, -4}, {2, -2}, {1, -3}}]}}}], ",", 
+   GraphicsBox[
+    {EdgeForm[Thickness[Large]], {
+      {RGBColor[1, 
+        NCache[
+         Rational[1, 2], 0.5], 0], PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+      {RGBColor[1, 1, 1], PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+      {RGBColor[0, 1, 0], PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+      {RGBColor[0, 1, 0], PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}, {
+      {RGBColor[1, 1, 1], PolygonBox[{{0, -2}, {2, -2}, {1, -3}}]}, 
+      {RGBColor[1, 1, 0], PolygonBox[{{0, -4}, {2, -4}, {1, -3}}]}, 
+      {RGBColor[1, 
+        NCache[
+         Rational[1, 2], 0.5], 0], PolygonBox[{{0, -4}, {0, -2}, {1, -3}}]}, 
+      {RGBColor[0, 1, 0], PolygonBox[{{2, -4}, {2, -2}, {1, -3}}]}}}], ",", 
+   GraphicsBox[
+    {EdgeForm[Thickness[Large]], {
+      {RGBColor[1, 
+        NCache[
+         Rational[1, 2], 0.5], 0], PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+      {RGBColor[1, 1, 1], PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+      {RGBColor[0, 1, 0], PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+      {RGBColor[1, 
+        NCache[
+         Rational[1, 2], 0.5], 0], 
+       PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}, {
+      {RGBColor[1, 1, 1], PolygonBox[{{0, -2}, {2, -2}, {1, -3}}]}, 
+      {RGBColor[1, 
+        NCache[
+         Rational[1, 2], 0.5], 0], PolygonBox[{{0, -4}, {2, -4}, {1, -3}}]}, 
+      {RGBColor[0, 1, 0], PolygonBox[{{0, -4}, {0, -2}, {1, -3}}]}, 
+      {RGBColor[1, 0, 0], PolygonBox[{{2, -4}, {2, -2}, {1, -3}}]}}}], ",", 
+   GraphicsBox[
+    {EdgeForm[Thickness[Large]], {
+      {RGBColor[1, 0, 0], PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+      {RGBColor[1, 1, 1], PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+      {RGBColor[1, 1, 0], PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+      {RGBColor[1, 1, 0], PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}, {
+      {RGBColor[1, 1, 1], PolygonBox[{{0, -2}, {2, -2}, {1, -3}}]}, 
+      {RGBColor[1, 
+        NCache[
+         Rational[1, 2], 0.5], 0], PolygonBox[{{0, -4}, {2, -4}, {1, -3}}]}, 
+      {RGBColor[0, 1, 0], PolygonBox[{{0, -4}, {0, -2}, {1, -3}}]}, 
+      {RGBColor[1, 0, 0], PolygonBox[{{2, -4}, {2, -2}, {1, -3}}]}}}], ",", 
+   GraphicsBox[
+    {EdgeForm[Thickness[Large]], {
+      {RGBColor[1, 0, 0], PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+      {RGBColor[1, 1, 1], PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+      {RGBColor[1, 0, 0], PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+      {RGBColor[1, 0, 0], PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}, {
+      {RGBColor[1, 1, 1], PolygonBox[{{0, -2}, {2, -2}, {1, -3}}]}, 
+      {RGBColor[1, 
+        NCache[
+         Rational[1, 2], 0.5], 0], PolygonBox[{{0, -4}, {2, -4}, {1, -3}}]}, 
+      {RGBColor[0, 1, 0], PolygonBox[{{0, -4}, {0, -2}, {1, -3}}]}, 
+      {RGBColor[1, 0, 0], PolygonBox[{{2, -4}, {2, -2}, {1, -3}}]}}}], ",", 
+   GraphicsBox[
+    {EdgeForm[Thickness[Large]], {
+      {RGBColor[1, 
+        NCache[
+         Rational[1, 2], 0.5], 0], PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+      {RGBColor[1, 1, 1], PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+      {RGBColor[0, 1, 0], PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+      {RGBColor[1, 0, 0], PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}, {
+      {RGBColor[1, 1, 1], PolygonBox[{{0, -2}, {2, -2}, {1, -3}}]}, 
+      {RGBColor[1, 
+        NCache[
+         Rational[1, 2], 0.5], 0], PolygonBox[{{0, -4}, {2, -4}, {1, -3}}]}, 
+      {RGBColor[0, 1, 0], PolygonBox[{{0, -4}, {0, -2}, {1, -3}}]}, 
+      {RGBColor[1, 0, 0], PolygonBox[{{2, -4}, {2, -2}, {1, -3}}]}}}]}], 
+  "}"}]], "Output",
+ CellChangeTimes->{3.853204877257462*^9, 3.853205084193297*^9},
+ CellLabel->"Out[8]=",ExpressionUUID->"344c78d6-6e10-49b1-b497-f2c3310decab"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+  "(*", "Wang\:96c6\:5408\:306e\:6c34\:5e73\:65b9\:5411\:306e\:5408\:6210", 
+   "*)"}], "\[IndentingNewLine]", 
+  RowBox[{"Map", "[", 
+   RowBox[{"Tiling", ",", 
+    RowBox[{"Tilecompositionh", "[", 
+     RowBox[{"Jeandeltiles", ",", "Jeandeltiles"}], "]"}]}], "]"}]}]], "Input",\
+
+ CellChangeTimes->{{3.853204975898704*^9, 3.8532049970338593`*^9}},
+ CellLabel->"In[9]:=",ExpressionUUID->"97e16a59-1a2c-4569-8c74-fdd750f41082"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   GraphicsBox[
+    {EdgeForm[Thickness[Large]], {{
+       {RGBColor[1, 
+         NCache[
+          Rational[1, 2], 0.5], 0], PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+       {RGBColor[1, 
+         NCache[
+          Rational[1, 2], 0.5], 0], 
+        PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+       {RGBColor[0, 1, 0], PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+       {RGBColor[1, 1, 1], PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}, {
+       {RGBColor[1, 1, 0], PolygonBox[{{2, 0}, {4, 0}, {3, -1}}]}, 
+       {RGBColor[1, 1, 0], PolygonBox[{{2, -2}, {4, -2}, {3, -1}}]}, 
+       {RGBColor[1, 1, 1], PolygonBox[{{2, -2}, {2, 0}, {3, -1}}]}, 
+       {RGBColor[1, 0, 0], PolygonBox[{{4, -2}, {4, 0}, {3, -1}}]}}}}], ",", 
+   GraphicsBox[
+    {EdgeForm[Thickness[Large]], {{
+       {RGBColor[1, 
+         NCache[
+          Rational[1, 2], 0.5], 0], PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+       {RGBColor[1, 
+         NCache[
+          Rational[1, 2], 0.5], 0], 
+        PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+       {RGBColor[0, 1, 0], PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+       {RGBColor[1, 1, 1], PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}, {
+       {RGBColor[1, 1, 0], PolygonBox[{{2, 0}, {4, 0}, {3, -1}}]}, 
+       {RGBColor[1, 0, 0], PolygonBox[{{2, -2}, {4, -2}, {3, -1}}]}, 
+       {RGBColor[1, 1, 1], PolygonBox[{{2, -2}, {2, 0}, {3, -1}}]}, 
+       {RGBColor[1, 
+         NCache[
+          Rational[1, 2], 0.5], 0], 
+        PolygonBox[{{4, -2}, {4, 0}, {3, -1}}]}}}}], ",", 
+   GraphicsBox[
+    {EdgeForm[Thickness[Large]], {{
+       {RGBColor[1, 
+         NCache[
+          Rational[1, 2], 0.5], 0], PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+       {RGBColor[1, 
+         NCache[
+          Rational[1, 2], 0.5], 0], 
+        PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+       {RGBColor[0, 1, 0], PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+       {RGBColor[1, 1, 1], PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}, {
+       {RGBColor[0, 1, 0], PolygonBox[{{2, 0}, {4, 0}, {3, -1}}]}, 
+       {RGBColor[1, 1, 0], PolygonBox[{{2, -2}, {4, -2}, {3, -1}}]}, 
+       {RGBColor[1, 1, 1], PolygonBox[{{2, -2}, {2, 0}, {3, -1}}]}, 
+       {RGBColor[0, 1, 0], PolygonBox[{{4, -2}, {4, 0}, {3, -1}}]}}}}], ",", 
+   GraphicsBox[
+    {EdgeForm[Thickness[Large]], {{
+       {RGBColor[1, 1, 0], PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+       {RGBColor[1, 1, 0], PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+       {RGBColor[0, 1, 0], PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+       {RGBColor[1, 1, 1], PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}, {
+       {RGBColor[1, 1, 0], PolygonBox[{{2, 0}, {4, 0}, {3, -1}}]}, 
+       {RGBColor[1, 1, 0], PolygonBox[{{2, -2}, {4, -2}, {3, -1}}]}, 
+       {RGBColor[1, 1, 1], PolygonBox[{{2, -2}, {2, 0}, {3, -1}}]}, 
+       {RGBColor[1, 0, 0], PolygonBox[{{4, -2}, {4, 0}, {3, -1}}]}}}}], ",", 
+   GraphicsBox[
+    {EdgeForm[Thickness[Large]], {{
+       {RGBColor[1, 1, 0], PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+       {RGBColor[1, 1, 0], PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+       {RGBColor[0, 1, 0], PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+       {RGBColor[1, 1, 1], PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}, {
+       {RGBColor[1, 1, 0], PolygonBox[{{2, 0}, {4, 0}, {3, -1}}]}, 
+       {RGBColor[1, 0, 0], PolygonBox[{{2, -2}, {4, -2}, {3, -1}}]}, 
+       {RGBColor[1, 1, 1], PolygonBox[{{2, -2}, {2, 0}, {3, -1}}]}, 
+       {RGBColor[1, 
+         NCache[
+          Rational[1, 2], 0.5], 0], 
+        PolygonBox[{{4, -2}, {4, 0}, {3, -1}}]}}}}], ",", 
+   GraphicsBox[
+    {EdgeForm[Thickness[Large]], {{
+       {RGBColor[1, 1, 0], PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+       {RGBColor[1, 1, 0], PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+       {RGBColor[0, 1, 0], PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+       {RGBColor[1, 1, 1], PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}, {
+       {RGBColor[0, 1, 0], PolygonBox[{{2, 0}, {4, 0}, {3, -1}}]}, 
+       {RGBColor[1, 1, 0], PolygonBox[{{2, -2}, {4, -2}, {3, -1}}]}, 
+       {RGBColor[1, 1, 1], PolygonBox[{{2, -2}, {2, 0}, {3, -1}}]}, 
+       {RGBColor[0, 1, 0], PolygonBox[{{4, -2}, {4, 0}, {3, -1}}]}}}}], ",", 
+   GraphicsBox[
+    {EdgeForm[Thickness[Large]], {{
+       {RGBColor[1, 
+         NCache[
+          Rational[1, 2], 0.5], 0], PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+       {RGBColor[0, 1, 0], PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+       {RGBColor[0, 1, 0], PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+       {RGBColor[1, 1, 1], PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}, {
+       {RGBColor[1, 
+         NCache[
+          Rational[1, 2], 0.5], 0], PolygonBox[{{2, 0}, {4, 0}, {3, -1}}]}, 
+       {RGBColor[1, 
+         NCache[
+          Rational[1, 2], 0.5], 0], 
+        PolygonBox[{{2, -2}, {4, -2}, {3, -1}}]}, 
+       {RGBColor[1, 1, 1], PolygonBox[{{2, -2}, {2, 0}, {3, -1}}]}, 
+       {RGBColor[1, 
+         NCache[
+          Rational[1, 2], 0.5], 0], 
+        PolygonBox[{{4, -2}, {4, 0}, {3, -1}}]}}}}], ",", 
+   GraphicsBox[
+    {EdgeForm[Thickness[Large]], {{
+       {RGBColor[1, 
+         NCache[
+          Rational[1, 2], 0.5], 0], PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+       {RGBColor[0, 1, 0], PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+       {RGBColor[0, 1, 0], PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+       {RGBColor[1, 1, 1], PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}, {
+       {RGBColor[1, 1, 0], PolygonBox[{{2, 0}, {4, 0}, {3, -1}}]}, 
+       {RGBColor[1, 1, 0], PolygonBox[{{2, -2}, {4, -2}, {3, -1}}]}, 
+       {RGBColor[1, 1, 1], PolygonBox[{{2, -2}, {2, 0}, {3, -1}}]}, 
+       {RGBColor[1, 
+         NCache[
+          Rational[1, 2], 0.5], 0], 
+        PolygonBox[{{4, -2}, {4, 0}, {3, -1}}]}}}}], ",", 
+   GraphicsBox[
+    {EdgeForm[Thickness[Large]], {{
+       {RGBColor[1, 
+         NCache[
+          Rational[1, 2], 0.5], 0], PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+       {RGBColor[0, 1, 0], PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+       {RGBColor[0, 1, 0], PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+       {RGBColor[1, 1, 1], PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}, {
+       {RGBColor[1, 
+         NCache[
+          Rational[1, 2], 0.5], 0], PolygonBox[{{2, 0}, {4, 0}, {3, -1}}]}, 
+       {RGBColor[0, 1, 0], PolygonBox[{{2, -2}, {4, -2}, {3, -1}}]}, 
+       {RGBColor[1, 1, 1], PolygonBox[{{2, -2}, {2, 0}, {3, -1}}]}, 
+       {RGBColor[0, 1, 0], PolygonBox[{{4, -2}, {4, 0}, {3, -1}}]}}}}], ",", 
+   GraphicsBox[
+    {EdgeForm[Thickness[Large]], {{
+       {RGBColor[1, 
+         NCache[
+          Rational[1, 2], 0.5], 0], PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+       {RGBColor[0, 1, 0], PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+       {RGBColor[0, 1, 0], PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+       {RGBColor[1, 1, 1], PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}, {
+       {RGBColor[1, 
+         NCache[
+          Rational[1, 2], 0.5], 0], PolygonBox[{{2, 0}, {4, 0}, {3, -1}}]}, 
+       {RGBColor[1, 
+         NCache[
+          Rational[1, 2], 0.5], 0], 
+        PolygonBox[{{2, -2}, {4, -2}, {3, -1}}]}, 
+       {RGBColor[1, 1, 1], PolygonBox[{{2, -2}, {2, 0}, {3, -1}}]}, 
+       {RGBColor[1, 0, 0], PolygonBox[{{4, -2}, {4, 0}, {3, -1}}]}}}}], ",", 
+   GraphicsBox[
+    {EdgeForm[Thickness[Large]], {{
+       {RGBColor[1, 0, 0], PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+       {RGBColor[1, 
+         NCache[
+          Rational[1, 2], 0.5], 0], 
+        PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+       {RGBColor[1, 1, 0], PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+       {RGBColor[1, 1, 1], PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}, {
+       {RGBColor[1, 0, 0], PolygonBox[{{2, 0}, {4, 0}, {3, -1}}]}, 
+       {RGBColor[1, 
+         NCache[
+          Rational[1, 2], 0.5], 0], 
+        PolygonBox[{{2, -2}, {4, -2}, {3, -1}}]}, 
+       {RGBColor[1, 1, 1], PolygonBox[{{2, -2}, {2, 0}, {3, -1}}]}, 
+       {RGBColor[1, 1, 0], PolygonBox[{{4, -2}, {4, 0}, {3, -1}}]}}}}], ",", 
+   GraphicsBox[
+    {EdgeForm[Thickness[Large]], {{
+       {RGBColor[1, 0, 0], PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+       {RGBColor[1, 
+         NCache[
+          Rational[1, 2], 0.5], 0], 
+        PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+       {RGBColor[1, 1, 0], PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+       {RGBColor[1, 1, 1], PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}, {
+       {RGBColor[1, 1, 0], PolygonBox[{{2, 0}, {4, 0}, {3, -1}}]}, 
+       {RGBColor[1, 0, 0], PolygonBox[{{2, -2}, {4, -2}, {3, -1}}]}, 
+       {RGBColor[1, 1, 1], PolygonBox[{{2, -2}, {2, 0}, {3, -1}}]}, 
+       {RGBColor[1, 1, 0], PolygonBox[{{4, -2}, {4, 0}, {3, -1}}]}}}}], ",", 
+   GraphicsBox[
+    {EdgeForm[Thickness[Large]], {{
+       {RGBColor[1, 1, 0], PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+       {RGBColor[1, 0, 0], PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+       {RGBColor[1, 1, 0], PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+       {RGBColor[1, 1, 1], PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}, {
+       {RGBColor[1, 0, 0], PolygonBox[{{2, 0}, {4, 0}, {3, -1}}]}, 
+       {RGBColor[1, 
+         NCache[
+          Rational[1, 2], 0.5], 0], 
+        PolygonBox[{{2, -2}, {4, -2}, {3, -1}}]}, 
+       {RGBColor[1, 1, 1], PolygonBox[{{2, -2}, {2, 0}, {3, -1}}]}, 
+       {RGBColor[1, 1, 0], PolygonBox[{{4, -2}, {4, 0}, {3, -1}}]}}}}], ",", 
+   GraphicsBox[
+    {EdgeForm[Thickness[Large]], {{
+       {RGBColor[1, 1, 0], PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+       {RGBColor[1, 0, 0], PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+       {RGBColor[1, 1, 0], PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+       {RGBColor[1, 1, 1], PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}, {
+       {RGBColor[1, 1, 0], PolygonBox[{{2, 0}, {4, 0}, {3, -1}}]}, 
+       {RGBColor[1, 0, 0], PolygonBox[{{2, -2}, {4, -2}, {3, -1}}]}, 
+       {RGBColor[1, 1, 1], PolygonBox[{{2, -2}, {2, 0}, {3, -1}}]}, 
+       {RGBColor[1, 1, 0], PolygonBox[{{4, -2}, {4, 0}, {3, -1}}]}}}}], ",", 
+   GraphicsBox[
+    {EdgeForm[Thickness[Large]], {{
+       {RGBColor[1, 0, 0], PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+       {RGBColor[1, 
+         NCache[
+          Rational[1, 2], 0.5], 0], 
+        PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+       {RGBColor[1, 0, 0], PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+       {RGBColor[1, 1, 1], PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}, {
+       {RGBColor[1, 0, 0], PolygonBox[{{2, 0}, {4, 0}, {3, -1}}]}, 
+       {RGBColor[1, 
+         NCache[
+          Rational[1, 2], 0.5], 0], 
+        PolygonBox[{{2, -2}, {4, -2}, {3, -1}}]}, 
+       {RGBColor[1, 1, 1], PolygonBox[{{2, -2}, {2, 0}, {3, -1}}]}, 
+       {RGBColor[1, 0, 0], PolygonBox[{{4, -2}, {4, 0}, {3, -1}}]}}}}], ",", 
+   GraphicsBox[
+    {EdgeForm[Thickness[Large]], {{
+       {RGBColor[1, 0, 0], PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+       {RGBColor[1, 
+         NCache[
+          Rational[1, 2], 0.5], 0], 
+        PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+       {RGBColor[1, 0, 0], PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+       {RGBColor[1, 1, 1], PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}, {
+       {RGBColor[1, 
+         NCache[
+          Rational[1, 2], 0.5], 0], PolygonBox[{{2, 0}, {4, 0}, {3, -1}}]}, 
+       {RGBColor[1, 1, 0], PolygonBox[{{2, -2}, {4, -2}, {3, -1}}]}, 
+       {RGBColor[1, 1, 1], PolygonBox[{{2, -2}, {2, 0}, {3, -1}}]}, 
+       {RGBColor[0, 1, 0], PolygonBox[{{4, -2}, {4, 0}, {3, -1}}]}}}}], ",", 
+   GraphicsBox[
+    {EdgeForm[Thickness[Large]], {{
+       {RGBColor[1, 
+         NCache[
+          Rational[1, 2], 0.5], 0], PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+       {RGBColor[1, 1, 0], PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+       {RGBColor[1, 0, 0], PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+       {RGBColor[1, 1, 1], PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}, {
+       {RGBColor[1, 
+         NCache[
+          Rational[1, 2], 0.5], 0], PolygonBox[{{2, 0}, {4, 0}, {3, -1}}]}, 
+       {RGBColor[1, 
+         NCache[
+          Rational[1, 2], 0.5], 0], 
+        PolygonBox[{{2, -2}, {4, -2}, {3, -1}}]}, 
+       {RGBColor[1, 1, 1], PolygonBox[{{2, -2}, {2, 0}, {3, -1}}]}, 
+       {RGBColor[1, 
+         NCache[
+          Rational[1, 2], 0.5], 0], 
+        PolygonBox[{{4, -2}, {4, 0}, {3, -1}}]}}}}], ",", 
+   GraphicsBox[
+    {EdgeForm[Thickness[Large]], {{
+       {RGBColor[1, 
+         NCache[
+          Rational[1, 2], 0.5], 0], PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+       {RGBColor[1, 1, 0], PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+       {RGBColor[1, 0, 0], PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+       {RGBColor[1, 1, 1], PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}, {
+       {RGBColor[1, 1, 0], PolygonBox[{{2, 0}, {4, 0}, {3, -1}}]}, 
+       {RGBColor[1, 1, 0], PolygonBox[{{2, -2}, {4, -2}, {3, -1}}]}, 
+       {RGBColor[1, 1, 1], PolygonBox[{{2, -2}, {2, 0}, {3, -1}}]}, 
+       {RGBColor[1, 
+         NCache[
+          Rational[1, 2], 0.5], 0], 
+        PolygonBox[{{4, -2}, {4, 0}, {3, -1}}]}}}}], ",", 
+   GraphicsBox[
+    {EdgeForm[Thickness[Large]], {{
+       {RGBColor[1, 
+         NCache[
+          Rational[1, 2], 0.5], 0], PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+       {RGBColor[1, 1, 0], PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+       {RGBColor[1, 0, 0], PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+       {RGBColor[1, 1, 1], PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}, {
+       {RGBColor[1, 
+         NCache[
+          Rational[1, 2], 0.5], 0], PolygonBox[{{2, 0}, {4, 0}, {3, -1}}]}, 
+       {RGBColor[0, 1, 0], PolygonBox[{{2, -2}, {4, -2}, {3, -1}}]}, 
+       {RGBColor[1, 1, 1], PolygonBox[{{2, -2}, {2, 0}, {3, -1}}]}, 
+       {RGBColor[0, 1, 0], PolygonBox[{{4, -2}, {4, 0}, {3, -1}}]}}}}], ",", 
+   GraphicsBox[
+    {EdgeForm[Thickness[Large]], {{
+       {RGBColor[1, 
+         NCache[
+          Rational[1, 2], 0.5], 0], PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+       {RGBColor[1, 1, 0], PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+       {RGBColor[1, 0, 0], PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+       {RGBColor[1, 1, 1], PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}, {
+       {RGBColor[1, 
+         NCache[
+          Rational[1, 2], 0.5], 0], PolygonBox[{{2, 0}, {4, 0}, {3, -1}}]}, 
+       {RGBColor[1, 
+         NCache[
+          Rational[1, 2], 0.5], 0], 
+        PolygonBox[{{2, -2}, {4, -2}, {3, -1}}]}, 
+       {RGBColor[1, 1, 1], PolygonBox[{{2, -2}, {2, 0}, {3, -1}}]}, 
+       {RGBColor[1, 0, 0], PolygonBox[{{4, -2}, {4, 0}, {3, -1}}]}}}}], ",", 
+   GraphicsBox[
+    {EdgeForm[Thickness[Large]], {{
+       {RGBColor[1, 1, 0], PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+       {RGBColor[1, 1, 0], PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+       {RGBColor[1, 
+         NCache[
+          Rational[1, 2], 0.5], 0], PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+       {RGBColor[1, 1, 1], PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}, {
+       {RGBColor[1, 0, 0], PolygonBox[{{2, 0}, {4, 0}, {3, -1}}]}, 
+       {RGBColor[1, 
+         NCache[
+          Rational[1, 2], 0.5], 0], 
+        PolygonBox[{{2, -2}, {4, -2}, {3, -1}}]}, 
+       {RGBColor[1, 1, 1], PolygonBox[{{2, -2}, {2, 0}, {3, -1}}]}, 
+       {RGBColor[1, 0, 0], PolygonBox[{{4, -2}, {4, 0}, {3, -1}}]}}}}], ",", 
+   GraphicsBox[
+    {EdgeForm[Thickness[Large]], {{
+       {RGBColor[1, 1, 0], PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+       {RGBColor[1, 1, 0], PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+       {RGBColor[1, 
+         NCache[
+          Rational[1, 2], 0.5], 0], PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+       {RGBColor[1, 1, 1], PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}, {
+       {RGBColor[1, 
+         NCache[
+          Rational[1, 2], 0.5], 0], PolygonBox[{{2, 0}, {4, 0}, {3, -1}}]}, 
+       {RGBColor[1, 1, 0], PolygonBox[{{2, -2}, {4, -2}, {3, -1}}]}, 
+       {RGBColor[1, 1, 1], PolygonBox[{{2, -2}, {2, 0}, {3, -1}}]}, 
+       {RGBColor[0, 1, 0], PolygonBox[{{4, -2}, {4, 0}, {3, -1}}]}}}}], ",", 
+   GraphicsBox[
+    {EdgeForm[Thickness[Large]], {{
+       {RGBColor[1, 1, 0], PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+       {RGBColor[1, 0, 0], PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+       {RGBColor[1, 
+         NCache[
+          Rational[1, 2], 0.5], 0], PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+       {RGBColor[1, 1, 1], PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}, {
+       {RGBColor[1, 1, 0], PolygonBox[{{2, 0}, {4, 0}, {3, -1}}]}, 
+       {RGBColor[1, 1, 0], PolygonBox[{{2, -2}, {4, -2}, {3, -1}}]}, 
+       {RGBColor[1, 1, 1], PolygonBox[{{2, -2}, {2, 0}, {3, -1}}]}, 
+       {RGBColor[1, 0, 0], PolygonBox[{{4, -2}, {4, 0}, {3, -1}}]}}}}], ",", 
+   GraphicsBox[
+    {EdgeForm[Thickness[Large]], {{
+       {RGBColor[1, 1, 0], PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+       {RGBColor[1, 0, 0], PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+       {RGBColor[1, 
+         NCache[
+          Rational[1, 2], 0.5], 0], PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+       {RGBColor[1, 1, 1], PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}, {
+       {RGBColor[1, 1, 0], PolygonBox[{{2, 0}, {4, 0}, {3, -1}}]}, 
+       {RGBColor[1, 0, 0], PolygonBox[{{2, -2}, {4, -2}, {3, -1}}]}, 
+       {RGBColor[1, 1, 1], PolygonBox[{{2, -2}, {2, 0}, {3, -1}}]}, 
+       {RGBColor[1, 
+         NCache[
+          Rational[1, 2], 0.5], 0], 
+        PolygonBox[{{4, -2}, {4, 0}, {3, -1}}]}}}}], ",", 
+   GraphicsBox[
+    {EdgeForm[Thickness[Large]], {{
+       {RGBColor[1, 1, 0], PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+       {RGBColor[1, 0, 0], PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+       {RGBColor[1, 
+         NCache[
+          Rational[1, 2], 0.5], 0], PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+       {RGBColor[1, 1, 1], PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}, {
+       {RGBColor[0, 1, 0], PolygonBox[{{2, 0}, {4, 0}, {3, -1}}]}, 
+       {RGBColor[1, 1, 0], PolygonBox[{{2, -2}, {4, -2}, {3, -1}}]}, 
+       {RGBColor[1, 1, 1], PolygonBox[{{2, -2}, {2, 0}, {3, -1}}]}, 
+       {RGBColor[0, 1, 0], PolygonBox[{{4, -2}, {4, 0}, {3, -1}}]}}}}], ",", 
+   GraphicsBox[
+    {EdgeForm[Thickness[Large]], {{
+       {RGBColor[0, 1, 0], PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+       {RGBColor[1, 1, 0], PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+       {RGBColor[1, 
+         NCache[
+          Rational[1, 2], 0.5], 0], PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+       {RGBColor[1, 1, 1], PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}, {
+       {RGBColor[1, 
+         NCache[
+          Rational[1, 2], 0.5], 0], PolygonBox[{{2, 0}, {4, 0}, {3, -1}}]}, 
+       {RGBColor[1, 
+         NCache[
+          Rational[1, 2], 0.5], 0], 
+        PolygonBox[{{2, -2}, {4, -2}, {3, -1}}]}, 
+       {RGBColor[1, 1, 1], PolygonBox[{{2, -2}, {2, 0}, {3, -1}}]}, 
+       {RGBColor[1, 
+         NCache[
+          Rational[1, 2], 0.5], 0], 
+        PolygonBox[{{4, -2}, {4, 0}, {3, -1}}]}}}}], ",", 
+   GraphicsBox[
+    {EdgeForm[Thickness[Large]], {{
+       {RGBColor[0, 1, 0], PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+       {RGBColor[1, 1, 0], PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+       {RGBColor[1, 
+         NCache[
+          Rational[1, 2], 0.5], 0], PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+       {RGBColor[1, 1, 1], PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}, {
+       {RGBColor[1, 1, 0], PolygonBox[{{2, 0}, {4, 0}, {3, -1}}]}, 
+       {RGBColor[1, 1, 0], PolygonBox[{{2, -2}, {4, -2}, {3, -1}}]}, 
+       {RGBColor[1, 1, 1], PolygonBox[{{2, -2}, {2, 0}, {3, -1}}]}, 
+       {RGBColor[1, 
+         NCache[
+          Rational[1, 2], 0.5], 0], 
+        PolygonBox[{{4, -2}, {4, 0}, {3, -1}}]}}}}], ",", 
+   GraphicsBox[
+    {EdgeForm[Thickness[Large]], {{
+       {RGBColor[0, 1, 0], PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+       {RGBColor[1, 1, 0], PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+       {RGBColor[1, 
+         NCache[
+          Rational[1, 2], 0.5], 0], PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+       {RGBColor[1, 1, 1], PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}, {
+       {RGBColor[1, 
+         NCache[
+          Rational[1, 2], 0.5], 0], PolygonBox[{{2, 0}, {4, 0}, {3, -1}}]}, 
+       {RGBColor[0, 1, 0], PolygonBox[{{2, -2}, {4, -2}, {3, -1}}]}, 
+       {RGBColor[1, 1, 1], PolygonBox[{{2, -2}, {2, 0}, {3, -1}}]}, 
+       {RGBColor[0, 1, 0], PolygonBox[{{4, -2}, {4, 0}, {3, -1}}]}}}}], ",", 
+   GraphicsBox[
+    {EdgeForm[Thickness[Large]], {{
+       {RGBColor[0, 1, 0], PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+       {RGBColor[1, 1, 0], PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+       {RGBColor[1, 
+         NCache[
+          Rational[1, 2], 0.5], 0], PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+       {RGBColor[1, 1, 1], PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}, {
+       {RGBColor[1, 
+         NCache[
+          Rational[1, 2], 0.5], 0], PolygonBox[{{2, 0}, {4, 0}, {3, -1}}]}, 
+       {RGBColor[1, 
+         NCache[
+          Rational[1, 2], 0.5], 0], 
+        PolygonBox[{{2, -2}, {4, -2}, {3, -1}}]}, 
+       {RGBColor[1, 1, 1], PolygonBox[{{2, -2}, {2, 0}, {3, -1}}]}, 
+       {RGBColor[1, 0, 0], PolygonBox[{{4, -2}, {4, 0}, {3, -1}}]}}}}], ",", 
+   GraphicsBox[
+    {EdgeForm[Thickness[Large]], {{
+       {RGBColor[1, 
+         NCache[
+          Rational[1, 2], 0.5], 0], PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+       {RGBColor[1, 
+         NCache[
+          Rational[1, 2], 0.5], 0], 
+        PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+       {RGBColor[0, 1, 0], PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+       {RGBColor[1, 1, 1], PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}, {
+       {RGBColor[1, 0, 0], PolygonBox[{{2, 0}, {4, 0}, {3, -1}}]}, 
+       {RGBColor[1, 
+         NCache[
+          Rational[1, 2], 0.5], 0], 
+        PolygonBox[{{2, -2}, {4, -2}, {3, -1}}]}, 
+       {RGBColor[1, 1, 1], PolygonBox[{{2, -2}, {2, 0}, {3, -1}}]}, 
+       {RGBColor[1, 0, 0], PolygonBox[{{4, -2}, {4, 0}, {3, -1}}]}}}}], ",", 
+   GraphicsBox[
+    {EdgeForm[Thickness[Large]], {{
+       {RGBColor[1, 
+         NCache[
+          Rational[1, 2], 0.5], 0], PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+       {RGBColor[1, 
+         NCache[
+          Rational[1, 2], 0.5], 0], 
+        PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+       {RGBColor[0, 1, 0], PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+       {RGBColor[1, 1, 1], PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}, {
+       {RGBColor[1, 
+         NCache[
+          Rational[1, 2], 0.5], 0], PolygonBox[{{2, 0}, {4, 0}, {3, -1}}]}, 
+       {RGBColor[1, 1, 0], PolygonBox[{{2, -2}, {4, -2}, {3, -1}}]}, 
+       {RGBColor[1, 1, 1], PolygonBox[{{2, -2}, {2, 0}, {3, -1}}]}, 
+       {RGBColor[0, 1, 0], PolygonBox[{{4, -2}, {4, 0}, {3, -1}}]}}}}]}], 
+  "}"}]], "Output",
+ CellChangeTimes->{3.853204997452737*^9, 3.853205084308145*^9},
+ CellLabel->"Out[9]=",ExpressionUUID->"f052c9ae-3343-4dbc-b7bf-0cb4d5ea5804"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{"\:30a8\:30c3\:30b8\:306e\:6570", 
+     RowBox[{"(", "\:30bf\:30a4\:30eb\:306e\:6570", ")"}]}], "=", 
+    RowBox[{"5", "\:306e\:30b0\:30e9\:30d5\:306e\:751f\:6210"}]}], "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{"qqq", "=", 
+   RowBox[{"Generategraphs", "[", "5", "]"}]}]}]], "Input",
+ CellChangeTimes->{{3.853204485507578*^9, 3.8532045344403057`*^9}},
+ CellLabel->"In[10]:=",ExpressionUUID->"69e6717f-a051-408e-b189-6d7213877e26"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"1", ",", "2"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"2", ",", "1"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"2", ",", "1"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"2", ",", "1"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"2", ",", "1"}], "}"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"1", ",", "2"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"2", ",", "1"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"2", ",", "1"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"2", ",", "1"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"2", ",", "2"}], "}"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"1", ",", "2"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"2", ",", "1"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"2", ",", "1"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"2", ",", "2"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"2", ",", "2"}], "}"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"1", ",", "2"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"2", ",", "1"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"2", ",", "2"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"2", ",", "2"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"2", ",", "2"}], "}"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"1", ",", "1"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"1", ",", "1"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"2", ",", "2"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"2", ",", "2"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"2", ",", "2"}], "}"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"1", ",", "1"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"1", ",", "2"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"2", ",", "1"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"2", ",", "1"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"2", ",", "2"}], "}"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"1", ",", "1"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"1", ",", "2"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"2", ",", "1"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"2", ",", "2"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"2", ",", "2"}], "}"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"1", ",", "2"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"1", ",", "2"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"2", ",", "1"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"2", ",", "1"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"2", ",", "1"}], "}"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"1", ",", "2"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"1", ",", "2"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"2", ",", "1"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"2", ",", "1"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"2", ",", "2"}], "}"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"1", ",", "2"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"2", ",", "3"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"3", ",", "1"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"3", ",", "1"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"3", ",", "1"}], "}"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"1", ",", "2"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"2", ",", "3"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"3", ",", "1"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"3", ",", "1"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"3", ",", "2"}], "}"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"1", ",", "2"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"2", ",", "3"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"3", ",", "1"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"3", ",", "1"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"3", ",", "3"}], "}"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"1", ",", "2"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"2", ",", "3"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"3", ",", "1"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"3", ",", "2"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"3", ",", "2"}], "}"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"1", ",", "2"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"2", ",", "3"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"3", ",", "1"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"3", ",", "2"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"3", ",", "3"}], "}"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"1", ",", "2"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"2", ",", "3"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"3", ",", "1"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"3", ",", "3"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"3", ",", "3"}], "}"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"1", ",", "3"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"2", ",", "3"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"3", ",", "1"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"3", ",", "1"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"3", ",", "2"}], "}"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"1", ",", "3"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"2", ",", "3"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"3", ",", "1"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"3", ",", "2"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"3", ",", "3"}], "}"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"1", ",", "2"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"2", ",", "1"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"2", ",", "1"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"3", ",", "3"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"3", ",", "3"}], "}"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"1", ",", "2"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"2", ",", "1"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"2", ",", "2"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"3", ",", "3"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"3", ",", "3"}], "}"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"1", ",", "2"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"2", ",", "1"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"2", ",", "3"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"3", ",", "1"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"3", ",", "2"}], "}"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"1", ",", "2"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"2", ",", "1"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"2", ",", "3"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"3", ",", "1"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"3", ",", "3"}], "}"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"1", ",", "2"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"2", ",", "1"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"2", ",", "3"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"3", ",", "2"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"3", ",", "3"}], "}"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"1", ",", "2"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"2", ",", "2"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"2", ",", "3"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"3", ",", "1"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"3", ",", "1"}], "}"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"1", ",", "2"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"2", ",", "2"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"2", ",", "3"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"3", ",", "1"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"3", ",", "3"}], "}"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"1", ",", "2"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"2", ",", "3"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"2", ",", "3"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"3", ",", "1"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"3", ",", "1"}], "}"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"1", ",", "2"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"2", ",", "3"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"2", ",", "3"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"3", ",", "1"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"3", ",", "2"}], "}"}]}], "}"}]}], "}"}]], "Output",
+ CellChangeTimes->{3.853205084613826*^9},
+ CellLabel->"Out[10]=",ExpressionUUID->"515745cb-d3ed-4439-bad9-0732be56ccb2"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Map", "[", 
+  RowBox[{"Graph", ",", 
+   RowBox[{"Apply", "[", 
+    RowBox[{"Rule", ",", "qqq", ",", 
+     RowBox[{"{", "2", "}"}]}], "]"}]}], "]"}]], "Input",
+ CellChangeTimes->{3.8520229139474688`*^9},
+ CellLabel->"In[11]:=",ExpressionUUID->"b838a0c9-7b2c-4f6b-a0a3-439d757212a2"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   GraphicsBox[
+    NamespaceBox["NetworkGraphics",
+     DynamicModuleBox[{Typeset`graph = HoldComplete[
+       Graph[{1, 2}, {{{1, 2}, {2, 1}, {2, 1}, {2, 1}, {2, 1}}, Null}]]}, 
+      TagBox[GraphicsGroupBox[GraphicsComplexBox[CompressedData["
+1:eJxd0E1IlFEUBuDLbGbTxDRiKxNCUEGRSYJqYa9EhKGJplAOQWkF5kbIRYuE
+cpgJF8EErUINbVEiKTOm2A/O64DhSKvcSNHAIA6Sf307F7Vo9J67uPfCx3cv
+HM55n3O6p//6fZ9S6lLxO/zr40FZx6O5XamMnXzd8BvBbKQqtDfLwbro44HY
+FhoffV5Z715gZOHJA2+5gMbpip3Rmi/sqK9aP6U2cSe60lPRlKb/eSjvP7eB
+7Nlnq6uRJW63BioX+/K4+eLe14sXMgx2JbtHz+eQjCT2d9MZJl4dnh/w2j+W
+x3cyHNFvmneZrqep93Q/mn4BPY9mXpfOwzbJc1vnZVjyRrWHYfG0aC+VeMVP
+8UP8FD/ET/FD/BQ//HYebNt5EbQ9SNhejNj7QJm9L3j2PhGw9w3xQ/wQP8QP
+8UP8ED/Ej8m/2A0NFfdx7GnfmfAbzK4N+Wrniv6Jg/ncr7doqsv0JgpFf2f1
+p+m1KSz1jk3GSzep/mQHfSdm0Hb1IHbj8gbHlzu33jcnMdw+vH/tYZ7q5/Ga
+d/Up/JsreHeR43ir9715MYW4+PNH3hTGxG/eJfNH9TD1L3U/mH639DyYed90
+Hpg8HTovlORNaw+UeD5oL4zX8dPx0/HT8dPx0/HT8dPx0/HT8dPx0/HT8dPx
+0/HT8fM/Y24f0g==
+         "], {
+          {Hue[0.6, 0.7, 0.5], Opacity[0.7], Arrowheads[Medium], 
+           ArrowBox[BezierCurveBox[{1, {0., -0.32888149436623376`}, 2}], 
+            0.02261146496815286], 
+           ArrowBox[BezierCurveBox[{2, {0., 0.32888149436623376`}, 1}], 
+            0.02261146496815286], 
+           ArrowBox[BezierCurveBox[{
+            2, {-1.795943272800611*^-14, 0.16485669927049018`}, 1}], 
+            0.02261146496815286], ArrowBox[{2, 1}, 0.02261146496815286], 
+           ArrowBox[BezierCurveBox[{
+            2, {-1.795943272800611*^-14, -0.16485669927049018`}, 1}], 
+            0.02261146496815286]}, 
+          {Hue[0.6, 0.2, 0.8], EdgeForm[{GrayLevel[0], Opacity[0.7]}], 
+           DiskBox[1, 0.02261146496815286], 
+           DiskBox[2, 0.02261146496815286]}}]],
+       MouseAppearanceTag["NetworkGraphics"]],
+      AllowKernelInitialization->False]],
+    DefaultBaseStyle->{
+     "NetworkGraphics", FrontEnd`GraphicsHighlightColor -> Hue[0.8, 1., 0.6]},
+    
+    FormatType->TraditionalForm,
+    FrameTicks->None], ",", 
+   GraphicsBox[
+    NamespaceBox["NetworkGraphics",
+     DynamicModuleBox[{Typeset`graph = HoldComplete[
+       Graph[{1, 2}, {{{1, 2}, {2, 1}, {2, 1}, {2, 1}, {2, 2}}, Null}]]}, 
+      TagBox[GraphicsGroupBox[GraphicsComplexBox[CompressedData["
+1:eJxd1GtIFFEUB/BB0q0Pq2ZlGhaEoKCRpkEW6lkrtBelKeVumhYZ2cMgKQV7
+mG32RVQIQqkkyUcUlhmm5OO/9lqFijJNDSzdLMtMxkdpZZZ27/0w98Iwc5k7
+5/x/58Ms3Xt0e5KdoijG6WvmzpZKimapEE/hXmbXopAv5Nxs8nb5VoWTy7My
+Us39ZEh7YO3YUwNTzZlk9fFHMlR4fr3iW4foAO+OxUofJWZZ93puaIQux6VH
+t8pGzSuzW1pMFgxs1Xs1HOyh2Px9T0JXN8HZWLnnSlA3VZryhgYbm5BXOLO6
+SI2qXXL+axMusz3E3oOdhzivsnoQ9fSsH0Q/I8uDSJ4ngeWFP8+bxTzw554t
+zAuFe7kf3E/cD+4n7gf3E/eD+0mnzUMD2rzkrPVQntZLl7XzIA/tvEjVzpP0
+2nkT9xP3E/cT9xP3E/cT9xP3U37fzbG83C/IDKzO/6QvoNYEu5Cqhn5khu5+
+lBJbRAO3yjydBqf9K+eYJ9qLya1XTbe690Fp9StxmFVCyyZb3SbDbbC4m1PW
+3C+lJJcLn5+n9sDy7OnG44NlZKvLuFFn6IYSZTAWl5VTBvcrbptP3+0rpyLu
+F3v7+v/nyRLJzp9g9UjUC2H9SPTzYXlI5PnF8pLC89qYh4TnGvOSwr2SH5If
+kh+SH5Ifkh+SH5Ifkh+SH5Ifkh+SH5Ifkh+SH29Mq+LOTv8PRloiAqIXZGJ/
+6SzX0l0qAl9Hn7na/xA+oSOHa6KHETR+b9PbklfISr94rLVtBG2fF60vONSJ
+HEcYXSxjaP9mjvgQ3A37jLCHTkM/YDmSa3lR/R7ZO/07Zwf8xIhjYfCl6+/h
+FbM2MT3+NxJX7Oi9o+vG2KmYny/X/cHc2qnk2ws7YQuwjjo1TsEvLG3e96BX
+6NoWGv+u4i8m1kwd8B1uEv8tiy5ufqBXWXG9eD/O3pP43pd9T6K+ntUn0T+e
+9SeRT2X5yIHnB8tPwtfGfHRO6ydpPiTm58nmR2K+o2y+9A8zT+ZZ
+         "], {
+          {Hue[0.6, 0.7, 0.5], Opacity[0.7], Arrowheads[Medium], 
+           ArrowBox[BezierCurveBox[{1, {0., -0.32888149436623376`}, 2}], 
+            0.02261146496815286], 
+           ArrowBox[BezierCurveBox[{2, {0., 0.32888149436623376`}, 1}], 
+            0.02261146496815286], 
+           ArrowBox[BezierCurveBox[{
+            2, {2.76874187574513*^-14, 0.1099573392946255}, 1}], 
+            0.02261146496815286], 
+           ArrowBox[BezierCurveBox[{
+            2, {2.76874187574513*^-14, -0.1099573392946255}, 1}], 
+            0.02261146496815286], 
+           ArrowBox[BezierCurveBox[{2, 70, 73, 75, 81, 83, 86, 2},
+            SplineDegree->7], 0.02261146496815286]}, 
+          {Hue[0.6, 0.2, 0.8], EdgeForm[{GrayLevel[0], Opacity[0.7]}], 
+           DiskBox[1, 0.02261146496815286], 
+           DiskBox[2, 0.02261146496815286]}}]],
+       MouseAppearanceTag["NetworkGraphics"]],
+      AllowKernelInitialization->False]],
+    DefaultBaseStyle->{
+     "NetworkGraphics", FrontEnd`GraphicsHighlightColor -> Hue[0.8, 1., 0.6]},
+    
+    FormatType->TraditionalForm,
+    FrameTicks->None], ",", 
+   GraphicsBox[
+    NamespaceBox["NetworkGraphics",
+     DynamicModuleBox[{Typeset`graph = HoldComplete[
+       Graph[{1, 2}, {{{1, 2}, {2, 1}, {2, 1}, {2, 2}, {2, 2}}, Null}]]}, 
+      TagBox[GraphicsGroupBox[GraphicsComplexBox[CompressedData["
+1:eJxVkmtIk3EUxl+MMCpLtxArK8pSIosIzUvZsbR1U7Es0FVUdl+GSUJFF2tZ
+hl0WWaAlCX1IywIboZLOp0U2rQV2ITMVlretNeei0ml3+599eP8w9h44nPP8
+nvNMT89ct9NLkqTkf7/hf/FcJMmeC54vVXCu/82YT+TboA5R9OpxbJ726MFc
+K8UeemRq3lYFdVXOXtfTboq9H/S5eE4NUhaENE+Rumir1pQetLIO3hcUFu+I
+DmoIO9vYqH4Me5JPsEFjodTLO+qXRBnhm1axrTiynSrUOqejzghd0fBrIdfa
+6qlnPhtxQ9Tw1IGiH55+l5gHzzwfsQ+efWlCD5JZzxahF/NZr1bwYD7zJAhe
+SMzL/GB+Yn4wPzE/mJ+YH8xP3nI9ZJfrJV85D+nkvHRD7gcFyv0il9xP8pH7
+TcxPzE/MT8xPzE/MT8xPzE+WBE2/U2FHW22gv6rUDNWv12smRNhQcXmfMl75
+FpoH9SEDCiuuFx/QX8n7gOo5eZRf2YPyGe5noeUWtDT6qVuCrRgRPXd/lG8X
+ms23G59stqHf2up/PM6K9PakqYmr7XAaM7bGBNih6Tq//eorB6rNEa22XQ6Y
+lNnflzb1YVPJS0XseCduxoWHxVz6ghEFhmUBQ06s6FioUsZ/xe+PedNLJvUh
+ZejFy5ov3yBtiFeOy3Ri5qnoh8acfpRXZv14IvVi4nf9KM37AdiPjE4xdNqh
+it1Y2Wlz483hgrKz4Tacc/ScSro1iGe7L5qvTe5GdKLf1/yhQTTcmRYWZ/yI
+e/mTm0yOQRT45SS/u9uGRZrOrPojg4j801dmGP8OxlZd3ItSNzQTgp06nybk
+niiUkrUDyKgeabjkqkf3LP3RtIn9CBgT6m/YWIvwIvf94pPfMOpVx+yxOXqE
+cb1Y1NTD/amin07zPK2YR495X7bYR9GsZ5nQQ+Wst1DopSjmeS54KI95TYKX
+lsv9oEnsl1X4RbPYzzLhJ61nv3+v/+83reJ7/BT3oBK+l5e4F5nl96Rsvnet
+uDft4Ty4RB6onfPiFnkhC+fJW+SJ6jhvD0TeKJPzeFfkkVZzXg0ir9TJeR4S
+eaa/OEWsYg==
+         "], {
+          {Hue[0.6, 0.7, 0.5], Opacity[0.7], Arrowheads[Medium], 
+           ArrowBox[BezierCurveBox[{1, {0., -0.32888149436623376`}, 2}], 
+            0.02261146496815286], 
+           ArrowBox[BezierCurveBox[{2, {0., 0.32888149436623376`}, 1}], 
+            0.02261146496815286], ArrowBox[{2, 1}, 0.02261146496815286], 
+           ArrowBox[BezierCurveBox[{2, 38, 41, 43, 49, 51, 54, 2},
+            SplineDegree->7], 0.02261146496815286], 
+           ArrowBox[BezierCurveBox[{2, 61, 64, 66, 72, 74, 77, 2},
+            SplineDegree->7], 0.02261146496815286]}, 
+          {Hue[0.6, 0.2, 0.8], EdgeForm[{GrayLevel[0], Opacity[0.7]}], 
+           DiskBox[1, 0.02261146496815286], 
+           DiskBox[2, 0.02261146496815286]}}]],
+       MouseAppearanceTag["NetworkGraphics"]],
+      AllowKernelInitialization->False]],
+    DefaultBaseStyle->{
+     "NetworkGraphics", FrontEnd`GraphicsHighlightColor -> Hue[0.8, 1., 0.6]},
+    
+    FormatType->TraditionalForm,
+    FrameTicks->None], ",", 
+   GraphicsBox[
+    NamespaceBox["NetworkGraphics",
+     DynamicModuleBox[{Typeset`graph = HoldComplete[
+       Graph[{1, 2}, {{{1, 2}, {2, 1}, {2, 2}, {2, 2}, {2, 2}}, Null}]]}, 
+      TagBox[GraphicsGroupBox[GraphicsComplexBox[CompressedData["
+1:eJxVlH1MU2cUxisLFBI7CERNJoIEUhqVtTEENMs4KkGZU4IMUOqMSlj8iOg2
+pnPM4SwMZKBlDjccMCfKsIrK6BYMMk5xIDXMwQYCw1G+P6SlLawCKm2nO6d/
+9E1u7n1z733f83vO87wByUfi3nMRCAT7Xlwv7zTMIHAaZnQ8bRRnLf7+zcfg
+pZUHe09W44nXFZ+mZY3Buo9rm7v21qC85uQBc+MIrLsRqC9ZeQffWR3ctUww
+DHsUzcmB0fUozPfuF4YPgjY0+/59uQYnYkTiXw/2w46ClKaItQ3olVS1t2RN
+L1TJlUZDfQMqL7wcf4N5222/L/QNWExzdMx96Xt0fG+m9dCxnoj2Q8d+SVQP
+xnI9u6lelHG9CuJBGfNsIV4UMC/zI/MD8yPzA/Mj8wPzI/OD0LkemHCuF7yc
+eUDpzAvFznqAr7NeYHbWE0TOegPzA/MD8wPzA/MD8wPzA/NDv2k8OjxkBBWa
+c8Z/XuvE/T4r3TddHMKFdzSawAU9WOK9+NWzGYP4/nptREuaDt8K262wdg5g
+hiFA3ntpAG3nFKrMWy/mo+GPbH7DWHax49Rdj0GMK+jpNH0zimGVyk9sA4Mo
+qdtlyTeN44bSSUuUdBhLraNf2Tz1mN/9YEHb0Ai6HtS04oABxRJxzNnJMVyR
+5uFyZpsR7RO/bDeETeArn9muS2NN6HW0yKCuMOC9fXOF/u0mVCWH5orEJvxB
+m7l1usOEi1pPzGtbzJi5ojanMMGEZdlbLbKpKay6ohraLDdiW1SDYensNCpS
+E4PTJw0YK+0v+Pmvf7Fy8plsrZ8eyyO/uz6SbkFP1UPZT/ZxPNq3K7523IKR
+0i334q6O4qPC7UUVS56g5cerKeOyYYyITymsc32C4lZ5u1I9gKvmk11q1Bac
+yfhg89vndXgrb9Oe50EWlDRVhbzr34PGvJ07mj1nMLJT3V4d3o4Ge018s+8s
+doasEepGH+Lt5DP2uY1z6KErvbD8ZhdO6ULG3BRPUXJozlae3o0uX672eax5
+hp8fE5XNRXbj6YRv7YdnnuNTWe2xnQu7MHW5JKplkRV7628Iq/s78HjCcclS
+Hxs2Bgmts11/oqbJ7aPhIRsKTv9xqjjod5yXzOzPOmnHN5pyyqOP/Iaxlyuk
+eX121OvvpiZ1qx3nhMZlSVN+7oHGOsf7YnoPVv5fRP9DA6+vy/l/fUjn/atp
+fzjM9T2g+iCX69dT/eDKfB8SH0wzvy/xQx3rIyB9wMj6tZF+YGZ9gfQFNesf
+RPqDlPszTf2BDdy/AOof9HF/p6m/kM79B+o/XGN/iMgfkMj+uUb+gW72Vwb5
+C1Tsv5vkP1jG/lSQP6HG2b/gz/7Wkr9BpCf/u5H/IZTzEUL5gCLOjzvlB2I4
+X5cpX7Ce87eK8geVnM9Eyie4f035zab8QhznO4vyDWWcfwXlHw7x+eBL5wMM
+8fmhpPMD/gMaupIY
+         "], {
+          {Hue[0.6, 0.7, 0.5], Opacity[0.7], Arrowheads[Medium], 
+           ArrowBox[BezierCurveBox[{1, {0., -0.32888149436623376`}, 2}], 
+            0.02261146496815286], 
+           ArrowBox[BezierCurveBox[{2, {0., 0.32888149436623376`}, 1}], 
+            0.02261146496815286], 
+           ArrowBox[BezierCurveBox[{2, 38, 41, 43, 49, 51, 54, 2},
+            SplineDegree->7], 0.02261146496815286], 
+           ArrowBox[BezierCurveBox[{2, 61, 64, 66, 72, 74, 77, 2},
+            SplineDegree->7], 0.02261146496815286], 
+           ArrowBox[BezierCurveBox[{2, 84, 87, 89, 95, 97, 100, 2},
+            SplineDegree->7], 0.02261146496815286]}, 
+          {Hue[0.6, 0.2, 0.8], EdgeForm[{GrayLevel[0], Opacity[0.7]}], 
+           DiskBox[1, 0.02261146496815286], 
+           DiskBox[2, 0.02261146496815286]}}]],
+       MouseAppearanceTag["NetworkGraphics"]],
+      AllowKernelInitialization->False]],
+    DefaultBaseStyle->{
+     "NetworkGraphics", FrontEnd`GraphicsHighlightColor -> Hue[0.8, 1., 0.6]},
+    
+    FormatType->TraditionalForm,
+    FrameTicks->None], ",", 
+   GraphicsBox[
+    NamespaceBox["NetworkGraphics",
+     DynamicModuleBox[{Typeset`graph = HoldComplete[
+       Graph[{1, 2}, {{{1, 1}, {1, 1}, {2, 2}, {2, 2}, {2, 2}}, Null}]]}, 
+      TagBox[GraphicsGroupBox[GraphicsComplexBox[CompressedData["
+1:eJw9VHs0lGkYV0ssSh1CdCrXsF2oVC71FiFSuazrUTK7divKlHVNSxfao86u
+LpJEJTZrRTvDCo3HMDOMmSKXMfPNmIs4JZN7hVLbnvPO98d33vOd932f5/f8
+Lq8ZJS4geqGamlrC1+//lRn8reGlzS0Ir6D6N1+45L7PMwnohVT3rDJjI/YW
+M/Gr7hbojbXvNbrOQXas2V37LrDgzbaR9wH8VjRoywmdzWaDVVX4CZcnbWjF
+rqKuIhEHPHWDlvh7cdE94/SynWFtENHasXg9lYtoNzQ/PhjnQmK0tfkaey7S
+clBfqp3Jg/AWQUXk5TakS5XclH7kQ8nI8vHGK63oWqZGYYbrc2C7fvkws4eD
+HAqCeqQOHbBXtGtDHpeFpuZaJ0W8DhJ/67KYCVu1TnDpeTGfWMgk9xlU/S3L
+zZuQPb7feGE2qaiaQdb370n6HFHbQPY3yhHqS07Uk/h8+ZmuzW/rEB3jT3E7
+45KK6sn56j/FnS091EDObz9y4HiiI4PkJ/wc65HyIZD8xQcfDhnzYJL8/oL/
+GckTftbXm8nzocPGI80vmWS9ogu+3QaSJrJfF/GaJjUBEg/Ldq3mXdOnJN67
+DoaUHuUTMMTzTM+s3K7FqgE/PO9oaqxdpIAGTzEfioMmq0yDHkMj5svde/ow
+o6eC5NOl3W6oM7ac5Ltz7aTl8O2/wBPr4Yz3VXp54PvFWE8prq/SW4n7q/ww
+hfGp/FKI8av8pJrPGvvtBZ5f5UcVPyq/qvhT+VnFb6+YMjKwoA1pWHvvW+zX
+DwUCeNBiwUUMymb+6/R+uPrxyNpR23Y0Vpwbafq8H8wV/IJ+TR56qKNlPLxV
+Cu2b/piaofEQI2Yj169GCv7ac2cMLPhoND7R0dtdBvuHLKE3gI9KXWV92oQM
+eqIs300jPnI3mYpycJJDBid1MHSEhzzdNgRmnpeDbeesRCeMhzza/xVlsOVQ
+c40fqJ3Tjua0Q80mPsvBhhGX9jafi4KKIxYYr1OAgVP+ZML5r/gjV1585qMA
+zSCq3qfgVmRdHut2O0wB+V5hHL4VB63bDX7cEAWULCroTp1nIcdU3gDV4+v5
+38Zy1ylb0ONcK9dTFgoQ6vIMxj43I7N3dXPHpuRwxWgowXB3Mzo1vXznn7Vy
+OHYyIIPewERlVaZFavFyCKWbt1smMFEOXezVZCMHBx4St1GZ6LTdaoHiiQw4
+Iz/P91Qy0QDPinXSQgZ+KcW0+m5AamVvVlTck8Jb1vasZbqNSMCdLXdfJIOa
+cvv76h8aUCBn44sqPxmcOja7T6uyDvGCdrApaTIg4g/+o7O/Fnmla3/veUkG
+W4lHFIuJapSYrBPVS5WBfL0eYVVLQ5LxlN3mzjLI21Y36VP/GGk0NxZzh6RQ
+Klx9qNGqEo1+2XinK0kKB9Jagx3L/0aDzJTTZ9/1w5BCOBq4phw5ld/86Zvo
+fsC+Jt9D1b5OeKb4qqME9uP7UW7FHUalYijB9YPVlaXN5mK4hfvvdDt0l1dN
+kPiO6herxR8hSPzPLy9VgC0BEjzf/MVlowf0CaDi+ZMrpWmbVhFAx/xM7FBS
+h7wJGMP8nXQ2z/O/QZD87olwsBmeJYCN+adsf3/WOokAe6xPt+hTDF0hgmCs
+n1XhjzQDbxEcxfpOlwxq3KgWQjbWn2I6zt77nRAE2B8LTcp8mfQ+UMf+GRJ2
+cmmBfVCM/UXoZabR9fogD/tPea7w3sIRAWhgf85WuTGOvBKQ/nX2fOk0p94H
+Vtjf+UBB0W59QMf+9x+N+UK70wc2OB/1cZW/X9cTQjrOT206FGTnCqEL54vR
+4fjrJhsR+OL8FbW6Hs9uEoEfzmdQTqmubwhB5jfrljJ5zxBB5vvOjL5dxQ9i
+yMH5D4rKGkjhi8n3Iev+64QKEwkI8PuBpF3vL/lI4D8qg/jd
+         "], {
+          {Hue[0.6, 0.7, 0.5], Opacity[0.7], Arrowheads[Medium], 
+           ArrowBox[BezierCurveBox[{1, 6, 9, 11, 17, 19, 22, 1},
+            SplineDegree->7], 0.003819254600000001], 
+           ArrowBox[BezierCurveBox[{1, 29, 32, 34, 40, 42, 45, 1},
+            SplineDegree->7], 0.003819254600000001], 
+           ArrowBox[BezierCurveBox[{2, 52, 55, 57, 63, 65, 68, 2},
+            SplineDegree->7], 0.003819254600000001], 
+           ArrowBox[BezierCurveBox[{2, 75, 78, 80, 86, 88, 91, 2},
+            SplineDegree->7], 0.003819254600000001], 
+           ArrowBox[BezierCurveBox[{2, 98, 101, 103, 109, 111, 114, 2},
+            SplineDegree->7], 0.003819254600000001]}, 
+          {Hue[0.6, 0.2, 0.8], EdgeForm[{GrayLevel[0], Opacity[0.7]}], 
+           DiskBox[1, 0.003819254600000001], 
+           DiskBox[2, 0.003819254600000001]}}]],
+       MouseAppearanceTag["NetworkGraphics"]],
+      AllowKernelInitialization->False]],
+    DefaultBaseStyle->{
+     "NetworkGraphics", FrontEnd`GraphicsHighlightColor -> Hue[0.8, 1., 0.6]},
+    
+    FormatType->TraditionalForm,
+    FrameTicks->None], ",", 
+   GraphicsBox[
+    NamespaceBox["NetworkGraphics",
+     DynamicModuleBox[{Typeset`graph = HoldComplete[
+       Graph[{1, 2}, {{{1, 1}, {1, 2}, {2, 1}, {2, 1}, {2, 2}}, Null}]]}, 
+      TagBox[GraphicsGroupBox[GraphicsComplexBox[CompressedData["
+1:eJxdlH1Ik1EYxYd9zH/8yErBLApjVoOyGWlmHq3IiChrUrmUVCqyjKD+ULAw
+p0mFaBBEogVR9p8lRUz68NkkUSkqa+UUzI8sS1PmMk3Clfo8N3i7MPa+3Pfe
+e36Hc+6yrFN7j/jodLrkqd/0Pw83dJrhJvX0wRKdVjg1/6MlyWReeB5Hq2cH
+Vx90I+qdueBGfwNWxHtybOYRxI4/3NFxpxWFeVdPv3V60PY1dOv1Ey5c9qfU
+IPsoOoaKkz7FdWJWfmJDwPAYmk+W2V896kLR/kiXr2kCk/4Vcddud2F5yuaM
+vPTfyFm7r+e+vhOecykTb7ZMYmmdN/teiAs9pqYfAfVeIDF3/s+YVrh2x6d/
+rPmDRRu9x4wjDsWR4BPSWHop2xnXIfMvY2fmqU/Wh/J6GpP9vbaZ/WmlnJ/M
+59NF0feF9ZGv6LexfioTvtfMR0XC/4L5ySj+rGd/SPkXzv6R8tfD/tI2Q3Hw
+zU3fENhsiQgaekBnV1vzzxT3IyH3cVNbpo0stoJs9/PPSKgJH6wyPiGzKaJt
+sa4PGdamrPDt9aQvDerWR/eieV1JS4vFTgO7/AzPjnfjwJXDjfEbHBSYWptZ
+FdOJWkv58Pd6B5VXTI92uPfULbkw6KBKfif1Hsbfk/rezfuR2s+PzyN1Xirr
+oWTRc4j1UqTotTIPRQrPTuYlnfAKPwk/hJ+EH8JPwg/hJ+GHXqsHA1q9CNTy
+oFzLi0qtHwjT+gW31k/4af2G8EP4IfwQfgg/hB/CD+GH5IFUHiQvJH2jVZwn
+ipE8WTlv5JS8lXIe6b3kcQ7nleyS1xLOM3kkzwbOO2VI3ke5DzSP+0a93Bda
+I31p5z7RL+mT9M2uT1sQZbh766maH+d5qPVG6ava30/6rM5Pl74rfW65D+aK
+fpL7QvE55T4p0vLjP3/UfUXSt3/+qvvsL8T4kS0=
+         "], {
+          {Hue[0.6, 0.7, 0.5], Opacity[0.7], Arrowheads[Medium], 
+           ArrowBox[BezierCurveBox[{1, 6, 9, 11, 17, 19, 22, 1},
+            SplineDegree->7], 0.02261146496815286], 
+           ArrowBox[BezierCurveBox[{1, {0., -0.32888149436623376`}, 2}], 
+            0.02261146496815286], 
+           ArrowBox[BezierCurveBox[{2, {0., 0.32888149436623376`}, 1}], 
+            0.02261146496815286], ArrowBox[{2, 1}, 0.02261146496815286], 
+           ArrowBox[BezierCurveBox[{2, 61, 64, 66, 72, 74, 77, 2},
+            SplineDegree->7], 0.02261146496815286]}, 
+          {Hue[0.6, 0.2, 0.8], EdgeForm[{GrayLevel[0], Opacity[0.7]}], 
+           DiskBox[1, 0.02261146496815286], 
+           DiskBox[2, 0.02261146496815286]}}]],
+       MouseAppearanceTag["NetworkGraphics"]],
+      AllowKernelInitialization->False]],
+    DefaultBaseStyle->{
+     "NetworkGraphics", FrontEnd`GraphicsHighlightColor -> Hue[0.8, 1., 0.6]},
+    
+    FormatType->TraditionalForm,
+    FrameTicks->None], ",", 
+   GraphicsBox[
+    NamespaceBox["NetworkGraphics",
+     DynamicModuleBox[{Typeset`graph = HoldComplete[
+       Graph[{1, 2}, {{{1, 1}, {1, 2}, {2, 1}, {2, 2}, {2, 2}}, Null}]]}, 
+      TagBox[GraphicsGroupBox[GraphicsComplexBox[CompressedData["
+1:eJxVkntQlGUUxnegBqbitmuIQJahkIM1RCCwAme5BEVK1FLJIhNSqaw4ZDEj
+DtnKQmJk4EQ1kCQzlUkShVQskyyHZcKFWAuU4Sq5XHdbYVluyy7GmvKe/eN7
+Z775vnfe9zvn+T3n2ZKV++o7Djwe7+C95/6bLRPwOMuE9q9+Sdi+wnvni12J
+weJHT8KBCw94Xkg3wXM3xLKvde3wVPRCjkI8D8KVX5KGv+uFwvyK9673LcCA
+3ju+8vAglLpiGr9tCYZnixMnIkfBsSCm3c1ohs4jZW1//XYLit4IGnQOtsKa
+a1Xkl9/egq2psZn5GXcg59nXx352GoWFE6nWnrg1eKLZlv3TxkEYC1YvurXa
+AGKOCZbDe2Hw5eiMf+rvgs8u26HAeZWdQ+SwsePMx9l9kcN0rhGun+Mk/e/N
+/kcz1bcp1uvjduqfwvrjadI3zfShM+lXMP1YRnx/Mz4sIv5uxo+B5M9O5g/a
+/fNj/qHd3wXmLyb4F3uej/oX3DslAfzZRvzgGXnB+8U6EB37XT2wX4EShSzb
+9McUiOr9blcHXkFxcMDAY7xJyJSrs/xeaEWnM3ytU9g4dIac6uqStKEh2cVf
+KdXC3rNvd0RHqNA9rWF/dfgoNEjKjTOtKiyvur+GwPRK8+aPbqvwHNujfe/L
+7qP9vonVQ3s9F9YP7f3SmB5MIT1vMr0YRHrljAeDiGc340Ue8RI/Ej8QPxI/
+ED8SPxA/Ej84cfWAgasX3Lk8UM7lhXNcP8CX6xeYuH6CC9dvIH4gfiB+IH4g
+fiB+IH4gftDulpqNfAPebPH1TLiowYS16y9tCNNjw9nDgnhBH0ovdwSs8HX4
+VfW7jZ+VDGNzYAmUNk1j3ZOWqzvqtDjU5SEZ8teho/DpIxHukzig+b6rPUOP
+Zt2I54k4HWaNJm/ek2RAoyonM8rLgNLJT976vHcGmzVhI/oDM6gW5C3H9Mzh
+vpprfJGbEc/HhYZElc2jY4Uy1mvViInjOxME8YtoGyvZUuM9h+LV7mtX5peQ
+91q8wDXXiFsLhb+qZGasazp6p503i5uWG52lgytoOP6QWDlhwARRetOE3oI3
+8itqT4Xq8fTMdGHyN1a8evBTzRc+Uyjc47FYumrFzh8eD4lTjeGPpT496hkr
+VnjIUvov3cRd0omjHcetGH53rlbp1o+qkfK47osWlG7wN5a79GDxh5W8FPkK
+5jQ/qCwzdeDUtsaCtE1m9Hp4h6cyvQVDqyz11SeX0Ll3fPsjskYMoX0k28M0
+3d/L7kMR1ZOzetBG/fJYPxCSnlimB+pIbyXTCxHE8yfjgRLiVTNeeJ7rB3iT
+XzrmF2wjP2uZn5BKfttS1/2GF2ke/7F5QA3Ny4HNCzTceUIezbuFzRsOUR5M
+LA8wSnmxsLyAlvLkxPIErZS3yyxvkEt5vMTyCEmUVyXLK0xQnldZnuF/HKlq
+DQ==
+         "], {
+          {Hue[0.6, 0.7, 0.5], Opacity[0.7], Arrowheads[Medium], 
+           ArrowBox[BezierCurveBox[{1, 6, 9, 11, 17, 19, 22, 1},
+            SplineDegree->7], 0.02261146496815286], 
+           ArrowBox[BezierCurveBox[{1, {0., -0.32888149436623376`}, 2}], 
+            0.02261146496815286], 
+           ArrowBox[BezierCurveBox[{2, {0., 0.32888149436623376`}, 1}], 
+            0.02261146496815286], 
+           ArrowBox[BezierCurveBox[{2, 61, 64, 66, 72, 74, 77, 2},
+            SplineDegree->7], 0.02261146496815286], 
+           ArrowBox[BezierCurveBox[{2, 84, 87, 89, 95, 97, 100, 2},
+            SplineDegree->7], 0.02261146496815286]}, 
+          {Hue[0.6, 0.2, 0.8], EdgeForm[{GrayLevel[0], Opacity[0.7]}], 
+           DiskBox[1, 0.02261146496815286], 
+           DiskBox[2, 0.02261146496815286]}}]],
+       MouseAppearanceTag["NetworkGraphics"]],
+      AllowKernelInitialization->False]],
+    DefaultBaseStyle->{
+     "NetworkGraphics", FrontEnd`GraphicsHighlightColor -> Hue[0.8, 1., 0.6]},
+    
+    FormatType->TraditionalForm,
+    FrameTicks->None], ",", 
+   GraphicsBox[
+    NamespaceBox["NetworkGraphics",
+     DynamicModuleBox[{Typeset`graph = HoldComplete[
+       Graph[{1, 2}, {{{1, 2}, {1, 2}, {2, 1}, {2, 1}, {2, 1}}, Null}]]}, 
+      TagBox[GraphicsGroupBox[GraphicsComplexBox[CompressedData["
+1:eJxV0k9Ik2EcB/CHXXZpsRZ1siAEDQxZElSH+kpEGJbMFMohlFZgXoI6dEgo
+xxY7BAs8hS6sQ43I2PyD/cF9NzCceMqLFA2GOMQ/2XvzUIfU5/ccfi+MvQ88
+PM/v+36+x3rvX7vrM8Zc2Pnt/tvHg1GPR/d2qS5++NW5NQRL0frQ73EONMYe
+P4yvovnRl7mlnmlGp5/c82araB6r3Rhp+MqOpvqlI2YFt2JzvbUtefqfhyr+
+08sonXo2Px8tcL0tUDfTX8GNF3e+nT9bZLAr2zNypoxsNLW1mS8y9XL3+QGv
+/dPRxEaRw3ZNt66x++n2e/Y8uvMC9j66+7rsPIzIPDftvAzLvDGbh2HJc8Xm
+pZG8mb/YDA2uwex72n8y/Ibji4O+E5M7+V9vT5V/vWVLY7EvVd3J33n889ji
+exb60pnEoRWYP6UB34GPjFzejl+/uIzR2c7VD61ZJtuTW1cfVGB+7m9415Tj
+v8mqdxtljLZ531tnckxI/spe3hzTkt+tD07t7afbP2TPozuv295Hd9+CnYdu
+ng47L43Mm7d5aCTPhM1Ll1f8Kf4Qf4o/xJ/iD/Gn+MOvPbCuvRDUnkhpbwzr
+PqBG9wWe7hMCum8Qf4g/xB/iD/GH+EP8If7I6O8B8af4Q/wp/ijo742I9kBS
+e0H8nScS2htp3QeIv+sLhnSf0K37hgXdR4g/xB/iD/HHhO47/gOlqR/S
+         "], {
+          {Hue[0.6, 0.7, 0.5], Opacity[0.7], Arrowheads[Medium], 
+           ArrowBox[BezierCurveBox[{1, {0., -0.32888149436623376`}, 2}], 
+            0.02261146496815286], 
+           ArrowBox[BezierCurveBox[{
+            1, {1.795943272800611*^-14, -0.16485669927049018`}, 2}], 
+            0.02261146496815286], 
+           ArrowBox[BezierCurveBox[{2, {0., 0.32888149436623376`}, 1}], 
+            0.02261146496815286], 
+           ArrowBox[BezierCurveBox[{
+            2, {-1.795943272800611*^-14, 0.16485669927049018`}, 1}], 
+            0.02261146496815286], ArrowBox[{2, 1}, 0.02261146496815286]}, 
+          {Hue[0.6, 0.2, 0.8], EdgeForm[{GrayLevel[0], Opacity[0.7]}], 
+           DiskBox[1, 0.02261146496815286], 
+           DiskBox[2, 0.02261146496815286]}}]],
+       MouseAppearanceTag["NetworkGraphics"]],
+      AllowKernelInitialization->False]],
+    DefaultBaseStyle->{
+     "NetworkGraphics", FrontEnd`GraphicsHighlightColor -> Hue[0.8, 1., 0.6]},
+    
+    FormatType->TraditionalForm,
+    FrameTicks->None], ",", 
+   GraphicsBox[
+    NamespaceBox["NetworkGraphics",
+     DynamicModuleBox[{Typeset`graph = HoldComplete[
+       Graph[{1, 2}, {{{1, 2}, {1, 2}, {2, 1}, {2, 1}, {2, 2}}, Null}]]}, 
+      TagBox[GraphicsGroupBox[GraphicsComplexBox[CompressedData["
+1:eJxdlHlIVFEUxh+STv0xalamYUEICippo6CJztEKbaM0pZxJcyEjWwySVJhK
+s8n+ERWCUDRJconCMsOUXM5oiwoVOWlqYOpkuctzKbXM0u65we3C473Lu++c
+7zu/j7c17vzheDNJkjTL18qdLRkkYcnIn4Kc9LZF/iNg3ap1tpmowkvbMnRJ
++iEISHnW0hVbg9qatAT5xRcIqHAcK3StwzCVc9dmaRBiMlriHPc0oiLLpl/h
+bYJWr8y2Nq0BRw8qnRpO90NE7omX6h1NaK2pjC306YVKbc7keGMT5uSvrB6Q
+Q2u3XB9rwgK2R753YOeRn5dZPeT1lKwf8n4apgdDSE8004sepDeD+UEP8nOA
++UWJ/OYO3p/NyR6BdM/q3K/KPDRGm/lXNQxBuvr488SIIhx9UOZoNb7s32uN
+fr6zGO0G5NQW+0GQjO4lFqtK0G3RaLcYZAKDvT7R92kpxtvcGH6T1A+G16/2
+XhwvQ1Od7l5dQC9IoQGa4rJy1JF/yW7/lceD5VhE/vnevP7veTSEsPPJrB7y
+ev6sH/J+LkwPcj0/mF6USK+J+UHu5w7zixL5Jf5I/IH4I/EH4o/EH4g/En9Q
+iDxgVOQF1iJPyBF5Q4GYB3AQ8wKymCdQinkD4g/EH4g/EH8g/kD8gfgD8Qfi
+j8QfjOK8gPgj8Qc7cd7gJvKAeJEXEH8k/qATeUORmAcg/kD8IVnME/iLeQMX
+MY9A/IH4g0nMMxB/IP7wQesdeXX5fzDdFqwK25COJ0tX2ZYek9HzfVja7aFm
+dFFPn60Jm0KfuSf7Ppa0Y0bqzQvGjmnsGN60O+9MN2ZZosbGMIudE/rgz369
+aK4LbLaa/I6Gc9mGt9V9mHnUo3u1agGnLfP9bt3tQ6fwnTGpUT8xZvuRgUeK
+Xpy9HL7wbtcvXFu7lPBwYzeaVC0zVo1L6B6Ysu6bTzv2HFJHfar4jfO+S6dc
+p5r4f8ugiFzv6VRWXM/fz7H3wL93Zd8Dr69k9YH3j2L9geuTmT6wIP3I9AP3
+18H8wTXRP/w3H+Dzc2Tz+zffGTZf+ANve+ZZ
+         "], {
+          {Hue[0.6, 0.7, 0.5], Opacity[0.7], Arrowheads[Medium], 
+           ArrowBox[BezierCurveBox[{1, {0., -0.32888149436623376`}, 2}], 
+            0.02261146496815286], 
+           ArrowBox[BezierCurveBox[{
+            1, {-2.76874187574513*^-14, -0.1099573392946255}, 2}], 
+            0.02261146496815286], 
+           ArrowBox[BezierCurveBox[{2, {0., 0.32888149436623376`}, 1}], 
+            0.02261146496815286], 
+           ArrowBox[BezierCurveBox[{
+            2, {2.76874187574513*^-14, 0.1099573392946255}, 1}], 
+            0.02261146496815286], 
+           ArrowBox[BezierCurveBox[{2, 70, 73, 75, 81, 83, 86, 2},
+            SplineDegree->7], 0.02261146496815286]}, 
+          {Hue[0.6, 0.2, 0.8], EdgeForm[{GrayLevel[0], Opacity[0.7]}], 
+           DiskBox[1, 0.02261146496815286], 
+           DiskBox[2, 0.02261146496815286]}}]],
+       MouseAppearanceTag["NetworkGraphics"]],
+      AllowKernelInitialization->False]],
+    DefaultBaseStyle->{
+     "NetworkGraphics", FrontEnd`GraphicsHighlightColor -> Hue[0.8, 1., 0.6]},
+    
+    FormatType->TraditionalForm,
+    FrameTicks->None], ",", 
+   GraphicsBox[
+    NamespaceBox["NetworkGraphics",
+     DynamicModuleBox[{Typeset`graph = HoldComplete[
+       Graph[{1, 2, 3}, {{{1, 2}, {2, 3}, {3, 1}, {3, 1}, {3, 1}}, Null}]]}, 
+      TagBox[GraphicsGroupBox[GraphicsComplexBox[CompressedData["
+1:eJwBQQK+/SFib1JlAgAAACMAAAACAAAAqExY6Hq267/1///////fv61MWOh6
+tus/CwAAAAAA4L8Kip5MOXmqPAAAAAAAAPA/0ApFxdVwor+00kdL9+fpP6DP
+PPEqsqe/nYX4Vlhf6D8gAQt49x+uv4H7OII42+Y/2Fehczbbsr/0ayWafVzl
+P4ibcpOGOLe/Cmc7Ogrk4z/wmyqRViW8v7BOLka9cuI/TGvt9V3PwL+TWe9l
+cQnhP8RR+XK80MO/noRuCPlR3z+B2RTg+Qngv/yG33e1Uby/2S9nkQrb4L/u
+pFOND4TDvw1DLYxYvOG/yJ6Wy3m1yL9wpVdqXq3ivxCsgVcGus2/QLled42t
+478SvypRXkfRvx/swAROvOS/Ci8NOGCY079VidHD/9jlvzmAlcSpztW/ffai
+JPoC579mzfys6+jXv7xY1Q4DzsK/tmZ+1nX06z9YDRuS7HXHvyDASuJU5+o/
+OIJdjrPoy7+IlwYcMMzpP9om8+HaEdC/jF+VKK+j6D92TgH8OBLSvwZr4JWB
+buc/PBNWuET007+0p+VyXi3mP6Q54q3gttW/PulU4wPh5D9S5oYQAlnXv+Lw
++642iuM/OfiZy0vC5r/gbC/y3sCFP9jx3Gqjgue/EJn1XhaXoL8s+TIW0DHo
+v2h1cjHqlbO/OvnpFWrP6L84ONvRUSC/v60h5BkUW+m/yK+VaPZxxb+WnNdw
+e9Tpv/7t4wjibMu/rn9EOVg76r84C/GtsL7Qv/z7A4xtj+q/ZaWPlu7P07+/
+Ijz5
+         "], {
+          {Hue[0.6, 0.7, 0.5], Opacity[0.7], Arrowheads[Medium], 
+           ArrowBox[{1, 2}, 0.020399597244776385`], 
+           ArrowBox[{2, 3}, 0.020399597244776385`], 
+           ArrowBox[BezierCurveBox[{
+            3, {-0.18635158111754363`, 0.10759013552215828`}, 1}], 
+            0.020399597244776385`], ArrowBox[{3, 1}, 0.020399597244776385`], 
+           ArrowBox[BezierCurveBox[{
+            3, {-0.6796738226668928, 0.39240986447787013`}, 1}], 
+            0.020399597244776385`]}, 
+          {Hue[0.6, 0.2, 0.8], EdgeForm[{GrayLevel[0], Opacity[0.7]}], 
+           DiskBox[1, 0.020399597244776385], DiskBox[2, 0.020399597244776385],
+            DiskBox[3, 0.020399597244776385]}}]],
+       MouseAppearanceTag["NetworkGraphics"]],
+      AllowKernelInitialization->False]],
+    DefaultBaseStyle->{
+     "NetworkGraphics", FrontEnd`GraphicsHighlightColor -> Hue[0.8, 1., 0.6]},
+    
+    FormatType->TraditionalForm,
+    FrameTicks->None], ",", 
+   GraphicsBox[
+    NamespaceBox["NetworkGraphics",
+     DynamicModuleBox[{Typeset`graph = HoldComplete[
+       Graph[{1, 2, 3}, {{{1, 2}, {2, 3}, {3, 1}, {3, 1}, {3, 2}}, Null}]]}, 
+      TagBox[GraphicsGroupBox[GraphicsComplexBox[CompressedData["
+1:eJw1kH0w1HkAxl3U3XAiZSskyXXEcbeTlzvyXCy9SLTeozdTkuQlr6cWoaMX
+KUmXhovc9OLGlNfzUtbm7c7VDjqbvcL+2F3f3+5vt7rTSkbn/uiZeeaZ+Tzz
+/POsi4znHl6kpaXlueD/86Ocus04XI0CthPcdmvTMXzkmZqQJ6/n1Qj0FQUI
+kxQ4UaFduNd7HAJ688+1S9sROdzFPp8xDl64V9rQxU70VH4VfaZlHC9qGK6r
+XjfY70smNmhLwNxdm5OZ0YdE78LPOSESsD0uxJaI++HBbjCuaZTA+fr2VJ6N
+EKJDDiZW5hQyz+1bWcUegD+vyz3xEoVWbb7bh+5BpO/UdfnaiqCUyQlbu28S
+JysfCfVvEkw3ex9ZbinFRX2Sy/6Cxi53Qj8fk2LAoCLLr56GtuOmgg+lMiSe
+j6gw3KGAyarUpyZb5bDPHSs3IwqkCprSBWo5ft2t4RpfUsJalFRTfGkK7it8
+JNfcGbjF8x3sbAhqQ/ooretKVFbKKAWXRq1rjsi3bWH/5EGsnQENvWTJtTIx
+DTvfNbU2wwRx0aH2sRqC1QYJ0YvvEKwxOrZmuxHBvS4eI84j4L3RNWyxncKG
+mR8MOmIJvsv3PMvhyEEsq1fw9xO490ddSY6QodzwWa10L4FZTGvjlxZDuPx9
+cEp2McErI37shP8ATvOPP+y/QfCL5x5LkyVCZIbUsZ3vL/wSs2hjbHw/xIEG
+j5qEBIv6QsdejPWiLMK9xXmWQDBjOJsf1gWpzeC7mw40Dp1Z35Y7yofmg9n4
+YDyNeh3NgQ5JK+w15OjtVhoy1reSliolDpjq2mfcV8KKVTTq36tAqZGoedd7
+JXxahp4WTdG4M7WuItuVwanu01dnl9B409g4ShIYdESIBKz1BHUPJ0dibjC4
+EtXJObZ5CkvbthymWxnoqDSs7GA59Lg/ioOEDOIEGW9exsnwfqDcsvI5g4xQ
+KmmWMwT1JxbEVV+FvHHrgj0pA7il9ss9qKfC3PJN09ROIaJMMgoi5xlkXa3v
+qKrrB+Wbes9bxsDFbf4ky7wPJ7TzHMweM+jRF/8VcbkLB7qHiaZkoVcHi4qW
+doLl5WE7Hc4gZf5UYL5DG+gE/UbHVQyq/+BVWHurMVekznr3Wo6G4vaZ2WVq
+JL9dnGpiKId/b8BjrSEV9lGmWVrfyEAdV27df1aFkUi/eocgKaot/zX3cFSh
+z63BZSNvEkNOT4z/HmbwqZzzNv7uBKDDXRYZx4D1mfW2TDGFHkW7csWcEuk+
+aY1CQwrlZmn/BEXLMJe5m3QE/4myXkF4ulKK7CCPOrX37ygI/+l2wBEpzN1+
+uzXi1wOvsIkap5FJbDt4wR5Jj1H90qowxWMSqmd5xoN1fMillYVHb01gLlhn
+JMqiHUdXnnueMEch+oGpp3R1M0SBTjtUvhS6XjVZrA6qw38AGyDR
+         "], {
+          {Hue[0.6, 0.7, 0.5], Opacity[0.7], Arrowheads[Medium], 
+           ArrowBox[{1, 2}, 0.01272835986186617], 
+           ArrowBox[BezierCurveBox[{
+            2, {0.6018803398539317, 0.5134394602830381}, 3}], 
+            0.01272835986186617], 
+           ArrowBox[BezierCurveBox[{
+            3, {0.4972957060478071, 0.7014942104757661}, 1}], 
+            0.01272835986186617], 
+           ArrowBox[BezierCurveBox[{
+            3, {0.5025754535646131, 1.0303333316230077`}, 1}], 
+            0.01272835986186617], 
+           ArrowBox[BezierCurveBox[{
+            3, {0.8840234811105949, 0.34444748711227546`}, 2}], 
+            0.01272835986186617]}, 
+          {Hue[0.6, 0.2, 0.8], EdgeForm[{GrayLevel[0], Opacity[0.7]}], 
+           DiskBox[1, 0.01272835986186617], DiskBox[2, 0.01272835986186617], 
+           DiskBox[3, 0.01272835986186617]}}]],
+       MouseAppearanceTag["NetworkGraphics"]],
+      AllowKernelInitialization->False]],
+    DefaultBaseStyle->{
+     "NetworkGraphics", FrontEnd`GraphicsHighlightColor -> Hue[0.8, 1., 0.6]},
+    
+    FormatType->TraditionalForm,
+    FrameTicks->None], ",", 
+   GraphicsBox[
+    NamespaceBox["NetworkGraphics",
+     DynamicModuleBox[{Typeset`graph = HoldComplete[
+       Graph[{1, 2, 3}, {{{1, 2}, {2, 3}, {3, 1}, {3, 1}, {3, 3}}, Null}]]}, 
+      TagBox[GraphicsGroupBox[GraphicsComplexBox[CompressedData["
+1:eJw1kgtMU2cUxws1RMuYqGhcJBE2RUNU1ERyC8xDJo5sMpYiQo1YDAoa8FGL
+BauyWQIVSZE4LQgqImgEY9Gg4CPFUwEjhkeLpfK4TvqAvvBBWSkWqky415Oc
+fDk5Oef8/798gSlH4lI9GQxG2NeceWtiuJYTjSM4Pj0TgyinavBmzIQOWYUV
+MWzR7YjZkjEKatbW51p+FT54Fb1twmyFSlWEPbj+Fl7N/5TATbZAgIf38Ynl
+dSieInIJ0gR9idczQ8l6dGSsLM9JGoaCy4ILEuIhsvaHh7GGjDB6Ofh8wkoF
+3otd92uTwAAxGe/Hd6uUeGHnx9Sj8/TQynEJFOoWrMg7PNfFGQRxv5/ONU+H
+bslgdgNHgf0h+8+zSB1+uLG9aH5eC/psWSvlKvTYVlHSLmpoQ/7NxHSe3IC+
+d8SJXk86MfIxL7tIbsSFGMzhRXfj8nfKObGKIWSF+BB7Lmlwx9nulum+YWSf
+lrXWdmkxx1m1YtLTjGmd7jsjll5UcLXfM7uasTHtr9dCxwhwfZb98074AgOU
+vxvizTYgcnefu29px4JSL//1HVYYCPpPP7BAjdJk2eq71RbIivVwEwtfoVeG
+TiY+bIaIRQmPohwafHBrWMBba4IbbINc16jFzdZ4I1M/BHEmia/nzl40jE7V
+hRYagf2prH1bswl1B0PG3irzoc/+Jr0614y+ZeO8JaWVuMa1cYl6gwUPCAUb
+bLL7GOayLk5XWZAgyG5OAKI8cOgHv11WbLsrO+A8+hxLrvTyT/ZY8ct741zD
+wXas+zuKzQ23IeFtl997qkb3FFN6qNiGqTeLSz6oNOjkP/qJJE9ix3QTk/j6
+H5L8axk5yUps5L4NWPXnKBSWimpMxV0ombReYwTZwXbc/TA5SIt7hLpnBZlj
+sHFvmeJ0XD9mp4TjF38HSEI9/qjNIrHjjDTwF4YTNmkys/RpJIqWMs8UOyfg
+x3j+lkMr+vG1K7r8Sq8LxOOqpvp/e3Bauj5Nc2oKvFOLdnlqO7HZPlCT3uqG
+sapJr6V+iJXH8i4tu/gZzjmikkRlHREJQWuO/Ux+hn3Vs32ooPuR1Dw8o+fL
+qf3gpvezqfvQQ9//jdIHWbS+Uko/vKT1R1L+QEj7c1D+gUf7v0rxgXyaTwrF
+Dxpoft9lzvKFb3z/B3YFAQg=
+         "], {
+          {Hue[0.6, 0.7, 0.5], Opacity[0.7], Arrowheads[Medium], 
+           ArrowBox[{1, 2}, 0.020399597244776385`], 
+           ArrowBox[{2, 3}, 0.020399597244776385`], 
+           ArrowBox[BezierCurveBox[{
+            3, {-0.18635158111754363`, 0.10759013552215828`}, 1}], 
+            0.020399597244776385`], 
+           ArrowBox[BezierCurveBox[{
+            3, {-0.6796738226668928, 0.39240986447787013`}, 1}], 
+            0.020399597244776385`], 
+           ArrowBox[BezierCurveBox[{3, 39, 42, 44, 50, 52, 55, 3},
+            SplineDegree->7], 0.020399597244776385`]}, 
+          {Hue[0.6, 0.2, 0.8], EdgeForm[{GrayLevel[0], Opacity[0.7]}], 
+           DiskBox[1, 0.020399597244776385], DiskBox[2, 0.020399597244776385],
+            DiskBox[3, 0.020399597244776385]}}]],
+       MouseAppearanceTag["NetworkGraphics"]],
+      AllowKernelInitialization->False]],
+    DefaultBaseStyle->{
+     "NetworkGraphics", FrontEnd`GraphicsHighlightColor -> Hue[0.8, 1., 0.6]},
+    
+    FormatType->TraditionalForm,
+    FrameTicks->None], ",", 
+   GraphicsBox[
+    NamespaceBox["NetworkGraphics",
+     DynamicModuleBox[{Typeset`graph = HoldComplete[
+       Graph[{1, 2, 3}, {{{1, 2}, {2, 3}, {3, 1}, {3, 2}, {3, 2}}, Null}]]}, 
+      TagBox[GraphicsGroupBox[GraphicsComplexBox[CompressedData["
+1:eJwBQQK+/SFib1JlAgAAACMAAAACAAAAAAAAAAAAAAA2xRxEUvfrPyvjUrwo
+G98/AAAAAAAAAAB+91fN8f7vP1RN11PPc+s/cp4DjV1G4D/C6j2frg68P2LW
+xDKLeuA/fVtFd9OOwT/GoS1ohbngP9yr7VI7C8U/MvuU4yYD4T/tqR+CfnrI
+P3FGjQxEV+E/MkKMbJTayz9CMrQVq7XhPzeZSXZ9Kc8/12QvGiQe4j9+il4X
+ojLRP1B9xD5xkOI/ugPAPP/F0j94TAo4MCTpP5btglkfXuQ/e6G+zw2g6T/1
+t0ZnEyLlP44N6YMyJeo/Tj7p6tjf5T/RD55/T7PqPwM1NIj/luY/cYtcnhBK
+6z8aGHbOGkfnPy6D350c6es/dsK2eMLv5z+sUfdSFZDsPyjXc6uSkOg/PhRL
+4Zc+7T88b8AvLCnpP6TKfZ4oRu8//I/vf/nx5z+0krz4+hHvP3T2BXYaEOc/
+UMdTwwDT7j9e4ht/ADHmP+Jt7Edfie4/2WJPsy9V5T+kIvQeQjXuP8g8tDgq
+feQ/0zbNFdvW7T8H50T2b6njPz8EUhFibu0/FggoSH7a4j/G67zsFPzsP3hL
+d7XPEOI/nRx381Vo5j/8flHpv1bMP5rHwlt47OU/gFVCsu9GyT+IW5inU2fl
+Px48uKPZT8Y/RVnjqzbZ5D9IYYwuP3PDP6TdJI11QuQ/7tSEFdKywD/n5aGN
+aaPjP/xWBNlmILw/aReK2HD84j9osRtD5Rm3P9dUNkruTeI/xPC2IBlVsj+K
+XBNu
+         "], {
+          {Hue[0.6, 0.7, 0.5], Opacity[0.7], Arrowheads[Medium], 
+           ArrowBox[{1, 2}, 0.01272835986186617], 
+           ArrowBox[BezierCurveBox[{
+            2, {0.6018803398539317, 0.5134394602830381}, 3}], 
+            0.01272835986186617], ArrowBox[{3, 1}, 0.01272835986186617], 
+           ArrowBox[BezierCurveBox[{
+            3, {0.8840234811105949, 0.34444748711227546`}, 2}], 
+            0.01272835986186617], ArrowBox[{3, 2}, 0.01272835986186617]}, 
+          {Hue[0.6, 0.2, 0.8], EdgeForm[{GrayLevel[0], Opacity[0.7]}], 
+           DiskBox[1, 0.01272835986186617], DiskBox[2, 0.01272835986186617], 
+           DiskBox[3, 0.01272835986186617]}}]],
+       MouseAppearanceTag["NetworkGraphics"]],
+      AllowKernelInitialization->False]],
+    DefaultBaseStyle->{
+     "NetworkGraphics", FrontEnd`GraphicsHighlightColor -> Hue[0.8, 1., 0.6]},
+    
+    FormatType->TraditionalForm,
+    FrameTicks->None], ",", 
+   GraphicsBox[
+    NamespaceBox["NetworkGraphics",
+     DynamicModuleBox[{Typeset`graph = HoldComplete[
+       Graph[{1, 2, 3}, {{{1, 2}, {2, 3}, {3, 1}, {3, 2}, {3, 3}}, Null}]]}, 
+      TagBox[GraphicsGroupBox[GraphicsComplexBox[CompressedData["
+1:eJw1iHsw2wcAxzPRsrVMj7T1OCwzw9rStKVdzfcuU1qlKoI6rd5Mh64dSnFt
+Rae2M0qd07L2pPO4rWbXOyJlmlkWjzK1FCWiJZKIyPOXB0m3Mdv+6Ofuc5+7
+zztp2YxzNiQS6cP//L+vCR70CGdYNfhAzuD5uUvw+rOsSWPGfwgwY0TxwjwN
+LrHJVWciFiBQf3T/oSMPadMDtMorCyhOOVI4Wf0bhpp2Z3718wJetusYh7cM
+gvZ3ndyXLIWuzauUdWUYuRFVW8OTpKDRb16omx0FndZFaedKEfLtsYJifyFE
+6YFuPp4ysCpSdzTTxnGyeCAst0aGXjI/dGNwAkXRbx0M8lHhjq402St1EVeb
++oQO36mw2h2R4UxVoNpBdYP2nhonwlTqGYkC42+zS2I5apAP7C/fuLOE3MrT
+bKcoDdx2FvzhFqnEnhuSRg+VBgWCR0UCQomf4qwMSo0WfqK89tqaZYS5HJfW
+h+kQms0P3OWvQuvvxWy/CAJrt4iSP41KdNXyXv21jUC+ZVOBm5MSJ5/E95Mm
+9UiVuZeQ9i5BdlEbefYbPcRpsZzABAVaqSue9AN6DId2HQwoXsRk8BjlxbQO
+dspwS3abHLBlbEv7Qoft9n5HWbMyDGl4Wpc1LYqOF3KFTjI0ehSaEzKXsMaK
+U/2a+BR3nwhSirQKXE+gdxIRIyhPafghPkMBz9CeFnHsEI4ky9uDxYs4+snN
+PcjrR+ucT9Vl+iL0z8soE518KBVNVVktcqwl2oo/8+Yha0fFTM6aDJkd7h8r
+XLshYgZH6WNkGDA88nZN6IToc0klnyDA6RsdDajRIFPQ02rjT8CxfuPUlg4d
+uBO+FSQyAV6qWDxiJhCUeYgzdJ1AXsuZ99ddjJgvYR/2ijbAtPyM7upswuib
+u+6xXI243yCNF0lMeJZYHW+/0wR2DtV39LwZpym1D+P2mSER8i4LH5iR//hC
+cxNzBbw67lN1nRlSTkFWf/oqAqhxD7hBZryR1LZZHmNB/yt37qEyE/hOZFbM
+ugXM5AxBdKMRWyPJY4Z0K6LmU37Mrzbg2HDf9LVrVtiHXDVMzepRtjSy3ZFu
+xcw6hf1Lsxa7+eNZzF4LJvZf7NjbrMapx18KaYZV3K6nvjhho4L3lGVOYl7B
+u17nVnMWlbibSJ1qEJvR+7Jl09dnlZDand9s02NCXdZ8eghLief2GUsJ3xsx
+eWl5wjFsGcx5jnN5rwFznzrYtt1SYV83+XapnQG9FPI9Y5IG/wKtmdZn
+         "], {
+          {Hue[0.6, 0.7, 0.5], Opacity[0.7], Arrowheads[Medium], 
+           ArrowBox[{1, 2}, 0.01272835986186617], 
+           ArrowBox[BezierCurveBox[{
+            2, {0.6018803398539317, 0.5134394602830381}, 3}], 
+            0.01272835986186617], ArrowBox[{3, 1}, 0.01272835986186617], 
+           ArrowBox[BezierCurveBox[{
+            3, {0.8840234811105949, 0.34444748711227546`}, 2}], 
+            0.01272835986186617], 
+           ArrowBox[BezierCurveBox[{3, 39, 42, 44, 50, 52, 55, 3},
+            SplineDegree->7], 0.01272835986186617]}, 
+          {Hue[0.6, 0.2, 0.8], EdgeForm[{GrayLevel[0], Opacity[0.7]}], 
+           DiskBox[1, 0.01272835986186617], DiskBox[2, 0.01272835986186617], 
+           DiskBox[3, 0.01272835986186617]}}]],
+       MouseAppearanceTag["NetworkGraphics"]],
+      AllowKernelInitialization->False]],
+    DefaultBaseStyle->{
+     "NetworkGraphics", FrontEnd`GraphicsHighlightColor -> Hue[0.8, 1., 0.6]},
+    
+    FormatType->TraditionalForm,
+    FrameTicks->None], ",", 
+   GraphicsBox[
+    NamespaceBox["NetworkGraphics",
+     DynamicModuleBox[{Typeset`graph = HoldComplete[
+       Graph[{1, 2, 3}, {{{1, 2}, {2, 3}, {3, 1}, {3, 3}, {3, 3}}, Null}]]}, 
+      TagBox[GraphicsGroupBox[GraphicsComplexBox[CompressedData["
+1:eJw1km1Ik1EUxx9sqVTqh9aLpkPTbDGRBUGsYseMatYqGmUDZ5mpQRBFrVdi
+BH0oh7QRfVATt0DypRo2wlaszihL2zDM6ZA251qyuS2z5V4eQTDnvbtwuRzu
+4bz8/7+C2kuy+hSGYbYv3cTbJZVP3+4LYXQxcSbxJYlhNZM4HlylbpeKbvXs
+WQ6ZvxBZkaF5MDyI5YWCplJ3ELQjAzxz7Xe0qDx3uOUB8ErqP7yYd2A138LL
+2T8Nw8pqU8ztwt+iupKsqB+upO2zZtf8RFlJhkJWufQfDptbt0zhuli69PG5
+ALCh4569LT7sci2+LcgMAS/P57Q2T+PlNk+8VzwDubsMZZL0IBYOuBs6HbPw
+0Gh0dduD+Oz9uxavPAxfPIaisdkgNr7KW8ga/QeCVENdWVUQ862SY3xJBF5H
+WsXpvAByuSs5Tn0U5GL5IVWFH2/WXFVW2mIwoZxL2xmfQv5JTeDomzgUr2Gq
+Og56ceiAS+E9xYIu07lVb3Fj48eU+9IOFvoGDz9qt4+jzjDccLaZhbbzFyvW
+b7Kj9HSedmAHC9zgkxvskA1T5/VrZ1VxGOk2T3KZT2hs+qH6fDcGvfdsIp7G
+hK6W3TkCSRTyc4W/nnN6cezCDCv0zYGQxJCM+0k+TNB8B6kHyXrZpB8k++nI
+PHCEzmMi84KezvuU7ANquk8R2Re+0X3dRA/YRvVQEL0gqRfVEzZQPUuJ3rCZ
+6v2V+AFq6oeW+AWd1C8e8ROKqZ9FxG+4Rv1eIDxAD+VhlPACGykv1wlPcILy
+NE54gz+UNz/hEc5QHimv0E955XCWeYYkz/8BGC+ehw==
+         "], {
+          {Hue[0.6, 0.7, 0.5], Opacity[0.7], Arrowheads[Medium], 
+           ArrowBox[{1, 2}, 0.020399597244776385`], 
+           ArrowBox[{2, 3}, 0.020399597244776385`], 
+           ArrowBox[{3, 1}, 0.020399597244776385`], 
+           ArrowBox[BezierCurveBox[{3, 7, 10, 12, 18, 20, 23, 3},
+            SplineDegree->7], 0.020399597244776385`], 
+           ArrowBox[BezierCurveBox[{3, 30, 33, 35, 41, 43, 46, 3},
+            SplineDegree->7], 0.020399597244776385`]}, 
+          {Hue[0.6, 0.2, 0.8], EdgeForm[{GrayLevel[0], Opacity[0.7]}], 
+           DiskBox[1, 0.020399597244776385], DiskBox[2, 0.020399597244776385],
+            DiskBox[3, 0.020399597244776385]}}]],
+       MouseAppearanceTag["NetworkGraphics"]],
+      AllowKernelInitialization->False]],
+    DefaultBaseStyle->{
+     "NetworkGraphics", FrontEnd`GraphicsHighlightColor -> Hue[0.8, 1., 0.6]},
+    
+    FormatType->TraditionalForm,
+    FrameTicks->None], ",", 
+   GraphicsBox[
+    NamespaceBox["NetworkGraphics",
+     DynamicModuleBox[{Typeset`graph = HoldComplete[
+       Graph[{1, 3, 2}, {{{1, 2}, {3, 2}, {2, 1}, {2, 1}, {2, 3}}, Null}]]}, 
+      TagBox[GraphicsGroupBox[GraphicsComplexBox[CompressedData["
+1:eJxdkW9IU2EUxrdlQqWohPkHNf0SBgWRqZnTs5o2SdCbkWEIjcoQca5loa0y
+zCKFrNTAkHAoixXi2FVbQtMzYoQSpmL1xSirudlmZc5AcXer4HDh7cLL5YHD
+Oc/veVJOa0sqZBKJRPn3/fv//5VEXTupkC5BWH5y26mbx+Xtzp+uYDAIER+H
+3mfOlsrVnE4wbnkBc0cnY1p/9ELp3Bdr9aoduPSZpb4zJhi4lDo7XOeAOXvE
+d9vuPrDkv3xrlI6B+tmEpfGIGS4U3TkU++A1cJfHcqLKLZCU22X9vWsSUg1D
+hs4DPNQOn10Pr5iG809rcjg7D7KCccPgvhlofljn8S7yYGqInt9R6RK19pXq
++VqxW5xP6TimUmYuiPvCIk4Y9YnfxHvytvHrMTIPcORHvnFPQ7vTA1Pkt6Pq
+4O0KhxcUxPNotTA6rGcRpoi3izTx432aJ37Mon3Ej1l0j/hxE+sHk1i/WM3y
+oJHlRb+KyQM1bF64lc0Tz7F5o5H6IH40UV/Ej4XUJ/FjAfVN/KhRjfqt/C9Q
+OxRxnd5e6NnfKlvbvgzJRVL9BrUJBhtLQ6fvLQMX/2T06s4+CKR3T/olPohM
+KJl35JuhpsBWnlXrg9Tux9k3yiwQcDdvVrp8YBmOm5rP5CHxSqXtXdkKqD98
+bWoZ4cHdZAjpn1iBWKk7I8nDQ1A3Ie9IWxf1uD7kVpVpXZxfCHdmCPF+cV99
+v8UZetcv3lvANzqlRAAJ+Um7uC1bqxNAQX4Pj3zKVX0WIJJ49GZzXktxADji
+rSdN/JhH88SPe2kf8aOL7hE/1rF+0MX6xTGWBwMsL7rYPDCBzQsFNk/UsHmj
+QH0QPw5QX8SPBuqT+LGa+iZ+/AOMpR2f
+         "], {
+          {Hue[0.6, 0.7, 0.5], Opacity[0.7], Arrowheads[Medium], 
+           ArrowBox[BezierCurveBox[{
+            1, {0.5001527564386758, 0.16449098594894349`}, 2}], 
+            0.022611464210583382`], 
+           ArrowBox[BezierCurveBox[{
+            2, {0.5001527564386754, -0.1644909859489449}, 1}], 
+            0.022611464210583382`], ArrowBox[{2, 1}, 0.022611464210583382`], 
+           ArrowBox[BezierCurveBox[{
+            2, {1.5001527097553518`, 0.16439049306400955`}, 3}], 
+            0.022611464210583382`], 
+           ArrowBox[BezierCurveBox[{
+            3, {1.5001527097553502`, -0.16439049306401293`}, 2}], 
+            0.022611464210583382`]}, 
+          {Hue[0.6, 0.2, 0.8], EdgeForm[{GrayLevel[0], Opacity[0.7]}], 
+           DiskBox[1, 0.022611464210583382], DiskBox[2, 0.022611464210583382],
+            DiskBox[3, 0.022611464210583382]}}]],
+       MouseAppearanceTag["NetworkGraphics"]],
+      AllowKernelInitialization->False]],
+    DefaultBaseStyle->{
+     "NetworkGraphics", FrontEnd`GraphicsHighlightColor -> Hue[0.8, 1., 0.6]},
+    
+    FormatType->TraditionalForm,
+    FrameTicks->None], ",", 
+   GraphicsBox[
+    NamespaceBox["NetworkGraphics",
+     DynamicModuleBox[{Typeset`graph = HoldComplete[
+       Graph[{1, 3, 2}, {{{1, 2}, {3, 2}, {2, 1}, {2, 3}, {2, 2}}, Null}]]}, 
+      TagBox[GraphicsGroupBox[GraphicsComplexBox[CompressedData["
+1:eJxdkn1MU2cUxktVooCpxFTUYIV/Bktcgh+AQO1BKiuZi3bo2Kgka9gwSEBk
+8qGIEMSpJOoGTJ240Gm61I3Z9ALDugEHWdU2BCkRF7Pi6FxpS6kMejVBaek0
+nt3k7iY3Nyfvuec8v+d5Y/NLswuEAoFA9ep9/f3/kx15XJUeMgMRmTFNn5z8
+UNrs+McZDAZB9GfX78m2HKlaWRbQhv8K9g+Go85NX4Mc+5Pu4rl+UCY+mGn/
+VAcdFfE2Y5UJ7P2ipz3vtIMhc2BUG2IG9c9Dhvr39PD5rrMZq78eBOVR87bI
+PANIZK3dzzcMQ7ymS3MplYHDxs/mlxeMwKEfDm5T9jMgzLJoOrc8gDPfVHmm
+vAzoasUTbxU6ubr0ruLmi90urj+2ZY9Cnuzm5kWIPtJWr5vk9kmbLHVRQg8o
+SY90SUJts8MDVtLbUrT9dIFpCtKJ59u5neKIq16wEm8r1cSPX1E/8WMKzSN+
+TKF9xI/L+HpQwteLxXwe1PJ50a/g+YElfL9wJd9P3M/3G7WUB/GjjvIiftxJ
+eRI/ZlHexI8nZnUbMXEWvjP8MigRXcb1dc9HXkb7YMtZs2pP2o8YIQu7h3Yf
+5IH6SmXRTWxyiyI3lrNgPO/WV8oG8E7+TxfahljIs7w/dqHHgp1RueJ4Fwu2
+1mNS8yMrNqSKhDHIQkcse+je4Chuqug1xn3MQiqKBv4of4TqaVPGols+WFpR
+OVJ60Ybi292n47yzENXet882/xidA5oDYcEZON46FjdcM47/3ec3t9uONdh1
+0Rs6DbV0LvntlKpjgxdW0f+NhUWOl80eCKP5E6qjc8zeSZDS/u3WhwW3T7k5
+fU/EGcAkueEx6e+ruyIzHXBDLvHFlY8qNNGTHH+CZdxWL391H8ifcMWyu+GD
+U5BA/snztaENl59y/pYo+vzdzCyoTelrLk1dg6tbzwlfrPdBzK6Q6kVqHXTW
+54SOfOkD5drrfTVvt8NCYtuwX8DCiujsCVOmHg5m9eSlHGYhvu37tBO5Blhw
+nQmTO1kwGNdYJ5IZWHessOdh7jNQj/3d0NjLgKtBs/jG0DNYHeJKkngYCJYN
+SVs2z3O1pXrxF0W6ea7fvdyRFFjr5+YduWFwhJ73c/vceL9MLgiAgPRsLl+V
+VloWgHTS+27vuEzxVwBWEE+1Xr+jcfcCKIn3CNXEjzuon/hxE80jfnTSPuLH
+Kr4edPL1opnPgwt8XnTy/cBovl8Y4PuJJXy/MUB5ED92UF7EjxrKk/ixmPIm
+fvwXtWXl1Q==
+         "], {
+          {Hue[0.6, 0.7, 0.5], Opacity[0.7], Arrowheads[Medium], 
+           ArrowBox[BezierCurveBox[{
+            1, {0.5001527564386758, 0.16449098594894349`}, 2}], 
+            0.022611464210583382`], 
+           ArrowBox[BezierCurveBox[{
+            2, {0.5001527564386754, -0.1644909859489449}, 1}], 
+            0.022611464210583382`], 
+           ArrowBox[BezierCurveBox[{2, 39, 42, 44, 50, 52, 55, 2},
+            SplineDegree->7], 0.022611464210583382`], 
+           ArrowBox[BezierCurveBox[{
+            2, {1.5001527097553518`, 0.16439049306400955`}, 3}], 
+            0.022611464210583382`], 
+           ArrowBox[BezierCurveBox[{
+            3, {1.5001527097553502`, -0.16439049306401293`}, 2}], 
+            0.022611464210583382`]}, 
+          {Hue[0.6, 0.2, 0.8], EdgeForm[{GrayLevel[0], Opacity[0.7]}], 
+           DiskBox[1, 0.022611464210583382], DiskBox[2, 0.022611464210583382],
+            DiskBox[3, 0.022611464210583382]}}]],
+       MouseAppearanceTag["NetworkGraphics"]],
+      AllowKernelInitialization->False]],
+    DefaultBaseStyle->{
+     "NetworkGraphics", FrontEnd`GraphicsHighlightColor -> Hue[0.8, 1., 0.6]},
+    
+    FormatType->TraditionalForm,
+    FrameTicks->None], ",", 
+   GraphicsBox[
+    NamespaceBox["NetworkGraphics",
+     DynamicModuleBox[{Typeset`graph = HoldComplete[
+       Graph[{1, 2, 3}, {{{1, 2}, {2, 1}, {2, 1}, {3, 3}, {3, 3}}, Null}]]}, 
+      TagBox[GraphicsGroupBox[GraphicsComplexBox[CompressedData["
+1:eJw9VH1MzGEc/zlFhPVTuzZFO5XyMpm3kHlWV1GR1Kak1yOct7syjuWleZns
+UF5SIy+bFkabl4olvonZpRzyWsdddVed7q6umO4uDPN9nj9+e/bd832+38/b
+fiKJLD5LwHHcqr/fvzPnWfLe0dw3snqF204fzg6Fvh86EjgVqw35VTYProvg
+CU7qoWE5K/tJiW/MiPxiO/BxIWsD2q2EF8XOmfnQDlF3a85FZlvJk83SlL0t
+dhh5ym+A56xk87EphRkDdjCqHxtLvPpI2e3rfJOzA5Jn1Sp3zOslKec2ZN5z
+d0DgZRG/ONZCBGK7eJy3A5b1eaXnbjCTXc1Dzz9OcsDP8Et+qXN0rF7cebpO
+s+4L62+tT23cWqRh8x4dSeInN7Swfdk68YQx3CeGZ0uy6ejCkA+kDvEu0xt3
+Vue+I27IZ7+pq1VZ30yKke9hrIWK9/rqTTaIxf7SPc3VbhE2kOM8c9D9E/VT
+bKDAfWLesUY71gZPEc/oHsWnHMcgtCHeOKeafKV5EMKQz83EgPJZhkEQRPzn
+G6zy893YPggxqAetZ6BetD8V9aTzTKg33eeCfoQjnmj0i+J1Rz8pH2f0m/KN
+iHK9Nl5qJNI0974Tqi7Yt768+1hwD7nGS2a+uNoNiR2v3riDibwuFDWtsxgh
+M1iT9aPTTE7fkpXdLeiBF9M9ZG9KLCTkoUq2SGaG8qJt2w2NFhK/+ptwz9Ze
+WKppWfou10J0x4uTfs62wtW4+VX6CjMJrdTOCJ3YD5w4ouG8zEQqMx/Iyzv7
+QWoMTNC//0oWyKIThh0YgDFmh/DGUDfhTasil+gGWH4x51DrL2/NczKw+7Sp
+YZcip3Ww9w1q/8CCwjZShfOjD0p3Hy/Tsv2CbZMTbrp8IVrEF25zOCs3fWb4
+fzVWON1RfyaLkJ+60sdz41wt4y8PuuAjDG1j+sRUPBt1RdXO9DukSo/2LNYz
+fWmdfi9RUBrcyfpF3Kin6SkGyMZ5trwo/+fj9Wzf/Kyh5Qp5O8MzoSJ8uE6k
+Y3jNu/oqMwM0jI+nVZEnmfsRopBvQfzaoJXKt6BCPepKv/vUSF9DBuqV8TJp
++kWXJniEehb1ep+pGtHA9Mb/CLiiH2fxnvolwfe/w/77WYvzqd8ncT/NgxDx
+0byYED/Nkxfyk2DeKP8kzCPVh+aV6heJeab6/gEHAK78
+         "], {
+          {Hue[0.6, 0.7, 0.5], Opacity[0.7], Arrowheads[Medium], 
+           ArrowBox[BezierCurveBox[{
+            1, {0.6875099999999997, -1.7269707471829923`}, 2}], 0.01273], 
+           ArrowBox[BezierCurveBox[{
+            2, {0.6875100000000014, -1.3980892528172797`}, 1}], 0.01273], 
+           ArrowBox[{2, 1}, 0.01273], 
+           ArrowBox[BezierCurveBox[{3, 39, 42, 44, 50, 52, 55, 3},
+            SplineDegree->7], 0.01273], 
+           ArrowBox[BezierCurveBox[{3, 62, 65, 67, 73, 75, 78, 3},
+            SplineDegree->7], 0.01273]}, 
+          {Hue[0.6, 0.2, 0.8], EdgeForm[{GrayLevel[0], Opacity[0.7]}], 
+           DiskBox[1, 0.01273], DiskBox[2, 0.01273], DiskBox[3, 0.01273]}}]],
+       MouseAppearanceTag["NetworkGraphics"]],
+      AllowKernelInitialization->False]],
+    DefaultBaseStyle->{
+     "NetworkGraphics", FrontEnd`GraphicsHighlightColor -> Hue[0.8, 1., 0.6]},
+    
+    FormatType->TraditionalForm,
+    FrameTicks->None], ",", 
+   GraphicsBox[
+    NamespaceBox["NetworkGraphics",
+     DynamicModuleBox[{Typeset`graph = HoldComplete[
+       Graph[{1, 2, 3}, {{{1, 2}, {2, 1}, {2, 2}, {3, 3}, {3, 3}}, Null}]]}, 
+      TagBox[GraphicsGroupBox[GraphicsComplexBox[CompressedData["
+1:eJxlVHlMVEcYX5Zl5RDKIYcY5ZBjwQpIBSJKRyBLOGVLrXIUKYuIpLUcBUIU
+kQrKsViuCJEi0kK3EKAgVBGKzuNoitZAsFoUKLAHb3GXZRdU7qM0nTdJ0z9e
+Jl/mm+/7XXkW3ISQWDqNRju//f1zJveHZ2hmrQNx3r3lXbTXEJ3/qxtt8rre
+I+gEY3BNJXloFZxzObCHdJBCfc7RCNvoVRDmdCjVOU0K/dq6yn3mV0BnX9xv
+g21SqF5itaCXtQK0VIQOFWIpTI2LSnmqvQIyg8lDX2rJ4EGTiV87K5eB0pQ7
+fMxWBm8OFavvs10GR1NyyxfcZPCHpRstHu1LYH9ZYdU1Dxk8XmLrNxI4j2tO
+p5Vy8aUS93ckjjhHxCrxvCmvJvUSsQLv61JYaDNpCqCJ8Lg1v+ur2jsHHiC8
+/KS37mMechCK+PSkfiVnR8+CWMS3H9Ux4+BP72EJrEf9iYIjGUv5EuiO5ume
+ULWPCJLAh2jfI9383tI9EihCeAJ6c+Avb0nYifC+WlQ3l78k4UeIzze3ReFu
+AyT0RHz5mRMn63pJyEd6UHU50ovqd0R6UvPSkN7UPg3kB0R4/JFfegivAfIz
+CfFhIr/PIr46DplVZVszIN3E9A4wfw0zRa3ChLoZ4K9aU68eua2vfx8vskkC
+2q5zeQHxcsjVtbzudYAEu727NdZMFTD04mI1/bgYvM8NmObbKuGkdoqrmr4Q
+2Jd+cbI/TQm7uZqeJlWTgEPKvS+nKGFGPOl0hD0GqguupdMslHDKsHczN30E
+zLi6lNGYCshoGtfQzHkOnMLKPEJOyKFR8pzrhbpnwJvzItb9Qxkc0Pt83o72
+DOeZur/Wc5On6CGhKnp/68FI+8hdMZ4/Nepyxm5VCC+h/YXrUTS7RwKMj8Uu
+inc0FsAJhD9FXuL7nb4A80sIem4z3iqA0Yh/y+BPEodpIdbHiKd+bqJcjPW7
+ovO7r0UtifXlrHBCpJMzkO2n9aN+vAzsrDJbPrhAJy6f5Uvy3eRg3PfNjg2W
+KnFaODRsAOcAnxWTEHNJlYh2G4tdnFaAipY06yWRKjFtWNBxPlAJPN8EmryK
+YBB/PHF1W9jOG7PSuJc1xiBq5bP7pR5KICjg1+eFqRG1HNd7omYFKN33RL9x
+UI2gebMfVybMgcB393/+y5lJxM+wPha9mAU661vWvCtMYufsqlHDmhSsdWbf
+aWhhEv/9XzCJbuvE0SyGBN+fsfOq9rGfxu8fD1qziopFeL51z+FjPiFCvP9r
+15KGT3IEGJ9lxsZV9mEB2IHwb06fuhoaJ8D84kaLeB+YCjH/RMdvzYw8RVif
+gOZ+jZoBMdYveyDK37iCxPpStf9dZcb8DTruv8jYe8HyNJ1IQvNarZrVuhl0
+vI+4fSuYVaWC8RiG933qY6WC8XLal9sW62iYT2pv/NNyGxphhfjmRRb2z3C3
+4ADSY1drW1Z25Sb8DOlV/L15NUtlEz5EenbY7G6U1Wzg//OpIN1Us6wNqIX8
+uI/uKb+o95te//ppgOZTfuei/VQeKHxUXoIRfipPFD8uyhtE/ENRHil9qLxS
++vmgPFP6/g0xy2I7
+         "], {
+          {Hue[0.6, 0.7, 0.5], Opacity[0.7], Arrowheads[Medium], 
+           ArrowBox[BezierCurveBox[{
+            1, {1.281260000000001, -0.945700747182353}, 2}], 
+            0.018960040674803363`], 
+           ArrowBox[BezierCurveBox[{
+            2, {1.2812599999999987`, -0.6168192528170429}, 1}], 
+            0.018960040674803363`], 
+           ArrowBox[BezierCurveBox[{2, 39, 42, 44, 50, 52, 55, 2},
+            SplineDegree->7], 0.018960040674803363`], 
+           ArrowBox[BezierCurveBox[{3, 62, 65, 67, 73, 75, 78, 3},
+            SplineDegree->7], 0.018960040674803363`], 
+           ArrowBox[BezierCurveBox[{3, 85, 88, 90, 96, 98, 101, 3},
+            SplineDegree->7], 0.018960040674803363`]}, 
+          {Hue[0.6, 0.2, 0.8], EdgeForm[{GrayLevel[0], Opacity[0.7]}], 
+           DiskBox[1, 0.018960040674803363], DiskBox[2, 0.018960040674803363],
+            DiskBox[3, 0.018960040674803363]}}]],
+       MouseAppearanceTag["NetworkGraphics"]],
+      AllowKernelInitialization->False]],
+    DefaultBaseStyle->{
+     "NetworkGraphics", FrontEnd`GraphicsHighlightColor -> Hue[0.8, 1., 0.6]},
+    
+    FormatType->TraditionalForm,
+    FrameTicks->None], ",", 
+   GraphicsBox[
+    NamespaceBox["NetworkGraphics",
+     DynamicModuleBox[{Typeset`graph = HoldComplete[
+       Graph[{1, 2, 3}, {{{1, 2}, {2, 1}, {2, 3}, {3, 1}, {3, 2}}, Null}]]}, 
+      TagBox[GraphicsGroupBox[GraphicsComplexBox[CompressedData["
+1:eJw9jQtQ0wUAxscwVBoCGQa6GVg+LihFHODCPhHs0E3AgR6+WDwlkZuKYCJx
+Kj5qBUro1AGZkPJQQUcK6OIhoAgkY+RENNzGXv//9t/AEwJFiO66vrvvvvt9
+9919HrFCfgKdRqMFTfnfZB3/UP7THy9A+0+u5uvXXk5aIZsMGteWmv7v/Udv
+Ml63mHDlkCMVeUYFHt+RXuAuA0MbdqyyVYWlPSerIiRNaCm8sfEvGzWOiT5x
+kru1wv8Rs/r3EDWswgvCGz+2YYnbpZsLJWrIJ+46k4MdWLc+eK5uWI26IT9D
+RnAXcqbnSVq3aRCUYIi+taYbhXkNKlGHBokf72PrexXY9XiizSaAgKY/hZeU
+qYWn4mrp17cIeDqdobSBOni+sVvl5U/iT+uIMtxGj77MWNZ4M4nX7BAp544e
+P/fMPHIiygQGt8KWvdsAkr42LXXYBFfH7F3KOUYs8kh2SpSY4bpc9aKuzghF
+nK5s/EsKUV4hL7MiCdB9Khfv5Fux34Ve2P2REYXtKacdPKwYtI91Cg80QOvs
+0NyvtYC5Y+Xonhg99ql+iZkosqCpZIeq9pgOh88y48Q8C2bQHh+ouKrFV/EH
+XysHKYTapq+5rxwAs9QrY0REgblBzhPZDcCBNeHjPY+CiBKp936uwRdP67l3
+KvRIyo5qeHm9E1nPnVP43noE1zdwaOcf4tvq209OVepQjBVnwyX30eW97e+G
+BTrMWGxdXH67GfbPqvPZuVrUKxI1DZZG1F/95mLI0NTv8em5+7+T4WgOf9pm
+3hSnzB+I2lsD5fre5IaLGiwp6A9bViDFRul2U1WRGTrNw8uLMkmsThZ/2tdo
+gmbmiLqYTULAXm5Wq0iceVxhqxgjkBJvusedIFAcIkh70kZgXY97X5EbAcaI
+yVdeTMCWk3hO4GNE+SFBp+IkgXd/27LBjWdAaU35MusBAumUmYyI1+N80cLO
+z1IJXKsJ1bku7cE4rVYhzyKQI3CNLxZ0I7/sQprvcQLZAwrW5QVd2KgJ2lwv
+JuAj24Z0UQdkoSdmR1dP7StPTfaOPsCbknt3pj2bYs4PG0hhCy5lDXdLHEiM
+OWe+ahpqhLCzMIHOJXHySrtMQ7uLreLUuR/kk1j76Hv7Oe/dxWwXr7jaQTOS
+bKPHY8Yb4WKZXBTgR8HYZ7EJymxB7ALuOw6pFKrm25cW2LUhskqcP/1XCoFx
+K9ZHXOgAaWOvmNVOYUvb/E285V0IyxQHMHQU5u0pq5fu7Eb4al6v9RWF4LdH
+slf59UCwVR5wY4xC0Gk7TmKSHmMjq3xnWSjwZZcyPMINiA3bnl9moODvszJh
+nZ8RJS5SqbuSAuOtkrmJRYBTLhw+XEchnda+W2ZD4k2ET2hf3hSzuG6jAyQi
+D9L8ggUUJIbcpUebTTjhuaXkuQeFkHPvb1JeNEMSc9Ty4KkZ/wDeaR+/
+         "], {
+          {Hue[0.6, 0.7, 0.5], Opacity[0.7], Arrowheads[Medium], 
+           ArrowBox[BezierCurveBox[{
+            1, {0.6063408457537409, 0.5148479082840206}, 2}], 
+            0.012729919112564167`], 
+           ArrowBox[BezierCurveBox[{
+            2, {0.8905750101400242, 0.34939702265687883`}, 1}], 
+            0.012729919112564167`], 
+           ArrowBox[BezierCurveBox[{
+            2, {0.4994130446186894, 0.7015802702498445}, 3}], 
+            0.012729919112564167`], ArrowBox[{3, 1}, 0.012729919112564167`], 
+           ArrowBox[BezierCurveBox[{
+            3, {0.5005806013015165, 1.0304596748771824`}, 2}], 
+            0.012729919112564167`]}, 
+          {Hue[0.6, 0.2, 0.8], EdgeForm[{GrayLevel[0], Opacity[0.7]}], 
+           DiskBox[1, 0.012729919112564167], DiskBox[2, 0.012729919112564167],
+            DiskBox[3, 0.012729919112564167]}}]],
+       MouseAppearanceTag["NetworkGraphics"]],
+      AllowKernelInitialization->False]],
+    DefaultBaseStyle->{
+     "NetworkGraphics", FrontEnd`GraphicsHighlightColor -> Hue[0.8, 1., 0.6]},
+    
+    FormatType->TraditionalForm,
+    FrameTicks->None], ",", 
+   GraphicsBox[
+    NamespaceBox["NetworkGraphics",
+     DynamicModuleBox[{Typeset`graph = HoldComplete[
+       Graph[{1, 2, 3}, {{{1, 2}, {2, 1}, {2, 3}, {3, 1}, {3, 3}}, Null}]]}, 
+      TagBox[GraphicsGroupBox[GraphicsComplexBox[CompressedData["
+1:eJw9iAlMG2QARks1kAzwWJRNVjpOl2yMUMNgY8hnkQAKA8IIYTIdLCC1bhyy
+icGBXLJxjKsNbkWuGuWSgSKnhZ9jMBhMLgdYWmzpQU+OFggiwyMxvuTlJc/u
+amJYHJVCoXj+47/tYNLHy5/8Dsp/eJfWfWv4ax1DXOcdeb32/x/rxDXde6hF
+ZC1LHc6VQBgq/pNnK8ALJ6szH4xIIPKpb77IG4R/3eYFsYkU04Jc8+nXRuDt
+HtzaFyCF6BSD3VY0ht3ygRYnnhRZGVxzzcYEBotDrBTbUuRLwiVpvlO4s/Rl
+xUjUCpLtrKM6fGbg+ahSVDCxAgkrkKFcnMWoMXHYxEsNgUDjz7olh+QNKv+j
+DjVYCQqVnKnAcPFbHs5nNUh1pM+Gmiih800/sj+swV6rX4tnrxIU+XOf50Vq
+kVGWdeB2bRWT2bTElG0tfAfc4uatVHALoh/6kKdDETVB2NOjgnvhJ/x9Pz2E
+inZdRrgawy+N2caHraNe01Yx46CCxe3yfEu7dVg89DEPZa7i1xchWJavoSQu
+0JgUo4QobeW9g6o1TLxTu9Sdq4ADPelyRdAa7G/6pzQ1yxFpLzXOb+hRe/mI
+9+i8DOVPm1J2CvQ4lFsTUGAqg0TNPc04psdFSZ44+fwKwvsG/HqblLCNNusx
+tEzCM8OFFcZQgn2fdoZybxwR9huzJQ8UcB08VxrKG4XLtXYDsVfAkfOVQ2Pn
+MKyfOJecKZbDyvL7ZbI2gGCXVyoDNmXY+qb/9o07AqzGHqZEBMkgKNsSRyZ3
+Qe7UH09qVhCUOhLoWvkjMnOaWezqaHI0MPZSQqMWR/UzB/d364n5xxamTJUa
+58ZbUq/qe4lq4dLpnRoVGBHhOT8cHiXH3m2nyDSr6D6ZYPuB3RQZl+d33l1Y
+xU+CfM77W3PEheEUlBOvQvTi0C0f4QIpV0y1eJSo0UxidGEGISn+4+05g7sW
+0TcZRabPRITK/2yiy0uPx1Izp6RpMbn+89B3B5+uo5uxWMiLEpOdL2j850Ub
+KOrtW5DXL5FRJevCI9UmfHMeG5iLi4QewuacnTSAl/byNvv1p4TT0HXc+oYR
+5jE2wjeXp4lJZlLD1qwRV8pS/UNaxwgtlpnsLDViIViSHtVPCJfDzquqMsJU
+15ltQ20jmXm9J9otjYhOuLdvxiokjaQ6e9fLgFJddtb1PQ5+CXNtOOW1iQCH
+V2m1J+owdL56SHF8A65FLBtnx6/x29yMp+qZHpketD5++hXUuLGWzKRa/A1Y
+q+Xo
+         "], {
+          {Hue[0.6, 0.7, 0.5], Opacity[0.7], Arrowheads[Medium], 
+           ArrowBox[BezierCurveBox[{
+            1, {0.6063408377933767, 0.5148479015247521}, 2}], 
+            0.01272991894543915], 
+           ArrowBox[BezierCurveBox[{
+            2, {0.8905749984480941, 0.3493970180697965}, 1}], 
+            0.01272991894543915], ArrowBox[{2, 3}, 0.01272991894543915], 
+           ArrowBox[{3, 1}, 0.01272991894543915], 
+           ArrowBox[BezierCurveBox[{3, 39, 42, 44, 50, 52, 55, 3},
+            SplineDegree->7], 0.01272991894543915]}, 
+          {Hue[0.6, 0.2, 0.8], EdgeForm[{GrayLevel[0], Opacity[0.7]}], 
+           DiskBox[1, 0.01272991894543915], DiskBox[2, 0.01272991894543915], 
+           DiskBox[3, 0.01272991894543915]}}]],
+       MouseAppearanceTag["NetworkGraphics"]],
+      AllowKernelInitialization->False]],
+    DefaultBaseStyle->{
+     "NetworkGraphics", FrontEnd`GraphicsHighlightColor -> Hue[0.8, 1., 0.6]},
+    
+    FormatType->TraditionalForm,
+    FrameTicks->None], ",", 
+   GraphicsBox[
+    NamespaceBox["NetworkGraphics",
+     DynamicModuleBox[{Typeset`graph = HoldComplete[
+       Graph[{1, 2, 3}, {{{1, 2}, {2, 1}, {2, 3}, {3, 2}, {3, 3}}, Null}]]}, 
+      TagBox[GraphicsGroupBox[GraphicsComplexBox[CompressedData["
+1:eJxdkXtMU3cUx29b5gscEoMoQ4b+YfCV+ECe1fNzwIpo9AqK0RhtnBhAENEt
+dWxTEZywzCdG1KiNWFMNsba8E5GDpnElpBSDj0SNopYWqd0QMIPQxzbv8SZ3
+N/nl5uR3fud8P9/vrB2FGdlyjuO2/Hv++///ywj5ZQuTDUBQatTp7WUblWfs
+fzn8fj8Ev6x/Evc8S6nmi7y6wDvQs94WdvzPasjqedOYP9IG/LLugZrv9FD7
+Q/TzZo0ZetqC3S0La8CYev+RTmYBdYPVWJJugH1rf/9m+tkO4H+0LA/ZaoTI
+FRcbPy6wQbS2XluVaIL9zTvHJmc/hL039yzn20wgT2vX1sV0Q/l5Tb/rvQn0
+B0N75+Q4xLrwgappdJ1T7J9VmalKjusT5wUFb9IVz3wn7lOebj8UJu8HnvQo
+v1h08Iy9H7pIb2XeymPZZhcw4rk0sjo06Op76CLei1QTP56ifuLHBJpH/JhA
++4gfJ0r1YKRUL+ZLeVAn5UWPSuIHFkj9wqlSP3GX1G/UUR7Ej3rKi/hxNeVJ
+/JhGeRM/FqhaPY2mD6A2sxlVrmq4Gn9cPvr1IEStlRUr1HqoK8ka9/DkIPDh
+N1p/nlsDvmVXbB5uCKZEZPSaUw2wJ61la8L+IYi+cj3pyGYj+Jzlk5IdQ2Bs
+ntHVG2eCmT/ltDzePAzqF29LK+6awFmqDbhlHYbpMmdsZL8J/EVWZeXSMbFu
+Lw44mqcfE/v7JttjveEecd6BW0b7uBMecV8fdhYlc17gSM/S76clFRZ5gZHe
+b+++WqF67YUpxFNsMKRUrPMBT7wHqCZ+TKF+4sclNI/40UH7iB81Uj3okOpF
+i5QHfVJedEj9wAipX+iV+okFUr/RS3kQP9ZSXsSPWsqT+DGf8iZ+9FuOpkdx
+HBtpVy3JDN0L1V+Nxr+bxrGY7sxDl5210F1S3+newLHEv+vSn+nuQW5XxKmY
+Bo497QtPOb/bAq4GZ0XAIhl75i5TvVVaYdL6CfbSOzJmKTjR1tlgg3kTyuYe
+WSNn3i8vKM9ds0HGsfLAbU/lLH9x1uvb463wIMS6eJhXsKhmX64hzAIyzB0o
+va1gsFIz9WP8PYBf//hN41KwiCRfzvwPJlg1qBny+xWs9fA+D1SZlYzuOxI/
+3aOc3ocL7/HzfF/Tp/mYSft5YT/OJ30OQR8Gkv4mQT+6ic8m8GEe8XcI/PiI
+/IkV/MFr5N9swT/RX7fgL/4Dnp7OPA==
+         "], {
+          {Hue[0.6, 0.7, 0.5], Opacity[0.7], Arrowheads[Medium], 
+           ArrowBox[BezierCurveBox[{
+            1, {0.5001527564386758, 0.16449098594894349`}, 2}], 
+            0.022611464210583382`], 
+           ArrowBox[BezierCurveBox[{
+            2, {0.5001527564386754, -0.1644909859489449}, 1}], 
+            0.022611464210583382`], 
+           ArrowBox[BezierCurveBox[{
+            2, {1.5001527097553518`, 0.16439049306400955`}, 3}], 
+            0.022611464210583382`], 
+           ArrowBox[BezierCurveBox[{
+            3, {1.5001527097553502`, -0.16439049306401293`}, 2}], 
+            0.022611464210583382`], 
+           ArrowBox[BezierCurveBox[{3, 71, 74, 76, 82, 84, 87, 3},
+            SplineDegree->7], 0.022611464210583382`]}, 
+          {Hue[0.6, 0.2, 0.8], EdgeForm[{GrayLevel[0], Opacity[0.7]}], 
+           DiskBox[1, 0.022611464210583382], DiskBox[2, 0.022611464210583382],
+            DiskBox[3, 0.022611464210583382]}}]],
+       MouseAppearanceTag["NetworkGraphics"]],
+      AllowKernelInitialization->False]],
+    DefaultBaseStyle->{
+     "NetworkGraphics", FrontEnd`GraphicsHighlightColor -> Hue[0.8, 1., 0.6]},
+    
+    FormatType->TraditionalForm,
+    FrameTicks->None], ",", 
+   GraphicsBox[
+    NamespaceBox["NetworkGraphics",
+     DynamicModuleBox[{Typeset`graph = HoldComplete[
+       Graph[{1, 2, 3}, {{{1, 2}, {2, 2}, {2, 3}, {3, 1}, {3, 1}}, Null}]]}, 
+      TagBox[GraphicsGroupBox[GraphicsComplexBox[CompressedData["
+1:eJwlj3tQEwQcxwck6JDAYVwml3ilcpww5DhuQ/JnJXAHHDYlmEcb6skj3mI8
+1AxG8sgDRHAzAwlQTjMGHApUrH6Lx8G1GOMxGaxibGNPHhsyxjaSwD533/vc
+58/vwYtZZxLtCQRC8Na2/SSKrrnWrUfT5jazyP2/wZmwjQyJtxqiqFefhrxO
+ggHiO/0Yb0/owZz4x/7zjbMY43laMR25BFBwsldWNo3xWWU9//YZIFSjDB9w
+E+MRlrW6/vsVKCW/KuvljGOt3PvrKvYqePxOEjVFjWN1Cruq+ss1yG8u7E6h
+TKLnJf/0Gt91SGrY4dQQIMHdG34dkhILlL6Xx2dr/8aQpkLb4OdW4I851tiu
+yDGUtseJNGSF8ohBb/fTKiyL8XP5kGOFfcKku8ogHcYePvrFB1ILXHjtRdRn
+OSU7tazDOyRFxtMCA/YOGYVFu83QxWi/Pl9vRGbK1MXMABOoFvv8Zz9awWlh
+xfCLkJeQKH1wKZyx1WnZfNNZIwSOXJNsao0YRo2wOpxYhgGauCt8xYCTm3VT
+rsULsEDiMmzuy1hDyHMMbNVBUpi72bVej+/mFjzxkmuhMsMi3TGgxqCMLLJz
+oA4++TEhQzCjwCLzkfILdXromSPZdfjLUEQMHRRnN+Pz8fBIs1oLjaMhRp/O
+x/igZD2WnqABLzvnAvOBNmTZKMUUqQokcU1XgqSduJp26Lsbn81DeV1ObSml
+B4nJx4OJSgUY6nzuxB7iYUe0X9ivOXKISls0MUb5WHtuOfHyrrmtH5Ycnqgf
+G25m7rTQZoE1vVdm2SXDjdLZ/C4aD6fJyXeIUhkuPTpb6XqzH10+9q2g8+Zw
+uIEjuNo1jNktcalMrhzdWllxjr+M4MmfmfmVXAWS0IfGDB/DAwv8N6J5SiSS
+XSjnv53AT78Z69+UzCO1iD3wg1CMN9aa37faqzFpZKNVr5lCHl38poOwD7uT
+vnqRu6oHusv+moXcIfTiR8hj1DqgFDOqnmkEWH7P0dP/Ty3MHH45N7NHhBUJ
+bO/2hxrIi7bboJDG0TFNxmZlqiHEPfanU6sT+PzxfA7TVwWPqHKurFuMJ7Qx
+Coc5JZxRlbrZn5tCucHWFnRLAdT1+4LIPhXK0skr//BLQGL8K/VhsRrd7puY
+Hvca8aglwEN0TIMpuTnHdOxnGGzRvpU6qkEKRTpG80LkHlTu2xuvxeF2dsra
+5UHk1E9lX5/U4qtFxU55ugDbCk9R6cd1SHE2cjt+E+GGzaEi47YOE1tuc5ZG
+J/A/5FMGSA==
+         "], {
+          {Hue[0.6, 0.7, 0.5], Opacity[0.7], Arrowheads[Medium], 
+           ArrowBox[{1, 2}, 0.020399597244776385`], 
+           ArrowBox[BezierCurveBox[{2, 7, 10, 12, 18, 20, 23, 2},
+            SplineDegree->7], 0.020399597244776385`], 
+           ArrowBox[{2, 3}, 0.020399597244776385`], 
+           ArrowBox[BezierCurveBox[{
+            3, {-0.18635158111754363`, 0.10759013552215828`}, 1}], 
+            0.020399597244776385`], 
+           ArrowBox[BezierCurveBox[{
+            3, {-0.6796738226668928, 0.39240986447787013`}, 1}], 
+            0.020399597244776385`]}, 
+          {Hue[0.6, 0.2, 0.8], EdgeForm[{GrayLevel[0], Opacity[0.7]}], 
+           DiskBox[1, 0.020399597244776385], DiskBox[2, 0.020399597244776385],
+            DiskBox[3, 0.020399597244776385]}}]],
+       MouseAppearanceTag["NetworkGraphics"]],
+      AllowKernelInitialization->False]],
+    DefaultBaseStyle->{
+     "NetworkGraphics", FrontEnd`GraphicsHighlightColor -> Hue[0.8, 1., 0.6]},
+    
+    FormatType->TraditionalForm,
+    FrameTicks->None], ",", 
+   GraphicsBox[
+    NamespaceBox["NetworkGraphics",
+     DynamicModuleBox[{Typeset`graph = HoldComplete[
+       Graph[{1, 2, 3}, {{{1, 2}, {2, 2}, {2, 3}, {3, 1}, {3, 3}}, Null}]]}, 
+      TagBox[GraphicsGroupBox[GraphicsComplexBox[CompressedData["
+1:eJw1kH0s1AEYx38Yt0VTpzXFGmn4o5DJWOqRwpImsmbzfnHp5TobzmtD5c7M
+2+SlvNPaUJbZ0CZ7jp3pBRUO5yavyTlyd3HnzsvF/X4927Nnz549z/P9fqwZ
+7KBYfYIgzu/nQW3yD1lO65TipvYgZrCV7MGYOIhZPJRX6++e2uKhawkZhLY7
+hJuPSkEV+8Uiqn4Ggy0DFkQ3/gCkeHbP8kQYyuZ17fbJwHt50VdwRIh22Zri
+6joFcB33eN3lI/hi3v5ZYdkGHO+lf2/wH8HiuLLC4gwlJDdmdsa5jaFljNOj
+knNbwKw1pNU6T6LJjkPbZI4auDYcfplkGj0aMrf772uA/8OoZDthHr0Dj9Lo
+AxrI9eu3NwtYQl6ww+Er5Ro4McwsXXRdwTu2ZxMvidUQratrKGXT7tHebMFJ
++gKrJUWG3QPy4SwTFXSEv0//VS3HiLgJxmPnTVha63Oa8VKgaDj/07jHX4gV
+18T4hu/3D+P5m7fl4DKUNqmVyNHH3U9jcHkdBIHCDl+FDMe0VROmT1dhld4a
+vm22jiUEx8jl3QowfcxUptVSPJWU0mQ1L4ECllpsKPiNriy2o7HLCtx6G8n6
+OrWAWSq73OgqKXTN0fXanGZRGf/BRixOx0Ftj4HbPv8wy2biSSQfO0N+WtkF
+yCCvIrVpqWgYuRpJHWErh5WUna5IWyFGJc325iYowPnuq49ZQSJMZlzEPcsN
+4Lrq3WzmiHGQl2/tRSjhwmgCZ44pxlRzA16RUgWng+Ovss6IcFztW1k9oYbs
+zW897dNjqM13Yo5mbINxbEGovnAI++RTTQ8EO6Bo1BiZH0OsT3z+0qJ0Fwo3
+roWlvhr0ILnvQsxr3RxqqbknuQ+91H4leR92qPvu5H8Yo/5fJ/UBh9JXQeqH
+z5R+T9IfJFH+Nkj/EEH5ryH5QA7Fh0Hygw6Kn0mCji/85/sPjAymHg==
+         "], {
+          {Hue[0.6, 0.7, 0.5], Opacity[0.7], Arrowheads[Medium], 
+           ArrowBox[{1, 2}, 0.020399597244776385`], 
+           ArrowBox[BezierCurveBox[{2, 7, 10, 12, 18, 20, 23, 2},
+            SplineDegree->7], 0.020399597244776385`], 
+           ArrowBox[{2, 3}, 0.020399597244776385`], 
+           ArrowBox[{3, 1}, 0.020399597244776385`], 
+           ArrowBox[BezierCurveBox[{3, 30, 33, 35, 41, 43, 46, 3},
+            SplineDegree->7], 0.020399597244776385`]}, 
+          {Hue[0.6, 0.2, 0.8], EdgeForm[{GrayLevel[0], Opacity[0.7]}], 
+           DiskBox[1, 0.020399597244776385], DiskBox[2, 0.020399597244776385],
+            DiskBox[3, 0.020399597244776385]}}]],
+       MouseAppearanceTag["NetworkGraphics"]],
+      AllowKernelInitialization->False]],
+    DefaultBaseStyle->{
+     "NetworkGraphics", FrontEnd`GraphicsHighlightColor -> Hue[0.8, 1., 0.6]},
+    
+    FormatType->TraditionalForm,
+    FrameTicks->None], ",", 
+   GraphicsBox[
+    NamespaceBox["NetworkGraphics",
+     DynamicModuleBox[{Typeset`graph = HoldComplete[
+       Graph[{1, 2, 3}, {{{1, 2}, {2, 3}, {2, 3}, {3, 1}, {3, 1}}, Null}]]}, 
+      TagBox[GraphicsGroupBox[GraphicsComplexBox[CompressedData["
+1:eJw10n8s1HEcx/GLZjpT0o+tVXNarFk69Uf7Xq7eNvpt1kVcxWVtqjlJ1/RD
+UygqI5UdUZn8WD/mkF+pXb0tWjZxh0S0nDvcnV9RyMVSen98ts8++/z7ej6c
+j585GGbF4/G8/92596mv1BRTNYgTs3OnG1X0Bzve3NEhPznHV3Tpufj/lzcK
+MZN5639bGSG2caZo0NSO/reaa2c7+uBAnLLuWVMbrh2qWein7gWB0J4Lvd+K
+4leyC6kqA7iim0S2uxkjC4PCZSo9eBTFB9m8bkS+t3uKVN0DQzkZDZcq6/Gz
+8ORdfpcO+IX+qUuu12Lcl+U6yyIdcDe6L1RK1FgvsSjU2lrIvh5pa5F0wx75
+8ESIpgbSD38PO7uoB6YeuN0NdFFDid+mXW8UerjzQJGexL0E/knPbfxeA0wF
+PT63tasMJuUu2bHBfRC6wO7iL6diuDbNJXBd/aDTiMfcyp5AbuJUoPSYCUb5
+O9+3ReVBdcvu/b+MZpidtk45nTYAMYVpGSOaViy76iOSeg7AXrsxVelbLWY/
+bI+6/MkMghGDrT6iAV84965aftQMQyXKU5Nn36OnxbwiXGOCOK6rWSJAFFq2
+rNRuNsHTaMXmAWU5do59Dc9PMMKdrAnZysxcFE9lNex/1w9ecuGPbzWJcKQ/
+ycHqcDvoR6eLtyYboEikV+mq2mC7OcBg3dMLPssCq33GW6HySZ9C5t4PMX4L
+ZjjHFrCR65TxkUb46vqzp3OpFlKPKTeU5JtAnBByu9zUALcybdZ4fDRDsP3q
+e0PRH2BdzT59gHEA6qRti62b3kH1iSufo8cHQUt7YAXbI5f2wkdsLwHtifFs
+zw7aG8fZ3jepB873GKVeWMp6+VJPnO9ZR70xh/WOJw84k0QevpAXHCkgL/bk
+CeuZpyjyhg7Mmxd5REfm0Ym8Ip95PUSeUcQ8x5J3PMG8q2kPrGJ7SGkvFLC9
+ONoTb7I9O2lvTGF7n6ceON9DTL2wgvUqoJ64g/U8SL1xvreIPKAugjx0kBd0
+YF42kic8xTxtI2/IMW8q8oj1zGMGecU/w+S1mDwjxzzPkHcMY97/AmagUPs=
+
+         "], {
+          {Hue[0.6, 0.7, 0.5], Opacity[0.7], Arrowheads[Medium], 
+           ArrowBox[{1, 2}, 0.020399597244776385`], 
+           ArrowBox[BezierCurveBox[{
+            2, {0.18635158111754763`, 0.10759013552211703`}, 3}], 
+            0.020399597244776385`], 
+           ArrowBox[BezierCurveBox[{
+            2, {0.679673822666896, 0.39240986447787185`}, 3}], 
+            0.020399597244776385`], 
+           ArrowBox[BezierCurveBox[{
+            3, {-0.18635158111754363`, 0.10759013552215828`}, 1}], 
+            0.020399597244776385`], 
+           ArrowBox[BezierCurveBox[{
+            3, {-0.6796738226668928, 0.39240986447787013`}, 1}], 
+            0.020399597244776385`]}, 
+          {Hue[0.6, 0.2, 0.8], EdgeForm[{GrayLevel[0], Opacity[0.7]}], 
+           DiskBox[1, 0.020399597244776385], DiskBox[2, 0.020399597244776385],
+            DiskBox[3, 0.020399597244776385]}}]],
+       MouseAppearanceTag["NetworkGraphics"]],
+      AllowKernelInitialization->False]],
+    DefaultBaseStyle->{
+     "NetworkGraphics", FrontEnd`GraphicsHighlightColor -> Hue[0.8, 1., 0.6]},
+    
+    FormatType->TraditionalForm,
+    FrameTicks->None], ",", 
+   GraphicsBox[
+    NamespaceBox["NetworkGraphics",
+     DynamicModuleBox[{Typeset`graph = HoldComplete[
+       Graph[{1, 2, 3}, {{{1, 2}, {2, 3}, {2, 3}, {3, 1}, {3, 2}}, Null}]]}, 
+      TagBox[GraphicsGroupBox[GraphicsComplexBox[CompressedData["
+1:eJwBQQK+/SFib1JlAgAAACMAAAACAAAAAAAAAAAAAAA2xRxEUvfrPyvjUrwo
+G98/AAAAAAAAAAB+91fN8f7vP1RN11PPc+s/cp4DjV1G4D/C6j2frg68P2LW
+xDKLeuA/fVtFd9OOwT/GoS1ohbngP9yr7VI7C8U/MvuU4yYD4T/tqR+CfnrI
+P3FGjQxEV+E/MkKMbJTayz9CMrQVq7XhPzeZSXZ9Kc8/12QvGiQe4j9+il4X
+ojLRP1B9xD5xkOI/ugPAPP/F0j94TAo4MCTpP5btglkfXuQ/e6G+zw2g6T/1
+t0ZnEyLlP44N6YMyJeo/Tj7p6tjf5T/RD55/T7PqPwM1NIj/luY/cYtcnhBK
+6z8aGHbOGkfnPy6D350c6es/dsK2eMLv5z+sUfdSFZDsPyjXc6uSkOg/PhRL
+4Zc+7T88b8AvLCnpP6TKfZ4oRu8//I/vf/nx5z+0krz4+hHvP3T2BXYaEOc/
+UMdTwwDT7j9e4ht/ADHmP+Jt7Edfie4/2WJPsy9V5T+kIvQeQjXuP8g8tDgq
+feQ/0zbNFdvW7T8H50T2b6njPz8EUhFibu0/FggoSH7a4j/G67zsFPzsP3hL
+d7XPEOI/nRx381Vo5j/8flHpv1bMP5rHwlt47OU/gFVCsu9GyT+IW5inU2fl
+Px48uKPZT8Y/RVnjqzbZ5D9IYYwuP3PDP6TdJI11QuQ/7tSEFdKywD/n5aGN
+aaPjP/xWBNlmILw/aReK2HD84j9osRtD5Rm3P9dUNkruTeI/xPC2IBlVsj+K
+XBNu
+         "], {
+          {Hue[0.6, 0.7, 0.5], Opacity[0.7], Arrowheads[Medium], 
+           ArrowBox[{1, 2}, 0.01272835986186617], 
+           ArrowBox[BezierCurveBox[{
+            2, {0.6018803398539317, 0.5134394602830381}, 3}], 
+            0.01272835986186617], ArrowBox[{2, 3}, 0.01272835986186617], 
+           ArrowBox[{3, 1}, 0.01272835986186617], 
+           ArrowBox[BezierCurveBox[{
+            3, {0.8840234811105949, 0.34444748711227546`}, 2}], 
+            0.01272835986186617]}, 
+          {Hue[0.6, 0.2, 0.8], EdgeForm[{GrayLevel[0], Opacity[0.7]}], 
+           DiskBox[1, 0.01272835986186617], DiskBox[2, 0.01272835986186617], 
+           DiskBox[3, 0.01272835986186617]}}]],
+       MouseAppearanceTag["NetworkGraphics"]],
+      AllowKernelInitialization->False]],
+    DefaultBaseStyle->{
+     "NetworkGraphics", FrontEnd`GraphicsHighlightColor -> Hue[0.8, 1., 0.6]},
+    
+    FormatType->TraditionalForm,
+    FrameTicks->None]}], "}"}]], "Output",
+ CellChangeTimes->{
+  3.849220916033564*^9, 3.850474538204461*^9, 3.8504786820792923`*^9, 
+   3.8504866312777967`*^9, {3.8520229147714863`*^9, 3.852022931671732*^9}, 
+   3.853205084980301*^9},
+ CellLabel->"Out[11]=",ExpressionUUID->"fe8209d6-8ed5-4431-af88-4d024e5f6570"]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{"(*", "\:5468\:671f\:6027\:306e\:5224\:5b9a", "*)"}]], "Input",
+ CellChangeTimes->{{3.853204554630938*^9, 3.853204565761332*^9}},
+ CellLabel->"In[12]:=",ExpressionUUID->"40c67502-76dd-4134-a423-d51b3d53c46c"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+  "(*", "\:4e0b\:306e9\:500b\:306e\:30bf\:30a4\:30eb\:306b\:3064\:3044\:3066\
+\:5224\:5b9a\:3059\:308b", "*)"}], "\[IndentingNewLine]", 
+  RowBox[{"Map", "[", 
+   RowBox[{"Tiling", ",", "tiles1"}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.852016326399806*^9, 3.852016343555501*^9}, 
+   3.8520240178503857`*^9, {3.853204572287085*^9, 3.853204604164233*^9}},
+ CellLabel->"In[13]:=",ExpressionUUID->"d1bd503a-805a-4e46-a638-c23755c9dbe8"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   GraphicsBox[
+    {EdgeForm[Thickness[Large]], {
+      {RGBColor[1, 
+        NCache[
+         Rational[1, 2], 0.5], 0], PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+      {RGBColor[1, 1, 0], PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+      {RGBColor[0, 1, 0], PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+      {RGBColor[1, 1, 0], PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}}], ",", 
+   GraphicsBox[
+    {EdgeForm[Thickness[Large]], {
+      {RGBColor[1, 
+        NCache[
+         Rational[1, 2], 0.5], 0], PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+      {RGBColor[0, 1, 0], PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+      {RGBColor[1, 1, 0], PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+      {RGBColor[1, 1, 0], PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}}], ",", 
+   GraphicsBox[
+    {EdgeForm[Thickness[Large]], {
+      {RGBColor[1, 1, 0], PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+      {RGBColor[1, 0, 0], PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+      {RGBColor[1, 1, 0], PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+      {RGBColor[0, 1, 0], PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}}], ",", 
+   GraphicsBox[
+    {EdgeForm[Thickness[Large]], {
+      {RGBColor[1, 1, 0], PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+      {RGBColor[1, 
+        NCache[
+         Rational[1, 2], 0.5], 0], PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+      {RGBColor[1, 
+        NCache[
+         Rational[1, 2], 0.5], 0], PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+      {RGBColor[0, 1, 0], PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}}], ",", 
+   GraphicsBox[
+    {EdgeForm[Thickness[Large]], {
+      {RGBColor[0, 1, 0], PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+      {RGBColor[1, 1, 0], PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+      {RGBColor[0, 1, 0], PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+      {RGBColor[1, 1, 0], PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}}], ",", 
+   GraphicsBox[
+    {EdgeForm[Thickness[Large]], {
+      {RGBColor[1, 0, 0], PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+      {RGBColor[1, 
+        NCache[
+         Rational[1, 2], 0.5], 0], PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+      {RGBColor[1, 1, 0], PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+      {RGBColor[1, 
+        NCache[
+         Rational[1, 2], 0.5], 0], PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}}],
+    ",", 
+   GraphicsBox[
+    {EdgeForm[Thickness[Large]], {
+      {RGBColor[1, 
+        NCache[
+         Rational[1, 2], 0.5], 0], PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+      {RGBColor[1, 
+        NCache[
+         Rational[1, 2], 0.5], 0], PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+      {RGBColor[1, 1, 0], PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+      {RGBColor[0, 1, 0], PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}}], ",", 
+   GraphicsBox[
+    {EdgeForm[Thickness[Large]], {
+      {RGBColor[1, 1, 0], PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+      {RGBColor[1, 
+        NCache[
+         Rational[1, 2], 0.5], 0], PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+      {RGBColor[0, 1, 0], PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+      {RGBColor[1, 
+        NCache[
+         Rational[1, 2], 0.5], 0], PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}}],
+    ",", 
+   GraphicsBox[
+    {EdgeForm[Thickness[Large]], {
+      {RGBColor[1, 
+        NCache[
+         Rational[1, 2], 0.5], 0], PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+      {RGBColor[1, 1, 0], PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+      {RGBColor[1, 
+        NCache[
+         Rational[1, 2], 0.5], 0], PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+      {RGBColor[1, 1, 0], PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}}]}], 
+  "}"}]], "Output",
+ CellChangeTimes->{3.85201634464962*^9, 3.852024020416418*^9, 
+  3.8525603238078403`*^9, 3.8525609626793947`*^9, 3.852561634817521*^9, 
+  3.853205085151627*^9},
+ CellLabel->"Out[13]=",ExpressionUUID->"3f6adb82-64ed-4109-9f39-7a9e6e8ca255"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{
+   "\:ff12\:304c\:51fa\:529b\:3055\:308c\:305f\:305f\:3081", "\:3001", 
+    "\:5468\:671f\:7684\:3067\:3042\:308b\:3068\:5224\:5b9a"}], "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"Nowang", "[", "tiles1", "]"}], "[", 
+   RowBox[{"[", "1", "]"}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.8505011422152987`*^9, 3.850501163215398*^9}, {
+   3.850501231660359*^9, 3.85050124075968*^9}, {3.8520228082834883`*^9, 
+   3.8520228090210123`*^9}, 3.852024040519294*^9, {3.8532046081049013`*^9, 
+   3.853204632677544*^9}},
+ CellLabel->"In[14]:=",ExpressionUUID->"ca19435e-0a76-455b-ad50-f6c8c50096ae"],
+
+Cell[BoxData["2"], "Output",
+ CellChangeTimes->{3.850501725108054*^9, 3.8520228098707657`*^9, 
+  3.8520240432933817`*^9, 3.8525603260251713`*^9, 3.852560964936448*^9, 
+  3.852561637406494*^9, 3.853205085207803*^9},
+ CellLabel->"Out[14]=",ExpressionUUID->"c2b524a3-992b-4cea-a616-e6ab28dcf0f9"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", "\:305d\:306e\:4e00\:5468\:671f", "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{"Periodictile", "[", 
+   RowBox[{
+    RowBox[{"Nowang", "[", "tiles1", "]"}], "[", 
+    RowBox[{"[", "2", "]"}], "]"}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.8505016890751467`*^9, 3.850501711318989*^9}, {
+   3.850501758696287*^9, 3.850501759899825*^9}, 3.852024045420908*^9, {
+   3.853204639385397*^9, 3.853204655130616*^9}},
+ CellLabel->"In[16]:=",ExpressionUUID->"1fc61292-873d-4f46-9cc0-286f7e65a798"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  GraphicsBox[
+   {EdgeForm[Thickness[Large]], {{
+      {RGBColor[1, 1, 0], PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+      {RGBColor[1, 1, 1], PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+      {RGBColor[1, 1, 0], PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+      {RGBColor[1, 1, 1], PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}, {
+      {RGBColor[0, 1, 0], PolygonBox[{{2, 0}, {4, 0}, {3, -1}}]}, 
+      {RGBColor[1, 1, 1], PolygonBox[{{2, -2}, {4, -2}, {3, -1}}]}, 
+      {RGBColor[1, 1, 1], PolygonBox[{{2, -2}, {2, 0}, {3, -1}}]}, 
+      {RGBColor[1, 1, 1], PolygonBox[{{4, -2}, {4, 0}, {3, -1}}]}}, {
+      {RGBColor[1, 0, 0], PolygonBox[{{4, 0}, {6, 0}, {5, -1}}]}, 
+      {RGBColor[1, 1, 1], PolygonBox[{{4, -2}, {6, -2}, {5, -1}}]}, 
+      {RGBColor[1, 1, 1], PolygonBox[{{4, -2}, {4, 0}, {5, -1}}]}, 
+      {RGBColor[1, 1, 1], PolygonBox[{{6, -2}, {6, 0}, {5, -1}}]}}, {
+      {RGBColor[1, 1, 0], PolygonBox[{{6, 0}, {8, 0}, {7, -1}}]}, 
+      {RGBColor[1, 1, 1], PolygonBox[{{6, -2}, {8, -2}, {7, -1}}]}, 
+      {RGBColor[1, 1, 1], PolygonBox[{{6, -2}, {6, 0}, {7, -1}}]}, 
+      {RGBColor[1, 1, 1], PolygonBox[{{8, -2}, {8, 0}, {7, -1}}]}}, {
+      {RGBColor[1, 
+        NCache[
+         Rational[1, 2], 0.5], 0], PolygonBox[{{8, 0}, {10, 0}, {9, -1}}]}, 
+      {RGBColor[1, 1, 1], PolygonBox[{{8, -2}, {10, -2}, {9, -1}}]}, 
+      {RGBColor[1, 1, 1], PolygonBox[{{8, -2}, {8, 0}, {9, -1}}]}, 
+      {RGBColor[1, 1, 1], PolygonBox[{{10, -2}, {10, 0}, {9, -1}}]}}, {
+      {RGBColor[1, 
+        NCache[
+         Rational[1, 2], 0.5], 0], 
+       PolygonBox[{{10, 0}, {12, 0}, {11, -1}}]}, 
+      {RGBColor[1, 1, 1], PolygonBox[{{10, -2}, {12, -2}, {11, -1}}]}, 
+      {RGBColor[1, 1, 1], PolygonBox[{{10, -2}, {10, 0}, {11, -1}}]}, 
+      {RGBColor[1, 1, 0], PolygonBox[{{12, -2}, {12, 0}, {11, -1}}]}}}, {{
+      {RGBColor[1, 1, 1], PolygonBox[{{0, -2}, {2, -2}, {1, -3}}]}, 
+      {RGBColor[1, 1, 1], PolygonBox[{{0, -4}, {2, -4}, {1, -3}}]}, 
+      {RGBColor[1, 1, 0], PolygonBox[{{0, -4}, {0, -2}, {1, -3}}]}, 
+      {RGBColor[1, 1, 1], PolygonBox[{{2, -4}, {2, -2}, {1, -3}}]}}, {
+      {RGBColor[1, 1, 1], PolygonBox[{{2, -2}, {4, -2}, {3, -3}}]}, 
+      {RGBColor[1, 1, 1], PolygonBox[{{2, -4}, {4, -4}, {3, -3}}]}, 
+      {RGBColor[1, 1, 1], PolygonBox[{{2, -4}, {2, -2}, {3, -3}}]}, 
+      {RGBColor[1, 1, 1], PolygonBox[{{4, -4}, {4, -2}, {3, -3}}]}}, {
+      {RGBColor[1, 1, 1], PolygonBox[{{4, -2}, {6, -2}, {5, -3}}]}, 
+      {RGBColor[1, 1, 1], PolygonBox[{{4, -4}, {6, -4}, {5, -3}}]}, 
+      {RGBColor[1, 1, 1], PolygonBox[{{4, -4}, {4, -2}, {5, -3}}]}, 
+      {RGBColor[1, 1, 1], PolygonBox[{{6, -4}, {6, -2}, {5, -3}}]}}, {
+      {RGBColor[1, 1, 1], PolygonBox[{{6, -2}, {8, -2}, {7, -3}}]}, 
+      {RGBColor[1, 1, 1], PolygonBox[{{6, -4}, {8, -4}, {7, -3}}]}, 
+      {RGBColor[1, 1, 1], PolygonBox[{{6, -4}, {6, -2}, {7, -3}}]}, 
+      {RGBColor[1, 1, 1], PolygonBox[{{8, -4}, {8, -2}, {7, -3}}]}}, {
+      {RGBColor[1, 1, 1], PolygonBox[{{8, -2}, {10, -2}, {9, -3}}]}, 
+      {RGBColor[1, 1, 1], PolygonBox[{{8, -4}, {10, -4}, {9, -3}}]}, 
+      {RGBColor[1, 1, 1], PolygonBox[{{8, -4}, {8, -2}, {9, -3}}]}, 
+      {RGBColor[1, 1, 1], PolygonBox[{{10, -4}, {10, -2}, {9, -3}}]}}, {
+      {RGBColor[1, 1, 1], PolygonBox[{{10, -2}, {12, -2}, {11, -3}}]}, 
+      {RGBColor[1, 1, 1], PolygonBox[{{10, -4}, {12, -4}, {11, -3}}]}, 
+      {RGBColor[1, 1, 1], PolygonBox[{{10, -4}, {10, -2}, {11, -3}}]}, 
+      {RGBColor[1, 1, 0], PolygonBox[{{12, -4}, {12, -2}, {11, -3}}]}}}, {{
+      {RGBColor[1, 1, 1], PolygonBox[{{0, -4}, {2, -4}, {1, -5}}]}, 
+      {RGBColor[1, 1, 0], PolygonBox[{{0, -6}, {2, -6}, {1, -5}}]}, 
+      {RGBColor[0, 1, 0], PolygonBox[{{0, -6}, {0, -4}, {1, -5}}]}, 
+      {RGBColor[1, 1, 1], PolygonBox[{{2, -6}, {2, -4}, {1, -5}}]}}, {
+      {RGBColor[1, 1, 1], PolygonBox[{{2, -4}, {4, -4}, {3, -5}}]}, 
+      {RGBColor[0, 1, 0], PolygonBox[{{2, -6}, {4, -6}, {3, -5}}]}, 
+      {RGBColor[1, 1, 1], PolygonBox[{{2, -6}, {2, -4}, {3, -5}}]}, 
+      {RGBColor[1, 1, 1], PolygonBox[{{4, -6}, {4, -4}, {3, -5}}]}}, {
+      {RGBColor[1, 1, 1], PolygonBox[{{4, -4}, {6, -4}, {5, -5}}]}, 
+      {RGBColor[1, 0, 0], PolygonBox[{{4, -6}, {6, -6}, {5, -5}}]}, 
+      {RGBColor[1, 1, 1], PolygonBox[{{4, -6}, {4, -4}, {5, -5}}]}, 
+      {RGBColor[1, 1, 1], PolygonBox[{{6, -6}, {6, -4}, {5, -5}}]}}, {
+      {RGBColor[1, 1, 1], PolygonBox[{{6, -4}, {8, -4}, {7, -5}}]}, 
+      {RGBColor[1, 1, 0], PolygonBox[{{6, -6}, {8, -6}, {7, -5}}]}, 
+      {RGBColor[1, 1, 1], PolygonBox[{{6, -6}, {6, -4}, {7, -5}}]}, 
+      {RGBColor[1, 1, 1], PolygonBox[{{8, -6}, {8, -4}, {7, -5}}]}}, {
+      {RGBColor[1, 1, 1], PolygonBox[{{8, -4}, {10, -4}, {9, -5}}]}, 
+      {RGBColor[1, 
+        NCache[
+         Rational[1, 2], 0.5], 0], 
+       PolygonBox[{{8, -6}, {10, -6}, {9, -5}}]}, 
+      {RGBColor[1, 1, 1], PolygonBox[{{8, -6}, {8, -4}, {9, -5}}]}, 
+      {RGBColor[1, 1, 1], PolygonBox[{{10, -6}, {10, -4}, {9, -5}}]}}, {
+      {RGBColor[1, 1, 1], PolygonBox[{{10, -4}, {12, -4}, {11, -5}}]}, 
+      {RGBColor[1, 
+        NCache[
+         Rational[1, 2], 0.5], 0], 
+       PolygonBox[{{10, -6}, {12, -6}, {11, -5}}]}, 
+      {RGBColor[1, 1, 1], PolygonBox[{{10, -6}, {10, -4}, {11, -5}}]}, 
+      {RGBColor[0, 1, 0], PolygonBox[{{12, -6}, {12, -4}, {11, -5}}]}}}}], 
+  "}"}]], "Output",
+ CellChangeTimes->{3.850501760556787*^9, 3.852024046034266*^9, 
+  3.85256032779033*^9, 3.852560966666585*^9, 3.852561639274562*^9, 
+  3.853205085318026*^9},
+ CellLabel->"Out[16]=",ExpressionUUID->"eeab19ed-5ab0-4aa8-81a0-ed07e6df52e4"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+  "(*", "\:4e0b\:306e3\:500b\:306e\:30bf\:30a4\:30eb\:96c6\:5408\:306b\:3064\
+\:3044\:3066\:5224\:5b9a", "*)"}], "\[IndentingNewLine]", 
+  RowBox[{"Map", "[", 
+   RowBox[{"Tiling", ",", "tiles2"}], "]"}]}]], "Input",
+ CellChangeTimes->{
+  3.852022848028124*^9, {3.852024025320672*^9, 3.852024025485861*^9}, {
+   3.853204692235292*^9, 3.853204715854746*^9}},
+ CellLabel->"In[17]:=",ExpressionUUID->"7bea915b-7f92-4dec-a6ae-2271d3979572"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   GraphicsBox[
+    {EdgeForm[Thickness[Large]], {
+      {RGBColor[1, 0, 0], PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+      {RGBColor[1, 1, 0], PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+      {RGBColor[0, 1, 0], PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+      {RGBColor[1, 
+        NCache[
+         Rational[1, 2], 0.5], 0], PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}}],
+    ",", 
+   GraphicsBox[
+    {EdgeForm[Thickness[Large]], {
+      {RGBColor[1, 
+        NCache[
+         Rational[1, 2], 0.5], 0], PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+      {RGBColor[0, 1, 0], PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+      {RGBColor[1, 1, 0], PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+      {RGBColor[0, 0.5, 1], PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}}], ",", 
+   GraphicsBox[
+    {EdgeForm[Thickness[Large]], {
+      {RGBColor[1, 1, 0], PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+      {RGBColor[1, 0, 0], PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+      {RGBColor[1, 1, 0], PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+      {RGBColor[0, 1, 0], PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}}]}], 
+  "}"}]], "Output",
+ CellChangeTimes->{3.852022849096528*^9, 3.8520240258732147`*^9, 
+  3.853205085373583*^9},
+ CellLabel->"Out[17]=",ExpressionUUID->"854c8035-b1d0-43ba-b929-f77ceb75b98b"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{
+   "\:ff11\:304c\:51fa\:529b\:3055\:308c\:305f\:305f\:3081", "\:3001", 
+    "\:4e26\:3079\:3089\:308c\:306a\:3044\:3053\:3068\:304c\:308f\:304b\:308b\
+"}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"Nowang", "[", "tiles2", "]"}], "[", 
+   RowBox[{"[", "1", "]"}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.8520228555302362`*^9, 3.852022872030609*^9}, {
+  3.8520240503743877`*^9, 3.8520240505378733`*^9}, {3.8532047184976387`*^9, 
+  3.853204740692761*^9}},
+ CellLabel->"In[18]:=",ExpressionUUID->"8f6c5a91-c431-40b5-9ca5-5c25f3dea6b1"],
+
+Cell[BoxData["1"], "Output",
+ CellChangeTimes->{3.853205085426539*^9},
+ CellLabel->"Out[18]=",ExpressionUUID->"697ede65-79a5-478e-82e9-1769d7f72212"]
+}, Open  ]]
+},
+WindowSize->{996, 696},
+WindowMargins->{{Automatic, 131}, {Automatic, 0}},
+FrontEndVersion->"11.3 for Mac OS X x86 (32-bit, 64-bit Kernel) (2018\:5e743\
+\:670812\:65e5)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 482, 9, 97, "Text",ExpressionUUID->"1fea5a78-9e4b-436d-9877-88132254ad41"],
+Cell[1043, 31, 783, 15, 67, "Input",ExpressionUUID->"df8bb222-36a9-427a-be88-d552b0d54235"],
+Cell[CellGroupData[{
+Cell[1851, 50, 1070, 28, 65, "Input",ExpressionUUID->"e1429b7e-3bc1-4b5f-b119-59c89948b664"],
+Cell[2924, 80, 767, 15, 89, "Output",ExpressionUUID->"5cea053f-91cf-4e28-bcbb-123eeb9a76da"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[3728, 100, 1061, 28, 65, "Input",ExpressionUUID->"af1fe4f3-1aa2-4966-8ec9-d52774192961"],
+Cell[4792, 130, 2604, 51, 199, "Output",ExpressionUUID->"594f3659-fb26-49ce-afa9-75a7fc11e52f"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[7433, 186, 407, 9, 65, "Input",ExpressionUUID->"6b1aa3cc-0bda-42f3-aa69-ba190a54595a"],
+Cell[7843, 197, 4481, 102, 625, "Output",ExpressionUUID->"a93d6f23-e924-4178-9dda-4f8706db6bd8"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[12361, 304, 498, 12, 65, "Input",ExpressionUUID->"2128dcc7-1d57-4c6e-a6d4-381801c70937"],
+Cell[12862, 318, 25877, 529, 1480, "Output",ExpressionUUID->"344c78d6-6e10-49b1-b497-f2c3310decab"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[38776, 852, 462, 11, 65, "Input",ExpressionUUID->"97e16a59-1a2c-4569-8c74-fdd750f41082"],
+Cell[39241, 865, 22485, 470, 939, "Output",ExpressionUUID->"f052c9ae-3343-4dbc-b7bf-0cb4d5ea5804"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[61763, 1340, 498, 11, 54, "Input",ExpressionUUID->"69e6717f-a051-408e-b189-6d7213877e26"],
+Cell[62264, 1353, 9378, 316, 287, "Output",ExpressionUUID->"515745cb-d3ed-4439-bad9-0732be56ccb2"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[71679, 1674, 305, 7, 44, "Input",ExpressionUUID->"b838a0c9-7b2c-4f6b-a0a3-439d757212a2"],
+Cell[71987, 1683, 64475, 1217, 1570, "Output",ExpressionUUID->"fe8209d6-8ed5-4431-af88-4d024e5f6570"]
+}, Open  ]],
+Cell[136477, 2903, 231, 3, 30, "Input",ExpressionUUID->"40c67502-76dd-4134-a423-d51b3d53c46c"],
+Cell[CellGroupData[{
+Cell[136733, 2910, 470, 9, 65, "Input",ExpressionUUID->"d1bd503a-805a-4e46-a638-c23755c9dbe8"],
+Cell[137206, 2921, 3823, 87, 625, "Output",ExpressionUUID->"3f6adb82-64ed-4109-9f39-7a9e6e8ca255"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[141066, 3013, 654, 14, 52, "Input",ExpressionUUID->"ca19435e-0a76-455b-ad50-f6c8c50096ae"],
+Cell[141723, 3029, 293, 4, 34, "Output",ExpressionUUID->"c2b524a3-992b-4cea-a616-e6ab28dcf0f9"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[142053, 3038, 526, 11, 52, "Input",ExpressionUUID->"1fc61292-873d-4f46-9cc0-286f7e65a798"],
+Cell[142582, 3051, 5572, 91, 113, "Output",ExpressionUUID->"eeab19ed-5ab0-4aa8-81a0-ed07e6df52e4"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[148191, 3147, 471, 10, 65, "Input",ExpressionUUID->"7bea915b-7f92-4dec-a6ae-2271d3979572"],
+Cell[148665, 3159, 1315, 29, 199, "Output",ExpressionUUID->"854c8035-b1d0-43ba-b929-f77ceb75b98b"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[150017, 3193, 598, 13, 52, "Input",ExpressionUUID->"8f6c5a91-c431-40b5-9ca5-5c25f3dea6b1"],
+Cell[150618, 3208, 149, 2, 34, "Output",ExpressionUUID->"697ede65-79a5-478e-82e9-1769d7f72212"]
+}, Open  ]]
+}
+]
+*)
+
